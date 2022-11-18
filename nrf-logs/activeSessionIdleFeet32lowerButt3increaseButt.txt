@@ -1,0 +1,850 @@
+nRF Connect, 2022-11-18
+Domyos-EL-1919 (E8:5D:86:BF:35:9D)
+I	17:35:19.373	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:19.373	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:19.373	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:19.374	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:19.675	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:19.675	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:19.675	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:19.675	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:19.972	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:19.972	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:19.973	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:19.973	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:20.274	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:20.274	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:20.274	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:20.274	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:20.576	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:20.576	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:20.578	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:20.578	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:20.875	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:20.875	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:20.876	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:20.876	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:21.195	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:21.195	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:21.197	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:21.197	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:21.474	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:21.474	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:21.476	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:21.476	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:21.795	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:21.795	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:21.796	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:21.796	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:22.094	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:22.094	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:22.095	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:22.095	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:22.394	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:22.394	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:22.395	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:22.395	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:22.695	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:22.695	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:22.696	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:22.696	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:22.995	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:22.996	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:22.996	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:22.997	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:23.296	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:23.296	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:23.297	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:23.297	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:23.594	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:23.594	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:23.594	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:23.594	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:23.897	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:23.897	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:23.899	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:23.899	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:24.194	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:24.194	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:24.195	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:24.195	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:24.495	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:24.495	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:24.496	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:24.496	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:24.794	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:24.794	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:24.794	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:24.794	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:25.095	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:25.095	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:25.096	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:25.096	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:25.394	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:25.395	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:25.396	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:25.396	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:25.694	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:25.694	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:25.694	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:25.694	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:25.994	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:25.994	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:25.995	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:25.995	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:26.294	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:26.294	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:26.294	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:26.294	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:26.594	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:26.594	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:26.595	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:26.595	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:26.916	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:26.916	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:26.917	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:26.917	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:27.193	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-02-00-01-00-00-00
+A	17:35:27.194	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-02-00-01-00-00-00" received
+I	17:35:27.194	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D1
+A	17:35:27.194	"(0x) 22-FF-00-00-01-D1" received
+I	17:35:27.495	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-02-00-01-00-00-00
+A	17:35:27.495	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-02-00-01-00-00-00" received
+I	17:35:27.497	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D1
+A	17:35:27.497	"(0x) 22-FF-00-00-01-D1" received
+I	17:35:27.837	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:27.837	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:27.838	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:27.838	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:28.099	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:28.099	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:28.110	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:28.110	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:28.395	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:28.395	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:28.395	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:28.395	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:28.677	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:28.677	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:28.694	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:28.694	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:28.975	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:28.975	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:28.994	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:28.994	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:29.275	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:29.276	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:29.293	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:29.293	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:29.614	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:29.614	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:29.615	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:29.616	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:29.937	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:29.937	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:29.938	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:29.938	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:30.175	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:30.175	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:30.176	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:30.176	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:30.477	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:30.477	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:30.478	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:30.478	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:30.776	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:30.776	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:30.777	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:30.777	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:31.077	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:31.077	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:31.077	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:31.077	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:31.376	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00
+A	17:35:31.376	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-01-00-01-00-00-00" received
+I	17:35:31.377	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D0
+A	17:35:31.377	"(0x) 22-FF-00-00-01-D0" received
+I	17:35:31.677	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-02-00-01-00-00-00
+A	17:35:31.677	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-02-00-01-00-00-00" received
+I	17:35:31.677	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D1
+A	17:35:31.677	"(0x) 22-FF-00-00-01-D1" received
+I	17:35:32.017	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-02-00-01-00-00-00
+A	17:35:32.017	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-02-00-01-00-00-00" received
+I	17:35:32.035	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D1
+A	17:35:32.035	"(0x) 22-FF-00-00-01-D1" received
+I	17:35:32.295	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:32.295	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:32.314	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:32.314	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:32.595	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+A	17:35:32.595	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00" received
+I	17:35:32.614	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D2
+A	17:35:32.615	"(0x) 22-FF-00-00-01-D2" received
+I	17:35:32.898	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:32.898	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:32.914	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:32.914	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:33.194	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:33.194	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:33.217	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:33.217	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:33.495	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:33.495	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:33.496	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:33.496	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:33.799	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:33.799	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:33.800	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:33.800	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:34.095	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:34.095	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:34.096	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:34.096	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:34.437	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:34.437	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:34.438	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:34.438	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:34.696	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:34.696	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:34.714	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:34.714	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:34.996	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:34.996	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:34.997	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:34.997	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:35.335	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:35.335	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:35.353	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:35.353	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:35.614	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:35.614	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:35.635	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:35.635	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:35.915	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:35.916	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:35.935	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:35.935	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:36.196	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:36.196	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:36.197	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:36.197	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:36.497	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:36.497	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:36.497	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:36.497	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:36.815	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:36.815	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:36.815	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:36.815	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:37.114	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:37.114	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:37.115	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:37.115	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:37.413	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:37.413	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:37.414	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:37.414	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:37.713	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:37.713	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:37.714	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:37.714	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:38.015	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:38.015	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:38.015	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:38.015	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:38.314	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:38.314	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:38.314	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:38.314	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:38.614	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:38.614	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:38.615	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:38.615	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:38.914	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:38.914	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:38.914	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:38.914	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:39.213	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:39.213	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:39.213	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:39.213	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:39.513	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:39.513	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:39.514	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:39.514	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:39.814	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:39.814	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:39.814	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:39.814	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:40.152	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:40.152	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:40.153	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:40.153	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:40.413	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:40.413	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:40.414	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:40.414	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:40.714	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:40.714	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:40.715	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:40.716	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:41.013	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:41.013	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:41.013	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:41.013	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:41.313	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:41.313	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:41.313	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:41.313	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:41.613	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:41.613	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:41.614	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:41.614	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:41.915	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:41.916	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:41.916	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:41.916	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:42.213	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:42.213	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:42.214	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:42.214	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:42.514	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:42.514	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:42.514	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:42.514	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:42.813	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:42.813	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:42.813	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:42.813	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:43.113	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:43.113	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:43.114	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:43.114	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:43.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:43.434	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:43.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:43.434	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:43.714	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:43.714	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:43.715	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:43.715	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:44.013	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:44.013	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:44.013	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:44.013	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:44.312	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:44.312	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:44.313	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:44.313	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:44.613	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:44.613	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:44.614	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:44.614	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:44.933	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:44.933	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:44.933	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:44.933	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:45.213	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:45.213	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:45.213	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:45.213	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:45.513	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:45.513	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:45.513	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:45.513	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:45.814	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:45.814	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:45.814	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:45.814	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:46.113	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:46.113	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:46.113	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:46.113	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:46.413	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:46.413	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:46.413	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:46.413	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:46.713	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:46.713	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:46.714	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:46.714	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:47.013	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:47.013	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:47.013	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:47.013	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:47.313	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:47.313	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:47.314	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:47.314	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:47.616	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:47.616	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:47.616	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:47.616	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:47.934	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:47.935	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:47.936	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:47.936	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:48.196	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:48.196	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:48.215	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:48.215	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:48.495	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:48.495	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:48.534	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:48.534	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:48.793	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:48.793	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:48.814	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:48.814	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:49.094	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:49.094	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:49.113	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:49.113	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:49.393	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:49.393	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:49.413	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:49.413	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:49.694	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:49.694	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:49.694	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:49.694	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:50.014	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:50.014	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:50.014	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:50.014	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:50.294	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:50.294	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:50.294	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:50.294	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:50.593	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:50.593	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:50.594	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:50.594	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:50.893	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:50.893	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:50.894	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:50.894	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:51.196	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:51.196	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:51.196	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:51.196	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:51.495	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:51.495	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:51.496	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:51.496	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:51.835	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:51.835	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:51.856	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:51.856	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:52.114	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:52.114	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:52.133	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:52.133	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:52.414	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:52.414	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:52.433	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:52.433	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:52.714	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:52.714	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:52.733	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:52.733	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:53.014	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:53.014	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:53.014	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:53.014	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:53.313	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:53.313	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:53.314	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:53.314	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:53.613	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:53.613	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:53.614	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:53.614	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:53.915	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:53.915	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:53.916	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:53.916	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:54.214	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:54.214	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:54.215	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:54.215	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:54.516	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:54.516	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:54.516	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:54.516	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:54.815	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:54.815	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:54.816	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:54.816	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:55.115	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:55.115	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:55.116	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:55.116	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:55.415	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:55.415	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:55.416	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:55.416	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:55.716	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:55.716	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:55.717	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:55.717	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:56.036	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:56.036	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:56.036	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:56.036	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:56.315	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:56.315	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:56.316	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:56.316	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:56.637	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:56.637	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:56.638	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:56.638	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:56.935	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:56.935	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:56.936	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:56.936	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:57.234	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:57.234	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:57.235	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:57.235	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:57.535	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:57.535	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:57.536	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:57.536	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:57.836	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:57.836	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:57.837	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:57.837	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:58.136	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:58.136	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:58.136	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:58.136	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:58.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:58.434	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:58.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:58.434	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:58.733	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:58.734	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:58.734	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:58.734	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:59.035	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:59.035	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:59.035	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:59.035	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:59.334	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:59.334	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:59.335	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:59.335	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:59.633	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:59.633	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:59.633	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:59.633	"(0x) 22-FF-00-00-01-D3" received
+I	17:35:59.934	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:35:59.934	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:35:59.934	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:35:59.934	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:00.235	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:00.235	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:00.236	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:00.236	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:00.535	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:00.535	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:00.535	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:00.536	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:00.834	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:00.834	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:00.834	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:00.834	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:01.133	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:01.133	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:01.134	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:01.134	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:01.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:01.434	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:01.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:01.434	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:01.734	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:01.734	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:01.734	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:01.734	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:02.037	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:02.037	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:02.037	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:02.037	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:02.335	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:02.335	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:02.336	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:02.336	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:02.634	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:02.634	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:02.636	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:02.636	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:02.935	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:02.935	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:02.936	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:02.936	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:03.254	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:03.254	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:03.254	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:03.254	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:03.574	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:03.574	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:03.576	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:03.576	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:03.833	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:03.833	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:03.834	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:03.834	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:04.134	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:04.134	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:04.134	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:04.134	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:04.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:04.434	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:04.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:04.434	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:04.734	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:04.734	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:04.734	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:04.734	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:05.054	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:05.054	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:05.054	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:05.054	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:05.335	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:05.335	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:05.337	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:05.337	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:05.655	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:05.655	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:05.656	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:05.656	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:05.933	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:05.933	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:05.933	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:05.933	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:06.233	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:06.233	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:06.234	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:06.234	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:06.535	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:06.535	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:06.536	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:06.536	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:06.833	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:06.833	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:06.834	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:06.834	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:07.133	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:07.133	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:07.134	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:07.134	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:07.433	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:07.433	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:07.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:07.434	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:07.715	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:07.715	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:07.733	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:07.733	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:08.014	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:08.014	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:08.033	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:08.033	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:08.315	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:08.316	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:08.335	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:08.335	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:08.616	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:08.616	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:08.634	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:08.634	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:08.916	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:08.916	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:08.936	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:08.936	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:09.216	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:09.216	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:09.217	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:09.217	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:09.515	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:09.515	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:09.516	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:09.516	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:09.816	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:09.816	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:09.817	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:09.817	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:10.115	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:10.115	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:10.115	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:10.115	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:10.414	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:10.414	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:10.415	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:10.415	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:10.716	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:10.716	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:10.717	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:10.717	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:11.056	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:11.056	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:11.057	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:11.057	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:11.353	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:11.353	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:11.373	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:11.373	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:11.655	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:11.655	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:11.656	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:11.656	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:11.935	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:11.935	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:11.954	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:11.954	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:12.234	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:12.234	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:12.254	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:12.254	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:12.536	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:12.536	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:12.554	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:12.554	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:12.836	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:12.836	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:12.855	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:12.855	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:13.137	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:13.137	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:13.138	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:13.138	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:13.436	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:13.436	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:13.437	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:13.437	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:13.757	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:13.757	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:13.759	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:13.759	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:14.037	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:14.037	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:14.038	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:14.038	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:14.354	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:14.354	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:14.375	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:14.376	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:14.634	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:14.634	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:14.634	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:14.634	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:14.934	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:14.934	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:14.934	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:14.934	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:15.256	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:15.256	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:15.276	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:15.276	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:15.534	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:15.534	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:15.534	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:15.534	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:15.854	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:15.854	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:15.855	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:15.855	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:16.134	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:16.134	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:16.153	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:16.153	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:16.434	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:16.434	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:16.435	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:16.435	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:16.734	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:16.734	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:16.734	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:16.734	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:17.033	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:17.033	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:17.034	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:17.034	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:17.393	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:17.393	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:17.394	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:17.394	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:17.635	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:17.635	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:17.635	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:17.635	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:17.933	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:17.933	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:17.934	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:17.934	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:18.234	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:18.234	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:18.253	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:18.253	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:18.554	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:18.554	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:18.554	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:18.554	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:18.854	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:18.854	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:18.854	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:18.854	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:19.154	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:19.154	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:19.154	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:19.154	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:19.453	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:19.453	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:19.455	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:19.455	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:19.754	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:19.754	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:19.754	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:19.754	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:20.054	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:20.054	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:20.054	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:20.054	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:20.353	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:20.353	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:20.353	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:20.353	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:20.654	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:20.654	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:20.654	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:20.654	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:20.976	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:20.976	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:20.976	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:20.977	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:21.255	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:21.255	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:21.276	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:21.276	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:21.555	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:21.555	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:21.555	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:21.555	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:21.856	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:21.856	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:21.857	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:21.857	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:22.155	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:22.155	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:22.155	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:22.155	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:22.455	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:22.455	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:22.456	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:22.456	"(0x) 22-FF-00-00-01-D3" received
+I	17:36:22.754	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00
+A	17:36:22.754	"(0x) F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-04-00-01-00-00-00" received
+I	17:36:22.754	Notification received from 49535343-1e4d-4bd9-ba61-23c647249616, value: (0x) 22-FF-00-00-01-D3
+A	17:36:22.754	"(0x) 22-FF-00-00-01-D3" received
