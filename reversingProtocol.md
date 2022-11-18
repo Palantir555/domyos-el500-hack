@@ -1,3 +1,11 @@
+# Useful commands to review nRF conn logs:
+
+```
+cat nrf-logs/logs.txt | grep '^A' | grep -o '"(0x.*"' | awk '!x[$0]++' | grep ' F0-BC'
+```
+
+# New Conn, no activity log review
+
 Notifications recvd by `nRF Connect` when a new conn is established by the
 `eConnected` app:
 
@@ -94,5 +102,23 @@ A  21:54:32.348  "(0x) 00-FF-00-00-00-AB"
 
 ## Messages by code:
 
-Apparent message types and subtypes:
+`F0-BC` status report:
+    ```
+    F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
+                                             /__\
+                                            Resistance setting
+    ```
 
+`22-FF` also a status report? in-session only. Not present on new connection:
+    ```
+    22-FF-00-00-01-D1 # Sample from buttons only logs
+                    T
+                    Resistance setting - 1 (??)
+    ---------
+    # Samples from accelerating walk only logs:
+    22-FF-00-00-01-18
+    22-FF-00-00-01-1E
+    22-FF-00-00-01-24
+    22-FF-00-00-01-29
+    22-FF-00-00-01-D2
+    ```
