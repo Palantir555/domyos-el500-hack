@@ -54,16 +54,16 @@ A  21:54:32.348  "(0x) 00-FF-00-00-00-AB"
 
 ## Messages by size:
 
-- 6 bytes:
+- 3 bytes:
     ```
     FF-FF-9D
     FF-FF-9D
     ```
-- 8 bytes:
+- 4 bytes:
     ```
     F0-D4-03-C7
     ```
-- 12 bytes:
+- 6 bytes:
     ```
     00-FF-00-00-00-AB
     00-FF-00-00-00-AB
@@ -77,7 +77,7 @@ A  21:54:32.348  "(0x) 00-FF-00-00-00-AB"
     00-FF-00-00-00-AB
     00-FF-00-00-00-AB
     ```
-- 14 bytes:
+- 7 bytes:
     ```
     00-00-01-00-00-00-DA
     F0-B3-01-01-FF-FF-A3
@@ -85,18 +85,18 @@ A  21:54:32.348  "(0x) 00-FF-00-00-00-AB"
     F0-B5-00-00-FF-FF-A3
     F0-B5-00-00-FF-FF-A3
     ```
-- 16 bytes:
+- 8 bytes:
     ```
     F0-D9-00-08-36-81-67-EF
     F0-BB-00-00-FF-FF-FF-A8
     F0-BB-00-00-FF-FF-FF-A8
     ```
-- 26 bytes:
+- 13 bytes:
     ```
     F0-B4-16-11-00-04-DE-FF-FF-FF-FF-FF-A8
     F0-B4-16-11-00-04-DE-FF-FF-FF-FF-FF-A8
     ```
-- 40 bytes:
+- 20 bytes:
     ```
     F0-BD-FF-FF-FF-FF-FF-FF-FF-FF-01-FF-FF-FF-FF-FF-FF-FF-01-FF
     F0-BD-FF-FF-FF-FF-FF-FF-FF-FF-01-FF-FF-FF-FF-FF-FF-FF-01-FF

@@ -1,0 +1,72 @@
+<server-configuration name="Domyos-EL-1919 - copy">
+   <service uuid="0000180a-0000-1000-8000-00805f9b34fb">
+      <characteristic uuid="00002a29-0000-1000-8000-00805f9b34fb" value-string="ISSC">
+         <permission name="READ"/>
+         <property name="READ"/>
+      </characteristic>
+      <characteristic uuid="00002a24-0000-1000-8000-00805f9b34fb" value-string="BM70">
+         <permission name="READ"/>
+         <property name="READ"/>
+      </characteristic>
+      <characteristic uuid="00002a25-0000-1000-8000-00805f9b34fb" value-string="0000">
+         <permission name="READ"/>
+         <property name="READ"/>
+      </characteristic>
+      <characteristic uuid="00002a27-0000-1000-8000-00805f9b34fb" value-string="5505 102_BLDK3">
+         <permission name="READ"/>
+         <property name="READ"/>
+      </characteristic>
+      <characteristic uuid="00002a26-0000-1000-8000-00805f9b34fb" value-string="009500">
+         <permission name="READ"/>
+         <property name="READ"/>
+      </characteristic>
+      <characteristic uuid="00002a28-0000-1000-8000-00805f9b34fb" value-string="0000">
+         <permission name="READ"/>
+         <property name="READ"/>
+      </characteristic>
+      <characteristic uuid="00002a23-0000-1000-8000-00805f9b34fb" value="0000000000000000">
+         <permission name="READ"/>
+         <property name="READ"/>
+      </characteristic>
+      <characteristic uuid="00002a2a-0000-1000-8000-00805f9b34fb" value="0000000001000000">
+         <permission name="READ"/>
+         <property name="READ"/>
+      </characteristic>
+   </service>
+   <service uuid="49535343-5d82-6099-9348-7aac4d5fbc51">
+      <characteristic uuid="49535343-026e-3a9b-954c-97daef17e26e">
+         <descriptor configure="CCCD"/>
+         <permission name="WRITE"/>
+         <property name="WRITE"/>
+         <property name="NOTIFY"/>
+      </characteristic>
+   </service>
+   <service uuid="49535343-c9d0-cc83-a44a-6fe238d06d33">
+      <characteristic uuid="49535343-aca3-481c-91ec-d85e28a60318">
+         <descriptor configure="CCCD"/>
+         <permission name="WRITE"/>
+         <property name="WRITE"/>
+         <property name="NOTIFY"/>
+      </characteristic>
+   </service>
+   <service uuid="49535343-fe7d-4ae5-8fa9-9fafd205e455">
+      <characteristic uuid="49535343-1e4d-4bd9-ba61-23c647249616">
+         <descriptor configure="CCCD"/>
+         <permission name="WRITE"/>
+         <property name="WRITE"/>
+         <property name="WRITE_WITHOUT_RESPONSE"/>
+         <property name="NOTIFY"/>
+      </characteristic>
+      <characteristic uuid="49535343-8841-43f4-a8d4-ecbe34729bb3">
+         <permission name="WRITE"/>
+         <property name="WRITE"/>
+         <property name="WRITE_WITHOUT_RESPONSE"/>
+      </characteristic>
+      <characteristic uuid="49535343-4c8a-39b3-2f49-511cff073b7e">
+         <descriptor configure="CCCD"/>
+         <permission name="WRITE"/>
+         <property name="WRITE"/>
+         <property name="NOTIFY"/>
+      </characteristic>
+   </service>
+</server-configuration>
