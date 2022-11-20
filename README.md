@@ -54,12 +54,17 @@ A  21:54:32.348  "(0x) 00-FF-00-00-00-AB"
 
 ## Messages by size:
 
-6 bytes:
+- 6 bytes:
+    ```
     FF-FF-9D
     FF-FF-9D
-8 bytes:
+    ```
+- 8 bytes:
+    ```
     F0-D4-03-C7
-12 bytes:
+    ```
+- 12 bytes:
+    ```
     00-FF-00-00-00-AB
     00-FF-00-00-00-AB
     00-FF-00-00-00-AB
@@ -71,20 +76,28 @@ A  21:54:32.348  "(0x) 00-FF-00-00-00-AB"
     00-FF-00-00-00-AB
     00-FF-00-00-00-AB
     00-FF-00-00-00-AB
-14 bytes:
+    ```
+- 14 bytes:
+    ```
     00-00-01-00-00-00-DA
     F0-B3-01-01-FF-FF-A3
     F0-B3-01-01-FF-FF-A3
     F0-B5-00-00-FF-FF-A3
     F0-B5-00-00-FF-FF-A3
-16 bytes:
+    ```
+- 16 bytes:
+    ```
     F0-D9-00-08-36-81-67-EF
     F0-BB-00-00-FF-FF-FF-A8
     F0-BB-00-00-FF-FF-FF-A8
-26 bytes:
+    ```
+- 26 bytes:
+    ```
     F0-B4-16-11-00-04-DE-FF-FF-FF-FF-FF-A8
     F0-B4-16-11-00-04-DE-FF-FF-FF-FF-FF-A8
-40 bytes:
+    ```
+- 40 bytes:
+    ```
     F0-BD-FF-FF-FF-FF-FF-FF-FF-FF-01-FF-FF-FF-FF-FF-FF-FF-01-FF
     F0-BD-FF-FF-FF-FF-FF-FF-FF-FF-01-FF-FF-FF-FF-FF-FF-FF-01-FF
     F0-DB-02-00-08-FF-01-00-00-01-01-00-00-00-01-00-00-00-01-00
@@ -99,10 +112,11 @@ A  21:54:32.348  "(0x) 00-FF-00-00-00-AB"
     F0-BC-FF-FF-00-00-00-00-00-00-00-00-00-00-01-00-01-00-00-00
     F0-BC-FF-FF-00-00-00-00-00-00-00-00-00-00-01-00-01-00-00-00
     F0-BC-FF-FF-00-00-00-00-00-00-00-00-00-00-01-00-01-00-00-00
+    ```
 
 ## Messages by code:
 
-`F0-BC` status report:
+- `F0-BC` status report:
     ```
     F0-BC-FF-FF-00-00-00-00-00-00-00-02-00-00-03-00-01-00-00-00
                                              /__\
@@ -165,7 +179,7 @@ A  21:54:32.348  "(0x) 00-FF-00-00-00-AB"
 
     ```
 
-`22-FF` also a status report? in-session only. Not present on new connection:
+- `22-FF` also a status report? in-session only. Not present on new connection:
     ```
     22-FF-00-00-01-D1 # Sample from buttons only logs
                     T
