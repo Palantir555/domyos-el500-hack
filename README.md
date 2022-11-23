@@ -1,3 +1,41 @@
+# Message stats:
+
+STATS ON ALL NOTIFICATION PAYLOADS CAPTURED SO FAR (21/11)
+
+```
+CMD     COUNT
+
+ *  9642
+ 0*     970
+ 1*     314
+ 2*     2215
+     22-*       1133
+     2D-*       431
+     2E-*       358
+     23-*       76
+ 3*     1109
+ 4*     81
+ 5*     33
+ 6*     0
+ 7*     0
+.....   0
+ F*     4920
+     F0-*   4869
+     F0-BC-*    4003
+     F0-DB-*    719
+     F0-BD-*    51
+     F0-D9-*    4   # POTENTIAL SESSION START MESSAGE?? F0-D9-00-08-36-81-67-EF
+```
+
+TODO: Write a script to automatically calculate all command stats, along the lines of:
+
+```
+cat nrf-logs/*.txt | grep '^A' | grep -o '"(0x.*"' | grep ' F'     | wc -l
+cat nrf-logs/*.txt | grep '^A' | grep -o '"(0x.*"' | grep ' F0'    | wc -l
+cat nrf-logs/*.txt | grep '^A' | grep -o '"(0x.*"' | grep ' F0-BC' | wc -l
+cat nrf-logs/*.txt | grep '^A' | grep -o '"(0x.*"' | grep ' F[^0]' | wc -l
+```
+
 # Useful commands to review nRF conn logs:
 
 ```
