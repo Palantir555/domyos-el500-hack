@@ -8,6 +8,7 @@
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
+#include <esp_system.h>
 
 // See the following for generating UUIDs:
 // https://www.uuidgenerator.net/
@@ -39,6 +40,9 @@ void setup()
 {
     Serial.begin(115200);
     Serial.println("Starting BLE work!");
+
+    uint8_t mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x9d};
+    esp_base_mac_addr_set(mac);
 
     BLEDevice::init("Domyos-EL-4242");
     BLEServer* pServer = BLEDevice::createServer();
