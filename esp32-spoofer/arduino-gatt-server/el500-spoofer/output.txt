@@ -1,0 +1,23 @@
+Starting BLE work!
+Characteristics defined!
+connect cback
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ
+Written to [UUID: 49535343-8841-43f4-a8d4-ecbe34729bb3, handle : 0x005a Write WriteNoResponse Notify ]:
+        �ɹ

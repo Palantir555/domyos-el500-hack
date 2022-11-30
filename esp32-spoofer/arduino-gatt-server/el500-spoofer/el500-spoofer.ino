@@ -79,7 +79,12 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
         Serial.print(pCharacteristic->toString().c_str());
         Serial.println("]:");
         Serial.print("\t");
-        Serial.println(value.c_str());
+        for (int i = 0; i < value.length(); i++)
+        {
+            Serial.print(value.c_str()[i], HEX);
+            Serial.print(" ");
+        }
+        Serial.println();
     }
 };
 
