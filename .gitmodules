@@ -1,0 +1,3 @@
+[submodule "mitm/gattacker"]
+	path = mitm/gattacker
+	url = https://github.com/securing/gattacker.git
