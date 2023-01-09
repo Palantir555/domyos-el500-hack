@@ -1,10 +1,3 @@
-/*
-    Based on Neil Kolban example for IDF:
-   https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/tests/BLE%20Tests/SampleServer.cpp
-    Ported to Arduino ESP32 by Evandro Copercini
-    updates by chegewara
-*/
-
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
@@ -74,9 +67,10 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
 {
     void onWrite(BLECharacteristic* pCharacteristic)
     {
+#if 0 // Human-readable serial report
         std::string value = pCharacteristic->getValue();
         Serial.print("Written to [");
-        Serial.print(pCharacteristic->toString().c_str());
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.println("]:");
         Serial.print("\t");
         for (int i = 0; i < value.length(); i++)
@@ -85,6 +79,34 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
             Serial.print(" ");
         }
         Serial.println();
+        {
+            char serialMsg[255] = "";
+            sprintf(serialMsg, "W,%s,%s\n", pCharacteristic->getUUID().toString().c_str(), value.c_str());// TODO JC highest: This is broken. value will sometimes have null characters within packets
+        }
+#else
+        // serialize into a machine-readable format, send via Serial
+        std::string value = pCharacteristic->getValue();
+        Serial.print("Write[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.print("]:[msg:");
+        for (int i = 0; i < value.length(); i++)
+        {
+            Serial.print(value.c_str()[i], HEX);
+            Serial.print(" ");
+        }
+        Serial.println("]");
+#endif
+    }
+
+    void onRead(BLECharacteristic* pCharacteristic)
+    {
+        //std::string value = pCharacteristic->getValue();
+        Serial.print("Read[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.println("]");
+        // TODO JC high: Wait for python to send back the real device's char value, parse it, and:
+        // pCharacteristic->setValue(( uint8_t* )(receivedReadValue), sizeof(receivedReadValue));
+        // The BLE stack will automatically return the newly set value to the BLE client
     }
 };
 
