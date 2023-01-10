@@ -88,7 +88,7 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
         std::string value = pCharacteristic->getValue();
         Serial.print("Write[char:");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
-        Serial.print("]:[msg:");
+        Serial.print("][msg:");
         for (int i = 0; i < value.length(); i++)
         {
             Serial.print(value.c_str()[i], HEX);
@@ -115,8 +115,9 @@ void setup()
     Serial.begin(115200);
     Serial.println("Starting BLE work!");
 
-    uint8_t mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x9d};
-    esp_base_mac_addr_set(mac);
+    // uint8_t spoofed_mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x9d}; // Original mac address - for identical cloning
+    uint8_t spoofed_mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x42}; // Original mac address - for identical cloning
+    esp_base_mac_addr_set(spoofed_mac);
 
     BLEDevice::init("Domyos-EL-4242");
     pServer = BLEDevice::createServer();
