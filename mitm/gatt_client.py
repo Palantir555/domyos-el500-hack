@@ -22,7 +22,7 @@ serial_output_queue = queue.Queue()
 # Create a new logger for our threads. It prints all messages to stdout
 logger = logging.getLogger('jc_logger')
 # logger debug messages should be printed in red
-coloredlogs.install(level='DEBUG', logger=logger, fmt='%(asctime)s %(levelname)s %(message)s',
+coloredlogs.install(level='DEBUG', logger=logger, fmt='%(levelname)s %(message)s', # %(asctime)s ?
                     level_styles={'debug': {'color': 'blue'}, 'error': {'color': 'red'}})
 # initialize the logger
 # logger.setLevel(logging.DEBUG)
@@ -88,7 +88,7 @@ def serial_input_cback(dataline):
             return
         # Convert msg from "A0 B1 D2 " to a binary string:
         msg = bytes.fromhex(data.group('msg').replace(' ', ''))
-        logger.info(f'Spoofer received app cmd: Write[{data["uuid"]}][{msg}]')
+        logger.info(f'Got serial cmd: Write[{data["uuid"]}][{msg}]')
         # Write <msg> to <uuid>
         # Find BLE service and characteristic with the given UUID
         if el500_ble_device:
@@ -112,10 +112,10 @@ def serial_input_cback(dataline):
                     if charac.uuid == uuid:
                         # read the real device's value over BLE
                         charvalue = charac.read_value()
-                        logger.debug(f'Got real device value [{uuid}] = {charvalue}')
+                        logger.info(f'Got BLE response [{uuid}] = {charvalue}')
                         # Write the value to the serial port
                         serial_msg = f'ReadResponse,{uuid},{charvalue.hex()}\r\n'
-                        logger.info(f'Sending response over serial: {serial_msg}')
+                        logger.info(f'Sending serial response: {serial_msg}')
                         serial_output_queue.put(serial_msg)
                         return
 
@@ -128,7 +128,10 @@ def serial_port_handler():
     over a thread-safe queue, it will send it to the serial port.'''
     logger.info(f'Connecting to serial port...')
     with serial.Serial(EL500_SPOOFER_SERIALPORT, EL500_SPOOFER_BAUDRATE, timeout=1) as ser:
-        logger.info(f'Opened serial port {EL500_SPOOFER_SERIALPORT} at {EL500_SPOOFER_BAUDRATE} baud')
+        logger.info(f'Commanding ESP32 reboot over serial...')
+        ser.write(b'Restart,0,00\r\n')
+    with serial.Serial(EL500_SPOOFER_SERIALPORT, EL500_SPOOFER_BAUDRATE, timeout=10) as ser:
+        logger.debug(f'Opened serial port {EL500_SPOOFER_SERIALPORT} at {EL500_SPOOFER_BAUDRATE} baud')
         while True:
             if ser.in_waiting:
                 serial_input_cback(ser.readline())

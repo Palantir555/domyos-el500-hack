@@ -113,7 +113,7 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
 void setup()
 {
     Serial.begin(115200);
-    Serial.println("Starting BLE work!");
+    Serial.println("Starting BLE work");
 
     // uint8_t spoofed_mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x9d}; // Original mac address - for identical cloning
     uint8_t spoofed_mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x42}; // Original mac address - for identical cloning
@@ -223,31 +223,46 @@ void setup()
     pAdvertising->setMinPreferred(0x06); // functions that help with iPhone connections issue
     pAdvertising->setMinPreferred(0x12);
     BLEDevice::startAdvertising();
-    Serial.println("Characteristics defined!");
+    Serial.println("Characteristics defined");
 }
 
 void read_serial_input_line() {
     if (Serial.available()) {
-        String input_line = Serial.readStringUntil('\n')
+        String input_line = Serial.readStringUntil('\n');
         input_line.trim(); // Remove whitespace and newlines
         // Parse input_line into (command, uuid, value) according to this format:
         //  "<command>,<characteristic>,<msg>\r\n"
         //  where <msg> is a byte array in hex format.
         // Example: b'ReadResponse,49535343-8841-43f4-a8d4-ecbe34729bb3,F0C9B9\r\n'
-        command = input_line.substring(0, input_line.indexOf(','));
+        String command = input_line.substring(0, input_line.indexOf(','));
         input_line.remove(0, input_line.indexOf(',') + 1);
-        uuid = input_line.substring(0, input_line.indexOf(','));
+        String uuid = input_line.substring(0, input_line.indexOf(','));
         input_line.remove(0, input_line.indexOf(',') + 1);
-        value = input_line;
+        String value_hex = input_line;
+        // Convert hex string to byte array. Example hex string: "F0C9B9"
+        uint8_t payload[128];
+        int payload_len = value_hex.length() / 2;
+        assert(payload_len <= 128);
+        for (int i = 0; i < payload_len; i++) {
+            payload[i] = ( uint8_t )strtol(
+                value_hex.substring(i * 2, i * 2 + 2).c_str(), NULL, 16);
+        }
+        
         Serial.println("Got a serial message:");
-        Serial.println("Command: " + command);
-        Serial.println("UUID: " + uuid);
-        Serial.println("Value: " + value);
+        Serial.println("\tCommand: " + command);
+        Serial.println("\tUUID: " + uuid);
+        Serial.println("\tValue: " + value_hex);
+        if(command == "Restart") {
+            Serial.println("Restarting ESP32...");
+            ESP.restart();
+        }
+        // TODO JC highest: return a struct with cmd, uuid, value
     }
 }
 
 void loop()
 {
+    read_serial_input_line(); // To be expanded to fetch read responses. Will have to be moved elsewhere
     if (deviceConnected)
     {
         delay(1000);
