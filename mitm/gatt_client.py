@@ -1,9 +1,11 @@
 import gatt
 import serial
+import signal
 import threading
 import queue
 import logging
 import time
+import sys
 import re
 #import module for colorful logging
 import coloredlogs
@@ -18,6 +20,8 @@ EL500_SPOOFER_BAUDRATE = 115200
 
 el500_ble_device = None
 serial_output_queue = queue.Queue()
+
+kill_all_threads = False
 
 # Create a new logger for our threads. It prints all messages to stdout
 logger = logging.getLogger('jc_logger')
@@ -61,15 +65,17 @@ class Target(gatt.Device):
             logger.debug(f"[{self.mac_address}] \tService [{service.uuid}]")
             for charac in service.characteristics:
                 logger.debug(f"Enabling notifications for [{self.mac_address}] \t\tCharacteristic [{charac.uuid}]")
-                charac.enable_notifications()
+                charac.enable_notifications() # Subscribe to all notifications
                 # charac.write_value(b'\x42\x41\x43') # just testing
                 # JC: This version of the gatt lib doesn't seem to support descriptors??
                 # for descr in charac.descriptors:
                 #     logger.debug(f"[{self.mac_address}]\t\t\tDescriptor [{descr.uuid}] ({descr.read_value()})")
-        # subscribe to all characteristics
-        for service in self.services:
-            for charac in service.characteristics:
-                charac.enable_notifications()
+
+    def characteristic_value_updated(self, characteristic, value):
+        '''This is the callback for when a notification is received'''
+        global serial_output_queue
+        logger.debug(f"Received BLE Notification: [{characteristic.uuid}][{value}]")
+        serial_output_queue.put(f'Notify,{characteristic.uuid},{value.hex()}') # Move fstring into generic serialize_command(cmd, uuid, value)
 
     def descriptor_read_value_failed(self, descriptor, error):
         logger.error('descriptor_value_failed')
@@ -133,16 +139,33 @@ def serial_port_handler():
     with serial.Serial(EL500_SPOOFER_SERIALPORT, EL500_SPOOFER_BAUDRATE, timeout=10) as ser:
         logger.debug(f'Opened serial port {EL500_SPOOFER_SERIALPORT} at {EL500_SPOOFER_BAUDRATE} baud')
         while True:
+            if kill_all_threads:
+                logger.info('Serial port handler thread exiting')
+                return
             if ser.in_waiting:
                 serial_input_cback(ser.readline())
             if not serial_output_queue.empty():
                 ser.write(serial_output_queue.get())
             time.sleep(0.1)
 
+def sigint_handler(sig, frame):
+    '''This function is called when the user presses Ctrl-C'''
+    global kill_all_threads
+    logger.info('Exiting...')
+    kill_all_threads = True
+    # kill all threads:
+    for thread in threading.enumerate():
+        if thread is not threading.current_thread():
+            thread.join()
+    sys.exit(0)
+
 # Start the serial port handler thread:
 serial_port_thread = threading.Thread(target=serial_port_handler, name='Serial')
 serial_port_thread.start()
 # serial_port_handler()
+
+# configure sigint handler:
+signal.signal(signal.SIGINT, sigint_handler)
 
 # Start the BLE manager:
 manager = MyDeviceManager(adapter_name='hci0')
