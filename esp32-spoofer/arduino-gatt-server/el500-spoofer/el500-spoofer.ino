@@ -226,6 +226,26 @@ void setup()
     Serial.println("Characteristics defined!");
 }
 
+void read_serial_input_line() {
+    if (Serial.available()) {
+        String input_line = Serial.readStringUntil('\n')
+        input_line.trim(); // Remove whitespace and newlines
+        // Parse input_line into (command, uuid, value) according to this format:
+        //  "<command>,<characteristic>,<msg>\r\n"
+        //  where <msg> is a byte array in hex format.
+        // Example: b'ReadResponse,49535343-8841-43f4-a8d4-ecbe34729bb3,F0C9B9\r\n'
+        command = input_line.substring(0, input_line.indexOf(','));
+        input_line.remove(0, input_line.indexOf(',') + 1);
+        uuid = input_line.substring(0, input_line.indexOf(','));
+        input_line.remove(0, input_line.indexOf(',') + 1);
+        value = input_line;
+        Serial.println("Got a serial message:");
+        Serial.println("Command: " + command);
+        Serial.println("UUID: " + uuid);
+        Serial.println("Value: " + value);
+    }
+}
+
 void loop()
 {
     if (deviceConnected)
