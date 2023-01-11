@@ -42,6 +42,9 @@
     #define CHARACT_UUID_ST_2     "49535343-4c8a-39b3-2f49-511cff073b7e" // W : W/N
         BLE2902 descrCharStateSt2;
 
+#define NUM_CHARACTERISTICS 13
+BLECharacteristic* characts_array[NUM_CHARACTERISTICS];
+
 BLEServer* pServer      = NULL;
 bool deviceConnected    = false;
 bool oldDeviceConnected = false;
@@ -91,8 +94,8 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
         Serial.print("][msg:");
         for (int i = 0; i < value.length(); i++)
         {
-            Serial.print(value.c_str()[i], HEX);
-            Serial.print(" ");
+            // Print the byte as a hex value (always two digits)
+            Serial.printf("%02x ", value.c_str()[i]);
         }
         Serial.println("]");
 #endif
@@ -126,85 +129,76 @@ void setup()
     // service { characts }
     BLEService* pServiceMeta = pServer->createService(SERVICE_UUID_METADATA);
     {
-        BLECharacteristic* pCh0 = pServiceMeta->createCharacteristic(
+        characts_array[0] = pServiceMeta->createCharacteristic(
             CHARACT_UUID_META_0, BLECharacteristic::PROPERTY_READ);
-        BLECharacteristic* pCh1 = pServiceMeta->createCharacteristic(
+        characts_array[1] = pServiceMeta->createCharacteristic(
             CHARACT_UUID_META_1, BLECharacteristic::PROPERTY_READ);
-        BLECharacteristic* pCh2 = pServiceMeta->createCharacteristic(
+        characts_array[2] = pServiceMeta->createCharacteristic(
             CHARACT_UUID_META_2, BLECharacteristic::PROPERTY_READ);
-        BLECharacteristic* pCh3 = pServiceMeta->createCharacteristic(
+        characts_array[3] = pServiceMeta->createCharacteristic(
             CHARACT_UUID_META_3, BLECharacteristic::PROPERTY_READ);
-        BLECharacteristic* pCh4 = pServiceMeta->createCharacteristic(
+        characts_array[4] = pServiceMeta->createCharacteristic(
             CHARACT_UUID_META_4, BLECharacteristic::PROPERTY_READ);
-        BLECharacteristic* pCh5 = pServiceMeta->createCharacteristic(
+        characts_array[5] = pServiceMeta->createCharacteristic(
             CHARACT_UUID_META_5, BLECharacteristic::PROPERTY_READ);
-        BLECharacteristic* pCh6 = pServiceMeta->createCharacteristic(
+        characts_array[6] = pServiceMeta->createCharacteristic(
             CHARACT_UUID_META_6, BLECharacteristic::PROPERTY_READ);
-        BLECharacteristic* pCh7 = pServiceMeta->createCharacteristic(
+        characts_array[7] = pServiceMeta->createCharacteristic(
             CHARACT_UUID_META_7, BLECharacteristic::PROPERTY_READ);
-        pCh0->setCallbacks(new MyCharactCallbacks());
-        pCh1->setCallbacks(new MyCharactCallbacks());
-        pCh2->setCallbacks(new MyCharactCallbacks());
-        pCh3->setCallbacks(new MyCharactCallbacks());
-        pCh4->setCallbacks(new MyCharactCallbacks());
-        pCh5->setCallbacks(new MyCharactCallbacks());
-        pCh6->setCallbacks(new MyCharactCallbacks());
-        pCh7->setCallbacks(new MyCharactCallbacks());
 
         // Set up readable values
-        pCh0->setValue(( uint8_t* )(ch0_val), sizeof(ch0_val));
-        pCh1->setValue(( uint8_t* )(ch1_val), sizeof(ch1_val));
-        pCh2->setValue(( uint8_t* )(ch2_val), sizeof(ch2_val));
-        pCh3->setValue(( uint8_t* )(ch3_val), sizeof(ch3_val));
-        pCh4->setValue(( uint8_t* )(ch4_val), sizeof(ch4_val));
-        pCh5->setValue(( uint8_t* )(ch5_val), sizeof(ch5_val));
-        pCh6->setValue(( uint8_t* )(ch6_val), sizeof(ch6_val));
-        pCh7->setValue(( uint8_t* )(ch7_val), sizeof(ch7_val));
+        characts_array[0]->setValue(( uint8_t* )(ch0_val), sizeof(ch0_val));
+        characts_array[1]->setValue(( uint8_t* )(ch1_val), sizeof(ch1_val));
+        characts_array[2]->setValue(( uint8_t* )(ch2_val), sizeof(ch2_val));
+        characts_array[3]->setValue(( uint8_t* )(ch3_val), sizeof(ch3_val));
+        characts_array[4]->setValue(( uint8_t* )(ch4_val), sizeof(ch4_val));
+        characts_array[5]->setValue(( uint8_t* )(ch5_val), sizeof(ch5_val));
+        characts_array[6]->setValue(( uint8_t* )(ch6_val), sizeof(ch6_val));
+        characts_array[7]->setValue(( uint8_t* )(ch7_val), sizeof(ch7_val));
     }
 
     // service { characts }
     BLEService* pServiceUnk0 = pServer->createService(SERVICE_UUID_UNKNOWN_0);
     {
-        BLECharacteristic* pCh8 = pServiceUnk0->createCharacteristic(
+        characts_array[8] = pServiceUnk0->createCharacteristic(
             CHARACT_UUID_UNK0_0, BLECharacteristic::PROPERTY_WRITE |
                                      BLECharacteristic::PROPERTY_NOTIFY);
-        pCh8->setCallbacks(new MyCharactCallbacks());
         //descrCharUnk0.setNotifications(1);
-        pCh8->addDescriptor(&descrCharUnk0);
+        characts_array[8]->addDescriptor(&descrCharUnk0);
     }
 
     // service { characts }
     BLEService* pServiceUnk1    = pServer->createService(SERVICE_UUID_UNKNOWN_1);
     {
-        BLECharacteristic* pCh9 = pServiceUnk1->createCharacteristic(
+        characts_array[9] = pServiceUnk1->createCharacteristic(
             CHARACT_UUID_UNK1_0, BLECharacteristic::PROPERTY_WRITE |
                                      BLECharacteristic::PROPERTY_NOTIFY);
-        pCh9->setCallbacks(new MyCharactCallbacks());
         //descrCharUnk1.setNotifications(1);
-        pCh9->addDescriptor(&descrCharUnk1);
+        characts_array[9]->addDescriptor(&descrCharUnk1);
     }
 
     // service { characts }
     BLEService* pServiceStates = pServer->createService(SERVICE_UUID_STATEREPORTS);
     {
-        BLECharacteristic* pCh10 = pServiceStates->createCharacteristic(
+        characts_array[10] = pServiceStates->createCharacteristic(
             CHARACT_UUID_STATES, BLECharacteristic::PROPERTY_WRITE |
                                      BLECharacteristic::PROPERTY_WRITE_NR |
                                      BLECharacteristic::PROPERTY_NOTIFY);
-        BLECharacteristic* pCh11 = pServiceStates->createCharacteristic(
+        characts_array[11] = pServiceStates->createCharacteristic(
             CHARACT_UUID_ST_1, BLECharacteristic::PROPERTY_WRITE |
                                    BLECharacteristic::PROPERTY_WRITE_NR |
                                    BLECharacteristic::PROPERTY_NOTIFY);
-        BLECharacteristic* pCh12 = pServiceStates->createCharacteristic(
+        characts_array[12] = pServiceStates->createCharacteristic(
             CHARACT_UUID_ST_2, BLECharacteristic::PROPERTY_WRITE |
                                    BLECharacteristic::PROPERTY_NOTIFY);
-        pCh10->setCallbacks(new MyCharactCallbacks());
         descrCharStateStates.setNotifications(1);
-        pCh10->addDescriptor(&descrCharStateStates);
-        pCh11->setCallbacks(new MyCharactCallbacks());
-        pCh12->setCallbacks(new MyCharactCallbacks());
+        characts_array[10]->addDescriptor(&descrCharStateStates);
         //descrCharStateSt2.setNotifications(1);
-        pCh12->addDescriptor(&descrCharStateSt2);
+        characts_array[12]->addDescriptor(&descrCharStateSt2);
+    }
+
+    for(auto& ch : characts_array) {
+        ch->setCallbacks(new MyCharactCallbacks());
     }
 
     // start services
@@ -240,14 +234,14 @@ void read_serial_input_line() {
         input_line.remove(0, input_line.indexOf(',') + 1);
         String value_hex = input_line;
         // Convert hex string to byte array. Example hex string: "F0C9B9"
-        uint8_t payload[128];
+        uint8_t payload[512];
         int payload_len = value_hex.length() / 2;
-        assert(payload_len <= 128);
+        assert(payload_len <= 512);
         for (int i = 0; i < payload_len; i++) {
             payload[i] = ( uint8_t )strtol(
                 value_hex.substring(i * 2, i * 2 + 2).c_str(), NULL, 16);
         }
-        
+
         Serial.println("Got a serial message:");
         Serial.println("\tCommand: " + command);
         Serial.println("\tUUID: " + uuid);
@@ -255,8 +249,18 @@ void read_serial_input_line() {
         if(command == "Restart") {
             Serial.println("Restarting ESP32...");
             ESP.restart();
+        }else if(command == "Notify"){ // TODO highest: might be buggy, and that's why the app sessions aren't behaving?
+            for(auto &c : characts_array){
+                if(c->getUUID().equals(BLEUUID(uuid.c_str()))){
+                    c->setValue(payload, payload_len);
+                    c->notify();
+                    Serial.println("Notified to app!");
+                    break;
+                }
+            }
+            // pCharacteristic->setValue(( uint8_t* )(receivedReadValue), sizeof(receivedReadValue));
+            // pCharacteristic->notify();
         }
-        // TODO JC highest: return a struct with cmd, uuid, value
     }
 }
 

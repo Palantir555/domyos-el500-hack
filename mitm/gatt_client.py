@@ -11,7 +11,7 @@ import re
 import coloredlogs
 
 # Target BLE Device (The real EL500)
-target_el500_mac = 'e8:5d:86:bf:35:9f' # My EL500's MAC address
+target_el500_mac = 'e8:5d:86:bf:35:9d' # My EL500's MAC address
 SpOoFeR_MaC = 'e8:5d:86:bf:35:42' # esp32's spoofed mac address to look like a legit device - SHOULD NOT BE USED FROM THIS SCRIPT. The spoofer should connect to the mobile app, and this laptop's BLE should connect to the EL500 and spoof the behavior of the eConnected mobile app
 TARGET_MAC = target_el500_mac
 
@@ -25,9 +25,17 @@ kill_all_threads = False
 
 # Create a new logger for our threads. It prints all messages to stdout
 logger = logging.getLogger('jc_logger')
+serial_logger = logging.getLogger('serial_logger')
+ble_logger = logging.getLogger('ble_logger')
 # logger debug messages should be printed in red
 coloredlogs.install(level='DEBUG', logger=logger, fmt='%(levelname)s %(message)s', # %(asctime)s ?
-                    level_styles={'debug': {'color': 'blue'}, 'error': {'color': 'red'}})
+                    level_styles={'debug': {'color': 'green'}, 'error': {'color': 'red'}})
+# Serial logger messages should be yellow
+coloredlogs.install(level='DEBUG', logger=serial_logger, fmt='%(levelname)s %(message)s',
+                    level_styles={'debug': {'color': 'yellow'}, 'info': {'color': 'yellow'}, 'error': {'color': 'red'}})
+# Serial logger messages should be green
+coloredlogs.install(level='DEBUG', logger=ble_logger, fmt='%(levelname)s %(message)s',
+                    level_styles={'debug': {'color': 'green'}, 'info': {'color': 'green'}, 'error': {'color': 'red'}})
 # initialize the logger
 # logger.setLevel(logging.DEBUG)
 # Configure logger to print debug messages darker than INFO:
@@ -39,46 +47,45 @@ class MyDeviceManager(gatt.DeviceManager):
         global el500_ble_device
         # logger.debug(f"Discovered [{device.mac_address}] {device.alias()}")
         if device.mac_address.lower() == TARGET_MAC.lower():
-            logger.info(f"Target discovered: [{device.mac_address}] {device.alias()}")
+            ble_logger.info(f"Target discovered: [{device.mac_address}] {device.alias()}")
             el500_ble_device = Target(mac_address=device.mac_address, manager=self)
             el500_ble_device.connect()
-            dir(el500_ble_device)
 
 class Target(gatt.Device):
     def connect_succeeded(self):
         super().connect_succeeded()
-        logger.info(f"[{self.mac_address}] Connected")
+        ble_logger.info(f"[{self.mac_address}] Connected")
 
     def connect_failed(self, error):
         super().connect_failed(error)
-        logger.info(f"[{self.mac_address}] Connection failed: {str(error)}")
+        ble_logger.info(f"[{self.mac_address}] Connection failed: {str(error)}")
 
     def disconnect_succeeded(self):
         super().disconnect_succeeded()
-        logger.info(f"[{self.mac_address}] Disconnected")
+        ble_logger.info(f"[{self.mac_address}] Disconnected")
 
     def services_resolved(self):
         super().services_resolved()
 
-        logger.debug(f"[{self.mac_address}] Resolved services")
+        ble_logger.debug(f"[{self.mac_address}] Resolved services")
         for service in self.services:
-            logger.debug(f"[{self.mac_address}] \tService [{service.uuid}]")
+            ble_logger.debug(f"[{self.mac_address}] \tService [{service.uuid}]")
             for charac in service.characteristics:
-                logger.debug(f"Enabling notifications for [{self.mac_address}] \t\tCharacteristic [{charac.uuid}]")
+                ble_logger.debug(f"Enabling notifications for [{self.mac_address}] \t\tCharacteristic [{charac.uuid}]")
                 charac.enable_notifications() # Subscribe to all notifications
                 # charac.write_value(b'\x42\x41\x43') # just testing
                 # JC: This version of the gatt lib doesn't seem to support descriptors??
                 # for descr in charac.descriptors:
-                #     logger.debug(f"[{self.mac_address}]\t\t\tDescriptor [{descr.uuid}] ({descr.read_value()})")
+                #     ble_logger.debug(f"[{self.mac_address}]\t\t\tDescriptor [{descr.uuid}] ({descr.read_value()})")
 
     def characteristic_value_updated(self, characteristic, value):
         '''This is the callback for when a notification is received'''
         global serial_output_queue
-        logger.debug(f"Received BLE Notification: [{characteristic.uuid}][{value}]")
-        serial_output_queue.put(f'Notify,{characteristic.uuid},{value.hex()}') # Move fstring into generic serialize_command(cmd, uuid, value)
+        ble_logger.debug(f"Target to App: Notify[{characteristic.uuid}][{value}]")
+        serial_output_queue.put(bytes(f'Notify,{characteristic.uuid},{value.hex()}', 'utf-8')) # Move fstring into generic serialize_command(cmd, uuid, value)
 
     def descriptor_read_value_failed(self, descriptor, error):
-        logger.error('descriptor_value_failed')
+        ble_logger.error('descriptor_value_failed')
 
 def serial_input_cback(dataline):
     '''This function is called whenever a line of serial input is received. It
@@ -90,11 +97,19 @@ def serial_input_cback(dataline):
     if dataline.startswith(b'Write'):
         data = re.match(r'Write\[char:(?P<uuid>[0-9a-fA-F-]+)\]\[msg:(?P<msg>[0-9a-fA-F ]+)\]\r\n', dataline.decode())
         if not data:
-            logger.error(f'Failed to parse {dataline.decode()}')
+            serial_logger.error(f'Failed to parse {dataline.decode()}')
             return
-        # Convert msg from "A0 B1 D2 " to a binary string:
-        msg = bytes.fromhex(data.group('msg').replace(' ', ''))
-        logger.info(f'Got serial cmd: Write[{data["uuid"]}][{msg}]')
+        #if msg's datatype is not bytes, convert it to bytes:
+        if type(data.group('msg')) is not bytes: # TODO JC high: This might be very buggy!
+            try:
+                # Convert msg from "A0 B1 D2 " to a binary string:
+                msg = bytes.fromhex(data.group('msg').replace(' ', ''))
+            except ValueError:
+                logger.error(f'Failed to parse message payload: {data.group("msg")}')
+                return
+        else:
+            msg = data.group('msg')
+        serial_logger.info(f'App to Target: Write[{data["uuid"]}][{msg}]')
         # Write <msg> to <uuid>
         # Find BLE service and characteristic with the given UUID
         if el500_ble_device:
@@ -108,9 +123,9 @@ def serial_input_cback(dataline):
         # Parse the characteristic UUID
         data = re.match(r'Read\[char:(?P<uuid>[0-9a-fA-F-]+)\]\r\n', dataline.decode())
         if not data:
-            logger.error(f'Failed to parse {dataline.decode()}')
+            serial_logger.error(f'Failed to parse {dataline.decode()}')
             return
-        logger.info(f'Spoofer received app cmd: Read[{uuid}]')
+        serial_logger.info(f'App to Target: Read[{uuid}]')
         # Find BLE service and characteristic with the given UUID
         if el500_ble_device:
             for service in el500_ble_device.services:
@@ -118,21 +133,21 @@ def serial_input_cback(dataline):
                     if charac.uuid == uuid:
                         # read the real device's value over BLE
                         charvalue = charac.read_value()
-                        logger.info(f'Got BLE response [{uuid}] = {charvalue}')
+                        ble_logger.info(f'BLE read response [{uuid}] = {charvalue}')
                         # Write the value to the serial port
                         serial_msg = f'ReadResponse,{uuid},{charvalue.hex()}\r\n'
-                        logger.info(f'Sending serial response: {serial_msg}')
-                        serial_output_queue.put(serial_msg)
+                        serial_logger.info(f'Sending serial response: {serial_msg}')
+                        serial_output_queue.put(bytes(serial_msg, 'utf-8'))
                         return
 
     else:
-        logger.debug(f'Unparsed serial input: {dataline}')
+        serial_logger.debug(f'Unparsed serial input: {dataline}')
 
 def serial_port_handler():
     '''This function runs as a standalone thread. It constantly checks for serial
     input, parses it, and calls serial_input_cback(). If it receives a message
     over a thread-safe queue, it will send it to the serial port.'''
-    logger.info(f'Connecting to serial port...')
+    serial_logger.info(f'Connecting to serial port...')
     with serial.Serial(EL500_SPOOFER_SERIALPORT, EL500_SPOOFER_BAUDRATE, timeout=1) as ser:
         logger.info(f'Commanding ESP32 reboot over serial...')
         ser.write(b'Restart,0,00\r\n')
@@ -152,11 +167,13 @@ def sigint_handler(sig, frame):
     '''This function is called when the user presses Ctrl-C'''
     global kill_all_threads
     logger.info('Exiting...')
+    # Disconnect from the BLE device
+    if el500_ble_device:
+        el500_ble_device.disconnect()
+        time.sleep(0.25) # give it some time
     kill_all_threads = True
     # kill all threads:
-    for thread in threading.enumerate():
-        if thread is not threading.current_thread():
-            thread.join()
+    serial_port_thread.join()
     sys.exit(0)
 
 # Start the serial port handler thread:
