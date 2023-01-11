@@ -220,46 +220,64 @@ void setup()
     Serial.println("Characteristics defined");
 }
 
-void read_serial_input_line() {
-    if (Serial.available()) {
+void read_serial_input_line()
+{
+    if (Serial.available())
+    {
         String input_line = Serial.readStringUntil('\n');
         input_line.trim(); // Remove whitespace and newlines
-        // Parse input_line into (command, uuid, value) according to this format:
+        // Parse input_line into (command, uuid, value) according to this
+        // format:
         //  "<command>,<characteristic>,<msg>\r\n"
         //  where <msg> is a byte array in hex format.
-        // Example: b'ReadResponse,49535343-8841-43f4-a8d4-ecbe34729bb3,F0C9B9\r\n'
+        // Example:
+        // b'ReadResponse,49535343-8841-43f4-a8d4-ecbe34729bb3,F0C9B9\r\n'
         String command = input_line.substring(0, input_line.indexOf(','));
         input_line.remove(0, input_line.indexOf(',') + 1);
         String uuid = input_line.substring(0, input_line.indexOf(','));
         input_line.remove(0, input_line.indexOf(',') + 1);
         String value_hex = input_line;
         // Convert hex string to byte array. Example hex string: "F0C9B9"
-        uint8_t payload[512];
+        uint8_t payload[128];
         int payload_len = value_hex.length() / 2;
-        assert(payload_len <= 512);
-        for (int i = 0; i < payload_len; i++) {
+        assert(payload_len <= 128);
+        for (int i = 0; i < payload_len; i++)
+        {
             payload[i] = ( uint8_t )strtol(
                 value_hex.substring(i * 2, i * 2 + 2).c_str(), NULL, 16);
         }
 
-        Serial.println("Got a serial message:");
-        Serial.println("\tCommand: " + command);
-        Serial.println("\tUUID: " + uuid);
-        Serial.println("\tValue: " + value_hex);
-        if(command == "Restart") {
+        if (command == "Restart")
+        {
             Serial.println("Restarting ESP32...");
             ESP.restart();
-        }else if(command == "Notify"){ // TODO highest: might be buggy, and that's why the app sessions aren't behaving?
-            for(auto &c : characts_array){
-                if(c->getUUID().equals(BLEUUID(uuid.c_str()))){
+        }
+        else if (command == "Notify")
+        { // TODO highest: might be buggy, and that's why the app sessions
+          // aren't behaving?
+            for (auto& c : characts_array)
+            {
+                if (c->getUUID().equals(BLEUUID(uuid.c_str())))
+                {
                     c->setValue(payload, payload_len);
                     c->notify();
-                    Serial.println("Notified to app!");
+                    // Serial.println("App notified");
                     break;
                 }
             }
-            // pCharacteristic->setValue(( uint8_t* )(receivedReadValue), sizeof(receivedReadValue));
-            // pCharacteristic->notify();
+        }
+        else
+        {
+            // TODO high: Hitting this error SOMETIMES. Why? Is Serial dropping
+            //            characters? Is the issue in the python script? Logs:
+            // 'Received unrecognized serial message:'
+            // '    Command: 23c647249616'
+            // '    UUID: f0bcffff0000000000000000000001000100000000ff000000ab'
+            // '    Value: f0bcffff0000000000000000000001000100000000ff000000ab'
+            Serial.println("Received unrecognized serial message:");
+            Serial.println("    Command: " + command);
+            Serial.println("    UUID: " + uuid);
+            Serial.println("    Value: " + value_hex);
         }
     }
 }
