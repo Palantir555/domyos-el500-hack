@@ -82,7 +82,7 @@ class Target(gatt.Device):
         '''This is the callback for when a notification is received'''
         global serial_output_queue
         serial_msg = bytes(f'Notify,{characteristic.uuid},{value.hex()}\r\n', 'utf-8')
-        ble_logger.debug(f"Target to App: Notify[{characteristic.uuid}][{value}]")
+        ble_logger.info(f"Target to App: Notify[{characteristic.uuid}][{value}]")
         # ble_logger.debug(serial_msg)
         serial_output_queue.put(serial_msg) # Move fstring into generic serialize_command(cmd, uuid, value)
 
@@ -111,7 +111,7 @@ def serial_input_cback(dataline):
                 return
         else:
             msg = data.group('msg')
-        serial_logger.info(f'App to Target: Write[{data["uuid"]}][{msg}]')
+        serial_logger.info(f'App to Target:  Write[{data["uuid"]}][{msg}]')
         # Write <msg> to <uuid>
         # Find BLE service and characteristic with the given UUID
         if el500_ble_device:
