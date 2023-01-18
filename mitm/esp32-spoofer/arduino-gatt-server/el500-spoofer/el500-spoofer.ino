@@ -7,10 +7,6 @@
 // See the following for generating UUIDs:
 // https://www.uuidgenerator.net/
 
-// JC: Old UUIDs used by the example
-// #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
-// #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
-
 // permission : properties : value
 #define SERVICE_UUID_METADATA     "0000180a-0000-1000-8000-00805f9b34fb"
     #define CHARACT_UUID_META_0   "00002a29-0000-1000-8000-00805f9b34fb" // R : R : value-str="ISSC"
@@ -111,6 +107,92 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
         // pCharacteristic->setValue(( uint8_t* )(receivedReadValue), sizeof(receivedReadValue));
         // The BLE stack will automatically return the newly set value to the BLE client
     }
+
+    void onNotify(BLECharacteristic* pCharacteristic)
+    {
+        //std::string value = pCharacteristic->getValue();
+        Serial.print("Notify[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.print("][msg:");
+        std::string value = pCharacteristic->getValue();
+        for (int i = 0; i < value.length(); i++)
+        {
+            // Print the byte as a hex value (always two digits)
+            Serial.printf("%02x ", value.c_str()[i]);
+        }
+        Serial.println("]");
+    }
+
+    void onStatus(BLECharacteristic* pCharacteristic, Status s, uint32_t code)
+    {
+        Serial.print("Status[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.print("][status:");
+        Serial.print(s);
+        Serial.print("][code:");
+        Serial.print(code);
+        Serial.println("]");
+    }
+
+    #if 0
+    void onSubscribe(BLECharacteristic* pCharacteristic, ble::server::ServerCallbacks::SubscribeType t, bool isSubscribed)
+    {
+        Serial.print("Subscribe[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.print("][type:");
+        Serial.print(t);
+        Serial.print("][isSubscribed:");
+        Serial.print(isSubscribed);
+        Serial.println("]");
+    }
+    #endif
+
+    void onIndicate(BLECharacteristic* pCharacteristic)
+    {
+        //std::string value = pCharacteristic->getValue();
+        Serial.print("Indicate[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.println("]");
+    }
+
+    void onUnsubscribe(BLECharacteristic* pCharacteristic)
+    {
+        Serial.print("Unsubscribe[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.println("]");
+    }
+
+    void onConfirm(BLECharacteristic* pCharacteristic)
+    {
+        //std::string value = pCharacteristic->getValue();
+        Serial.print("Confirm[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.println("]");
+    }
+
+    void onAuthentication(BLECharacteristic* pCharacteristic, bool isEncryptedRead, bool isEncryptedWrite, bool isSignedWrite)
+    {
+        Serial.print("Authentication[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.print("][isEncryptedRead:");
+        Serial.print(isEncryptedRead);
+        Serial.print("][isEncryptedWrite:");
+        Serial.print(isEncryptedWrite);
+        Serial.print("][isSignedWrite:");
+        Serial.print(isSignedWrite);
+        Serial.println("]");
+    }
+
+    void onSecurityResponse(BLECharacteristic* pCharacteristic, Status s, uint32_t code)
+    {
+        Serial.print("SecurityResponse[char:");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.print("][status:");
+        Serial.print(s);
+        Serial.print("][code:");
+        Serial.print(code);
+        Serial.println("]");
+    }
 };
 
 void setup()
@@ -119,7 +201,7 @@ void setup()
     Serial.println("Starting BLE work");
 
     // uint8_t spoofed_mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x9d}; // Original mac address - for identical cloning
-    uint8_t spoofed_mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x42}; // Original mac address - for identical cloning
+    uint8_t spoofed_mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x42}; // Custom mac address - for vendor mac spoofing
     esp_base_mac_addr_set(spoofed_mac);
 
     BLEDevice::init("Domyos-EL-4242");
@@ -225,6 +307,8 @@ void read_serial_input_line()
     if (Serial.available())
     {
         String input_line = Serial.readStringUntil('\n');
+        // Copy input_line to input_line_copy
+        String input_line_copy = input_line;
         input_line.trim(); // Remove whitespace and newlines
         // Parse input_line into (command, uuid, value) according to this
         // format:
@@ -274,7 +358,8 @@ void read_serial_input_line()
             // '    Command: 23c647249616'
             // '    UUID: f0bcffff0000000000000000000001000100000000ff000000ab'
             // '    Value: f0bcffff0000000000000000000001000100000000ff000000ab'
-            Serial.println("Received unrecognized serial message:");
+            Serial.print("Received unrecognized serial message:");
+            Serial.println(input_line_copy);
             Serial.println("    Command: " + command);
             Serial.println("    UUID: " + uuid);
             Serial.println("    Value: " + value_hex);
