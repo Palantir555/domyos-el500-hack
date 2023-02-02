@@ -1,4 +1,3 @@
-*.swd
-*.swo
-*.swp
-*.swq
+*.sw[a-z]
+
+logs
