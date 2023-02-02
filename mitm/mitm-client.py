@@ -17,7 +17,7 @@ SpOoFeR_MaC = "e8:5d:86:bf:35:42"  # esp32's spoofed mac address to look like a 
 TARGET_MAC = target_el500_mac
 
 EL500_SPOOFER_SERIALPORT = "/dev/ttyUSB0"
-EL500_SPOOFER_BAUDRATE = 115200
+EL500_SPOOFER_BAUDRATE = 230400  # 115200
 
 el500_ble_device = None
 serial_output_queue = queue.Queue()
@@ -116,6 +116,19 @@ class Target(gatt.Device):
             serial_msg
         )  # Move fstring into generic serialize_command(cmd, uuid, value)
 
+    def characteristic_write_value_succeeded(self, characteristic):
+        # ble_logger.debug("characteristic_write_value_succeeded")
+        pass
+
+    def characteristic_write_value_failed(self, characteristic, error):
+        ble_logger.error("characteristic_write_value_failed")
+
+    def characteristic_read_value_succeeded(self, characteristic, value):
+        ble_logger.debug("characteristic_read_value_succeeded")
+
+    def characteristic_status_updated(self, characteristic, error):
+        ble_logger.error(f"characteristic_status_updated {error}")
+
     def descriptor_read_value_failed(self, descriptor, error):
         ble_logger.error("descriptor_value_failed")
 
@@ -125,11 +138,11 @@ def serial_input_cback(dataline):
     should parse the data and call the appropriate BLE functions."""
 
     def write_handler(serial_msg):
-        # Parse the input line with a regex. Format: "<command>[char:<characteristic>][msg:<msg> ]\r\n"
-        # Example: b'Write[char:49535343-8841-43f4-a8d4-ecbe34729bb3][msg:F0 C9 B9 ]\r\n'
-        # Example: b'Read[char:49535343-8841-43f4-a8d4-ecbe34729bb3]\r\n'
+        # Parse the input line with a regex. Format: "<command>[<characteristic>][<msg> ]\r\n"
+        # Example: b'Write[:49535343-8841-43f4-a8d4-ecbe34729bb3][F0 C9 B9 ]\r\n'
+        # Example: b'Read[49535343-8841-43f4-a8d4-ecbe34729bb3]\r\n'
         data = re.match(
-            r"Write\[char:(?P<uuid>[0-9a-fA-F-]+)\]\[msg:(?P<msg>[0-9a-fA-F ]+)\]\r\n",
+            r"Write\[(?P<uuid>[0-9a-fA-F-]+)\]\[(?P<msg>[0-9a-fA-F ]+)\]\r\n",
             serial_msg.decode(),
         )
         if not data:
@@ -157,31 +170,10 @@ def serial_input_cback(dataline):
                         # Write the message to the characteristic over BLE
                         charac.write_value(msg)
 
-    def read_handler(serial_msg):
-        # Parse the characteristic UUID
-        data = re.match(r"Read\[char:(?P<uuid>[0-9a-fA-F-]+)\]\r\n", dataline.decode())
-        if not data:
-            serial_logger.error(f"Failed to parse {dataline.decode()}")
-            return
-        serial_logger.info(f"App to Target: Read[{uuid}]")
-        # Find BLE service and characteristic with the given UUID
-        if el500_ble_device:
-            for service in el500_ble_device.services:
-                for charac in service.characteristics:
-                    if charac.uuid == uuid:
-                        # read the real device's value over BLE
-                        charvalue = charac.read_value()
-                        ble_logger.info(f"BLE read response [{uuid}] = {charvalue}")
-                        # Write the value to the serial port
-                        serial_msg = f"ReadResponse,{uuid},{charvalue.hex()}\r\n"
-                        serial_logger.info(f"Sending serial response: {serial_msg}")
-                        serial_output_queue.put(bytes(serial_msg, "utf-8"))
-                        return
-
     def notify_handler(serial_msg):
-        # Example: b'Notify[char:49535343-8841-43f4-a8d4-ecbe34729bb3][msg:F0 C9 B9 ]\r\n'
+        # Example: b'Notify[49535343-8841-43f4-a8d4-ecbe34729bb3][F0 C9 B9 ]\r\n'
         data = re.match(
-            r"Notify\[char:(?P<uuid>[0-9a-fA-F-]+)\]\[msg:(?P<msg>[0-9a-fA-F ]+)\]\r\n",
+            r"Notify\[(?P<uuid>[0-9a-fA-F-]+)\]\[(?P<msg>[0-9a-fA-F ]+)\]\r\n",
             serial_msg.decode(),
         )
         if not data:
@@ -201,7 +193,7 @@ def serial_input_cback(dataline):
                 return
         else:
             msg = data.group("msg")
-        serial_logger.info(f'App to Target:  Notify[{data["uuid"]}][{msg}]')
+        serial_logger.info(f'App to Target: Notify[{data["uuid"]}][{msg}]')
         # Write <msg> to <uuid>
         # Find BLE service and characteristic with the given UUID
         if el500_ble_device:
@@ -210,6 +202,27 @@ def serial_input_cback(dataline):
                     if charac.uuid == data["uuid"]:
                         # Notify the BLE device
                         charac.write_value(msg)
+
+    def read_handler(serial_msg):
+        # Parse the characteristic UUID
+        data = re.match(r"Read\[(?P<uuid>[0-9a-fA-F-]+)\]\r\n", dataline.decode())
+        if not data:
+            serial_logger.error(f"Failed to parse {dataline.decode()}")
+            return
+        serial_logger.info(f"App to Target: Read[{uuid}]")
+        # Find BLE service and characteristic with the given UUID
+        if el500_ble_device:
+            for service in el500_ble_device.services:
+                for charac in service.characteristics:
+                    if charac.uuid == uuid:
+                        # read the real device's value over BLE
+                        charvalue = charac.read_value()
+                        ble_logger.info(f"BLE read response [{uuid}] = {charvalue}")
+                        # Write the value to the serial port
+                        serial_msg = f"ReadResponse,{uuid},{charvalue.hex()}\r\n"
+                        serial_logger.info(f"Sending serial response: {serial_msg}")
+                        serial_output_queue.put(bytes(serial_msg, "utf-8"))
+                        return
 
     if dataline.startswith(b"Write"):
         write_handler(dataline)
@@ -263,15 +276,16 @@ def sigint_handler(sig, frame):
     sys.exit(0)
 
 
-# Start the serial port handler thread:
-serial_port_thread = threading.Thread(target=serial_port_handler, name="Serial")
-serial_port_thread.start()
-# serial_port_handler()
+if __name__ == "__main__":
+    # Start the serial port handler thread:
+    serial_port_thread = threading.Thread(target=serial_port_handler, name="Serial")
+    serial_port_thread.start()
+    # serial_port_handler()
 
-# configure sigint handler:
-signal.signal(signal.SIGINT, sigint_handler)
+    # configure sigint handler:
+    signal.signal(signal.SIGINT, sigint_handler)
 
-# Start the BLE manager:
-manager = MyDeviceManager(adapter_name="hci0")
-manager.start_discovery()
-manager.run()
+    # Start the BLE manager:
+    manager = MyDeviceManager(adapter_name="hci0")
+    manager.start_discovery()
+    manager.run()

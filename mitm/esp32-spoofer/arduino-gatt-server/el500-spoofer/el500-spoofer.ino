@@ -66,41 +66,37 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
 {
     void onWrite(BLECharacteristic* pCharacteristic)
     {
-#if 0 // Human-readable serial report
-        std::string value = pCharacteristic->getValue();
-        Serial.print("Written to [");
-        Serial.print(pCharacteristic->getUUID().toString().c_str());
-        Serial.println("]:");
-        Serial.print("\t");
-        for (int i = 0; i < value.length(); i++)
-        {
-            Serial.print(value.c_str()[i], HEX);
-            Serial.print(" ");
-        }
-        Serial.println();
-        {
-            char serialMsg[255] = "";
-            sprintf(serialMsg, "W,%s,%s\n", pCharacteristic->getUUID().toString().c_str(), value.c_str());// TODO JC highest: This is broken. value will sometimes have null characters within packets
-        }
-#else
         // serialize into a machine-readable format, send via Serial
         std::string value = pCharacteristic->getValue();
-        Serial.print("Write[char:");
+        Serial.print("Write[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
-        Serial.print("][msg:");
+        Serial.print("][");
         for (int i = 0; i < value.length(); i++)
         {
             // Print the byte as a hex value (always two digits)
             Serial.printf("%02x ", value.c_str()[i]);
         }
         Serial.println("]");
-#endif
+    }
+
+    void onWriteWithoutResponse(BLECharacteristic* pCharacteristic)
+    {
+        std::string value = pCharacteristic->getValue();
+        Serial.print("WriteWithoutResponse[");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.print("][");
+        for (int i = 0; i < value.length(); i++)
+        {
+            // Print the byte as a hex value (always two digits)
+            Serial.printf("%02x ", value.c_str()[i]);
+        }
+        Serial.println("]");
     }
 
     void onRead(BLECharacteristic* pCharacteristic)
     {
         //std::string value = pCharacteristic->getValue();
-        Serial.print("Read[char:");
+        Serial.print("Read[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.println("]");
         // TODO JC high: Wait for python to send back the real device's char value, parse it, and:
@@ -111,9 +107,9 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
     void onNotify(BLECharacteristic* pCharacteristic)
     {
         //std::string value = pCharacteristic->getValue();
-        Serial.print("Notify[char:");
+        Serial.print("Notify[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
-        Serial.print("][msg:");
+        Serial.print("][");
         std::string value = pCharacteristic->getValue();
         for (int i = 0; i < value.length(); i++)
         {
@@ -125,7 +121,7 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
 
     void onStatus(BLECharacteristic* pCharacteristic, Status s, uint32_t code)
     {
-        Serial.print("Status[char:");
+        Serial.print("Status[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.print("][status:");
         Serial.print(s);
@@ -137,7 +133,7 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
     #if 0
     void onSubscribe(BLECharacteristic* pCharacteristic, ble::server::ServerCallbacks::SubscribeType t, bool isSubscribed)
     {
-        Serial.print("Subscribe[char:");
+        Serial.print("Subscribe[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.print("][type:");
         Serial.print(t);
@@ -150,14 +146,14 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
     void onIndicate(BLECharacteristic* pCharacteristic)
     {
         //std::string value = pCharacteristic->getValue();
-        Serial.print("Indicate[char:");
+        Serial.print("Indicate[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.println("]");
     }
 
     void onUnsubscribe(BLECharacteristic* pCharacteristic)
     {
-        Serial.print("Unsubscribe[char:");
+        Serial.print("Unsubscribe[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.println("]");
     }
@@ -165,14 +161,14 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
     void onConfirm(BLECharacteristic* pCharacteristic)
     {
         //std::string value = pCharacteristic->getValue();
-        Serial.print("Confirm[char:");
+        Serial.print("Confirm[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.println("]");
     }
 
     void onAuthentication(BLECharacteristic* pCharacteristic, bool isEncryptedRead, bool isEncryptedWrite, bool isSignedWrite)
     {
-        Serial.print("Authentication[char:");
+        Serial.print("Authentication[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.print("][isEncryptedRead:");
         Serial.print(isEncryptedRead);
@@ -185,7 +181,7 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
 
     void onSecurityResponse(BLECharacteristic* pCharacteristic, Status s, uint32_t code)
     {
-        Serial.print("SecurityResponse[char:");
+        Serial.print("SecurityResponse[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.print("][status:");
         Serial.print(s);
@@ -197,7 +193,7 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(230400); // 115200);
     Serial.println("Starting BLE work");
 
     // uint8_t spoofed_mac[] = {0xe8, 0x5d, 0x86, 0xbf, 0x35, 0x9d}; // Original mac address - for identical cloning
