@@ -1,0 +1,556 @@
+$ python3 mitm-client.py 
+INFO Connecting to serial port...
+INFO Commanding ESP32 reboot over serial...
+DEBUG Opened serial port /dev/ttyUSB0 at 230400 baud
+ERROR Unparsed serial input: b'Restarting ESP32...\r\n'
+INFO Target discovered: [e8:5d:86:bf:35:9d] Domyos-EL-1919
+ERROR Unparsed serial input: b'f\x06~\x1e\x06\x18\x86f~\xf8\x9e\x00\x18\x18\x18\x18x\x00\x98\xe0\x18\x1e\x00\x18\x18\x18~\x18\x18x\x98\x98\xe6\x98\x1e\xe6\x80\x98\x80\xe6\x80\x98\x80\x18\xe6\xf8\x06~\x98\x18\x18\xe6\xe0\x06\x18\x86\x1eff\xfef\x80\x06ff\xe6f\x98f`\x1ef\x06\x06f\x86\x86\xe0\x86\x18\xe6\x9e\xfe\x9e`\x86~\x00\x18f\x98x\x00\x18\x86\x1eff\x18\xe6f`\x06\xe6\x98\x06f\xfef`\xe0\x98\x06\xe6\x98\x06\x98\xfef\x80\xe6\x98\xfe\x98`f\x98\x98\x1e\x98\x80\x1e\xe6\x9e\xf8\x9exf\x9e~\xe6\xf8f\x9e\x00\x86~\x00\x18\x18\x86\x00\x98\x98\x06f\x18\xe6f\x00f~\x00\x18fxff\x80\x98\x80\x1e\x06\x9e\x9e\x9e\xfefx\x18\x86~\x98\x18\x18\x06\x18\x18\x86\x06\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86`\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86\x1e\xe6\xf8\x06\x98fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86\x80\x9e`\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86~\x06\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x98\x1e\x98\x80\xe6\x9e\xfe\x9e`fx\x98\x18`\x86\x98\xfe\x98\xe0\x86\x00\x98\xe0\x06\x9e\xfe\x9e\x1e\xe6\xe6\x06\x18x\x86\x9ex\x86~\x06\x98\x1e\x98\x80\xe0\x9e\xfe\x9e\x06\x06x\x98\x18\x18\xe6xx\x86xx\x06\x18\x98x\x00\x18\x86\xe0\x9ef\x86\x9e\x98\x98\xe0\x98x`\x18\x1e\xe6\x80\x98\x80\xe0\x9e\xfe\x9e\x06\x06x\x98\x18\x18\x06\x1e\x00\x18\x98\x1e\x80\x18\x18\x18\x18\x86\xe0\x9ef\x86\x9e\x98\x98\xe0\x98x\x80\x18\x1e`\x98\x1e\x98\x80\xe0\x9e\xfe\x9e\x06\x06x\x98\x18\x18\x06\x1e\x00\x18\x18\x18\x18\x1e\x00\x18\x18\x86\xe0\x9ef\x86\x9e\x98\x98xx\x18\x18\x98\x1e\x98\x80f\x86\x9e`\x86\xf8f\x06\x18\x18\x06\x1e\x00\x18\x18\x18\x98\xe6\x18x\x00\x98\x1e\x98\x80f\x06~\x1e\x06\x18\x86f~\xf8\x9e\x00\x18\x18\x18\x18x\x00\x98\xe0\x18\x1e\x00\x18\x18\x18~\x18\x18x\x98\x98\xe6\x98\x1e\xe6\x80\x98\x80\xe6\x80\x98\x80\x18\xe6\xf8\x06~\x98\x18\x18f\x18\x18\x18\x86\x18ff\x1e\xe6f`\x06f\xfef\x98\x06f\x1e\xe6f\x98f`\x1ef\x06\x06f\x86\x86\xe0\x86\x18\xe6\x9e\xfe\x9e`\x86~\x00\x18f\x98x\x00\x18\x86\x1eff\x18\xe6f`\x06\xe6\x98\x06f\xfef`\xe0\x98\x06\xe6\x98\x06\x98\xfef\x80\xe6\x98\xfe\x98`f\x98\x98\x1e\x98\x80\x1e\xe6\x9e\xf8\x9exf\x9e~\xe6\xf8f\x9e\x00\x86~\x00\x18\x18\x86\x00\x98\x98\x06f\x18\xe6f\x00f~\x00\x18fxff\x80\x98\x80\x1e\x06\x9e\x9e\x9e\xfefx\x18\x86~\x98\x18\x18\x06\x18\x18\x86\x06\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86`\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86\x1e\xe6\xf8\x06\x98fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86\x80\x9e`\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86~\x06\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x98\x1e\x98\x80\xe6\x9e\xfe\x9e`fx\x98\x18`\x86\x98\xfe\x98\xe0\x86\x00\x98\xe0\x06\x9e\xfe\x9e\x1e\xe6\xe6\x06\x18x\x86\x9ex\x86~\x06\x98\x1e\x98\x80\xe0\x9e\xfe\x9e\x06\x06x\x98\x18\x18\xe6xx\x86xx\x06\x18\x98x\x00\x18\x86\xe0\x9ef\x86\x9e\x98\x98\xe0\x98x`\x18\x1e\xe6\x80\x98\x80\xe0\x9e\xfe\x9e\x06\x06x\x98\x18\x18\x06\x1e\x00\x18\x98\x1e\x80\x18\x18\x18\x18\x86\xe0\x9ef\x86\x9e\x98\x98\xe0\x98x\x80\x18\x1e`\x98\x1e\x98\x80\xe0\x9e\xfe\x9e\x06\x06x\x98\x18\x18\x06\x1e\x00\x18\x18\x18\x18\x1e\x00\x18\x18\x86\xe0\x9ef\x86\x9e\x98\x98xx\x18\x18\x98\x1e\x98\x80f\x86\x9e`\x86\xf8f\x06\x18\x18\x06\x1e\x00\x18\x18\x18\x98\xe6\x18x\x00\x98\x1e\x98\x80Starting BLE work\r\n'
+ERROR Unparsed serial input: b'Characteristics defined\r\n'
+INFO Target discovered: [e8:5d:86:bf:35:9d] Domyos-EL-1919
+INFO Target discovered: [e8:5d:86:bf:35:9d] Domyos-EL-1919
+INFO [e8:5d:86:bf:35:9d] Connected
+INFO Target discovered: [e8:5d:86:bf:35:9d] Domyos-EL-1919
+DEBUG [e8:5d:86:bf:35:9d] Resolved services
+DEBUG [e8:5d:86:bf:35:9d] 	Service [49535343-fe7d-4ae5-8fa9-9fafd205e455]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [49535343-4c8a-39b3-2f49-511cff073b7e]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [49535343-8841-43f4-a8d4-ecbe34729bb3]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [49535343-1e4d-4bd9-ba61-23c647249616]
+DEBUG [e8:5d:86:bf:35:9d] 	Service [49535343-c9d0-cc83-a44a-6fe238d06d33]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [49535343-aca3-481c-91ec-d85e28a60318]
+DEBUG [e8:5d:86:bf:35:9d] 	Service [49535343-5d82-6099-9348-7aac4d5fbc51]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [49535343-026e-3a9b-954c-97daef17e26e]
+DEBUG [e8:5d:86:bf:35:9d] 	Service [0000180a-0000-1000-8000-00805f9b34fb]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [00002a2a-0000-1000-8000-00805f9b34fb]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [00002a23-0000-1000-8000-00805f9b34fb]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [00002a28-0000-1000-8000-00805f9b34fb]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [00002a26-0000-1000-8000-00805f9b34fb]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [00002a27-0000-1000-8000-00805f9b34fb]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [00002a25-0000-1000-8000-00805f9b34fb]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [00002a24-0000-1000-8000-00805f9b34fb]
+DEBUG Enabling notifications for [e8:5d:86:bf:35:9d] 		Characteristic [00002a29-0000-1000-8000-00805f9b34fb]
+ERROR Unparsed serial input: b'connect cback\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xc9\xb9']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd9\x00\x086\x81g\xef']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd9\x00\x086\x81g\xef']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xff\xff\x8d']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xff\xff\x8d']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xc4\x03\xb7']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd4\x03\xc7']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xff\xff\x8d']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xff\xff\x8d']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\x00\x00\x01\x00\x00\x00\xca']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xdb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xda']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\x00\x00\x01\x00\x00\x00\xca']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xdb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xda']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xc4\x03\xb7']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd4\x03\xc7']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd4\x03\xc7']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xdb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xda']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xdb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xda']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Received unrecognized serial message:0000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 0000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 0000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 0000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa4\x94']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb4\x16\x11\x00\x04\xde\xff\xff\xff\xff\xff\xa8']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Received unrecognized serial message:6,f0b30101ffffa3\r\r\n'
+ERROR Unparsed serial input: b'    Command: 6\r\n'
+ERROR Unparsed serial input: b'    UUID: f0b30101ffffa3\r\n'
+ERROR Unparsed serial input: b'    Value: f0b30101ffffa3\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa4\x94']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb4\x16\x11\x00\x04\xde\xff\xff\xff\xff\xff\xa8']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:16,f0bcffff0000000000000000000001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 16\r\n'
+ERROR Unparsed serial input: b'    UUID: f0bcffff0000000000000000000001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: f0bcffff0000000000000000000001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa4\x94']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb4\x16\x11\x00\x04\xde\xff\xff\xff\xff\xff\xa8']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:5343-1e4d-4bd9-ba61-23c647249616,f0bcffff0000000000000000000001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 5343-1e4d-4bd9-ba61-23c647249616\r\n'
+ERROR Unparsed serial input: b'    UUID: f0bcffff0000000000000000000001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: f0bcffff0000000000000000000001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Received unrecognized serial message:0001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 0001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 0001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 0001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+ERROR Unparsed serial input: b'Received unrecognized serial message:00001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 00001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 00001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 00001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'Received unrecognized serial message:0000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 0000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 0000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 0000ff000000ab\r\n'
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+ERROR Unparsed serial input: b'f\x06~\x1e\x06\x18\x86f~\xf8\x9e\x00\x18\x18\x18\x18x\x00\x98\xe0\x18\x1e\x00\x18\x18\x18~\x18\x18x\x98\x98\xe6\x98\x1e\xe6\x80\x98\x80\xe6\x80\x98\x80\x18\xe6\xf8\x06~\x98\x18\x18f\x18\x18\x86\x00f\x98~f\x06\x86\x98\xe6\x98\xf8\x98\xfef\x98f`\x1ef\x06\x06f\x86\x86\xe0\x86\x18\xe6\x9e\xfe\x9e`\x86~\x00\x18f\x98x\x00\x18\x86\x1eff\x18\xe6f`\x06\xe6\x98\x06f\xfef`\xe0\x98\x06\xe6\x98\x06\x98\xfef\x80\xe6\x98\xfe\x98`f\x98\x98\x1e\x98\x80f\x06~\x1e\x06\x18\x86f~\xf8\x9e\x00\x18\x18\x18\x18x\x00\x98\xe0\x18\x1e\x00\x18\x18\x18~\x18\x18x\x98\x98\xe6\x98\x1e\xe6\x80\x98\x80\xe6\x80\x98\x80\x18\xe6\xf8\x06~\x98\x18\x18f\x18\x18\x18\x86\x18ff\x1e\xe6f`\x06f\xfef\x98\x06f\x1e\xe6f\x98f`\x1ef\x06\x06f\x86\x86\xe0\x86\x18\xe6\x9e\xfe\x9e`\x86~\x00\x18f\x98x\x00\x18\x86\x1eff\x18\xe6f`\x06\xe6\x98\x06f\xfef`\xe0\x98\x06\xe6\x98\x06\x98\xfef\x80\xe6\x98\xfe\x98`f\x98\x98\x1e\x98\x80\x1e\xe6\x9e\xf8\x9exf\x9e~\xe6\xf8f\x9e\x00\x86~\x00\x18\x18\x86\x00\x98\x98\x06f\x18\xe6f\x00f~\x00\x18fxff\x80\x98\x80\x1e\x06\x9e\x9e\x9e\xfefx\x18\x86~\x98\x18\x18\x06\x18\x18\x86\x06\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86`\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86\x1e\xe6\xf8\x06\x98fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86\x80\x9e`\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x18\x86~\x06\xe6fx\x18\x86~\x98\x18\x18\x06\x18\x98\x1e\x98\x80\xe6\x9e\xfe\x9e`fx\x98\x18`\x86\x98\xfe\x98\xe0\x86\x00\x98\xe0\x06\x9e\xfe\x9e\x1e\xe6\xe6\x06\x18x\x86\x9ex\x86~\x06\x98\x1e\x98\x80\xe0\x9e\xfe\x9e\x06\x06x\x98\x18\x18\xe6xx\x86xx\x06\x18\x98x\x00\x18\x86\xe0\x9ef\x86\x9e\x98\x98\xe0\x98x`\x18\x1e\xe6\x80\x98\x80\xe0\x9e\xfe\x9e\x06\x06x\x98\x18\x18\x06\x1e\x00\x18\x98\x1e\x80\x18\x18\x18\x18\x86\xe0\x9ef\x86\x9e\x98\x98\xe0\x98x\x80\x18\x1e`\x98\x1e\x98\x80\xe0\x9e\xfe\x9e\x06\x06x\x98\x18\x18\x06\x1e\x00\x18\x18\x18\x18\x1e\x00\x18\x18\x86\xe0\x9ef\x86\x9e\x98\x98xx\x18\x18\x98\x1e\x98\x80f\x86\x9e`\x86\xf8f\x06\x18\x18\x06\x1e\x00\x18\x18\x18\x98\xe6\x18x\x00\x98\x1e\x98\x80Starting BLE work\r\n'
+ERROR Unparsed serial input: b'Characteristics defined\r\n'
+ERROR Unparsed serial input: b'connect cback\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xc9\xb9']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd9\x00\x086\x81g\xef']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd9\x00\x086\x81g\xef']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xff\xff\x8d']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xff\xff\x8d']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xc4\x03\xb7']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd4\x03\xc7']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xff\xff\x8d']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xff\xff\x8d']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\x00\x00\x01\x00\x00\x00\xca']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\x00\x00\x01\x00\x00\x00\xca']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xdb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xda']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xc4\x03\xb7']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd4\x03\xc7']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd4\x03\xc7']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbd\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x9d']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Received unrecognized serial message:249616,f0bcffff0000000000000000000001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 249616\r\n'
+ERROR Unparsed serial input: b'    UUID: f0bcffff0000000000000000000001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: f0bcffff0000000000000000000001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:23c647249616,f0b30101ffffa3\r\r\n'
+ERROR Unparsed serial input: b'    Command: 23c647249616\r\n'
+ERROR Unparsed serial input: b'    UUID: f0b30101ffffa3\r\n'
+ERROR Unparsed serial input: b'    Value: f0b30101ffffa3\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:f0b30101ffffa3\r\r\n'
+ERROR Unparsed serial input: b'    Command: f0b30101ffffa3\r\n'
+ERROR Unparsed serial input: b'    UUID: f0b30101ffffa3\r\n'
+ERROR Unparsed serial input: b'    Value: f0b30101ffffa3\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Received unrecognized serial message:001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa4\x94']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb4\x16\x11\x00\x04\xde\xff\xff\xff\xff\xff\xa8']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:-1e4d-4bd9-ba61-23c647249616,f0b30101ffffa3\r\r\n'
+ERROR Unparsed serial input: b'    Command: -1e4d-4bd9-ba61-23c647249616\r\n'
+ERROR Unparsed serial input: b'    UUID: f0b30101ffffa3\r\n'
+ERROR Unparsed serial input: b'    Value: f0b30101ffffa3\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa4\x94']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb4\x16\x11\x00\x04\xde\xff\xff\xff\xff\xff\xa8']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Received unrecognized serial message:0001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 0001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 0001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 0001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Received unrecognized serial message:00000000000000001000100000000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 00000000000000001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 00000000000000001000100000000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 00000000000000001000100000000ff000000ab\r\n'
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xac\x9c']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+INFO App to Target:  Write[49535343-8841-43f4-a8d4-ecbe34729bb3][b'\xf0\xa3\x93']
+INFO Target to App: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Received unrecognized serial message:0000ff000000ab\r\r\n'
+ERROR Unparsed serial input: b'    Command: 0000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    UUID: 0000ff000000ab\r\n'
+ERROR Unparsed serial input: b'    Value: 0000ff000000ab\r\n'
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xbc\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\xff\x00\x00\x00\xab']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+INFO App to Target: Notify[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xb3\x01\x01\xff\xff\xa3']
+ERROR Unparsed serial input: b'Status[49535343-1e4d-4bd9-ba61-23c647249616][status:1][code:0]\r\n'
+ERROR Unparsed serial input: b'Received unrecognized serial message:tify,49535343-1e4d-4bd9-ba61-23c647249616,f0b30101ffffa3\r\r\n'
+ERROR Unparsed serial input: b'    Command: tify\r\n'
+ERROR Unparsed serial input: b'    UUID: 49535343-1e4d-4bd9-ba61-23c647249616\r\n'
+ERROR Unparsed serial input: b'    Value: f0b30101ffffa3\r\n'
+
