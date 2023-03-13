@@ -1,3 +1,4 @@
 *.sw[a-z]
 
 logs
+.DS_Store
