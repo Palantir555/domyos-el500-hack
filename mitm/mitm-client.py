@@ -13,7 +13,6 @@ import coloredlogs
 
 # Target BLE Device (The real EL500)
 target_el500_mac = "e8:5d:86:bf:35:9d"  # My EL500's MAC address
-SpOoFeR_MaC = "e8:5d:86:bf:35:42"  # esp32's spoofed mac address to look like a legit device - SHOULD NOT BE USED FROM THIS SCRIPT. The spoofer should connect to the mobile app, and this laptop's BLE should connect to the EL500 and spoof the behavior of the eConnected mobile app
 TARGET_MAC = target_el500_mac
 
 EL500_SPOOFER_SERIALPORT = "/dev/ttyUSB0"
