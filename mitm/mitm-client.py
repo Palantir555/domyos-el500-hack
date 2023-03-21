@@ -62,6 +62,10 @@ coloredlogs.install(
 # logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 
 
+def b2hex(bytestring):
+    return " ".join(format(b, "02x") for b in data)
+
+
 class MyDeviceManager(gatt.DeviceManager):
     def device_discovered(self, device):
         global el500_ble_device
@@ -107,9 +111,8 @@ class Target(gatt.Device):
         """This is the callback for when a notification is received"""
         global serial_output_queue
         serial_msg = bytes(f"Notify,{characteristic.uuid},{value.hex()}\r\n", "utf-8")
-        hex_string = ' '.join(format(b, '02x') for b in value)
         ble_logger.info(
-            f"Target to App: Notify[{characteristic.uuid}][{hex_string}]"  # - {serial_msg}"
+            f"Target to App: Notify[{characteristic.uuid}][{b2hex(value)}]"  # - {serial_msg}"
         )
         # ble_logger.debug(serial_msg)
         serial_output_queue.put(
@@ -160,8 +163,7 @@ def serial_input_cback(dataline):
                 return
         else:
             msg = data.group("msg")
-        hex_string = ' '.join(format(b, '02x') for b in msg)
-        serial_logger.info(f'App to Target:  Write[{data["uuid"]}][{hex_string}]')
+        serial_logger.info(f'App to Target:  Write[{data["uuid"]}][{b2hex(msg)}]')
         # Write <msg> to <uuid>
         # Find BLE service and characteristic with the given UUID
         if el500_ble_device:
@@ -194,8 +196,7 @@ def serial_input_cback(dataline):
                 return
         else:
             msg = data.group("msg")
-        hex_string = ' '.join(format(b, '02x') for b in msg)
-        serial_logger.info(f'App to Target: Notify[{data["uuid"]}][{hex_string}]')
+        serial_logger.info(f'App to Target: Notify[{data["uuid"]}][{b2hex(msg)}]')
         # Write <msg> to <uuid>
         # Find BLE service and characteristic with the given UUID
         if el500_ble_device:

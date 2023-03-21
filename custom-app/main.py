@@ -49,16 +49,20 @@ coloredlogs.install(
 )
 
 
+def b2hex(bytestring):
+    return " ".join(format(b, "02x") for b in bytestring)
+
+
 class ReversingLogic:
     def __init__(self):
         self.manager = BleDeviceManager(adapter_name="hci0")
 
     def stop(self):
+        self.manager.stop()
         if ble_connected.is_set():
             logger.info("Disconnecting from EL500")
             el500_ble_device.disconnect()
             time.sleep(0.19)  # give it some time
-        self.manager.stop()
 
     def start_ble_manager(self):
         logger.info("Scanning for BLE devices...")
@@ -80,19 +84,30 @@ class ReversingLogic:
         def await_notification():
             while not kill_all_threads:
                 try:
-                    notif_charact, notif_value = ble_notifications_q.get(timeout=1)
-                    break
+                    notif_charact, notif_value = ble_notifications_q.get(timeout=0.25)
+                    return notif_charact, notif_value
                 except queue.Empty:
                     pass
+
         ble_attributes_discovered.wait()
+        # Write "Startup" message:
         logger.info(f"Sending startup message {El500Cmd.cmdid_atd_startup}")
-        if ble_connected.is_set() and ble_attributes_discovered.is_set():
-            el500_ble_device.write(
-                El500Attributes.CHARACT_STATES, El500Cmd.cmdid_atd_startup
-            )
-        await_notification()
-        # Device's response to startup message:
+        el500_ble_device.write(
+            El500Attributes.CHARACT_STATES, El500Cmd.cmdid_atd_startup
+        )
+        char, msg = await_notification()
         # Notified[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd9\x00\x086\x81g\xef']
+        if msg != b"\xf0\xd9\x00\x086\x81g\xef":
+            logger.error(f"Received unexpected message {msg}")
+
+        # Write "Ready" message:
+        el500_ble_device.write(El500Attributes.CHARACT_ST_1, El500Cmd.cmdid_atd_ready)
+        char, msg = await_notification()
+        # Notified[49535343-1e4d-4bd9-ba61-23c647249616][f0 d4 03 c7]
+        if msg != b"\xf0\xd4\x03\xc7":
+            logger.error(f"Received unexpected message {msg}")
+        while True:
+            char, msg = await_notification()
         self.stop()
 
 
@@ -137,6 +152,7 @@ class El500Attributes:
 
 class El500Cmd:
     cmdid_atd_startup = b"\xf0\xc9\xb9"  # App to Device
+    cmdid_atd_ready = b"\xf0\xc4\x03\xb7"  # App to Device
     cmdid_dta_status = b"\xf0\xbc"  # Device to App
 
 
@@ -214,8 +230,7 @@ class BleConnectionHandler(gatt.Device):
         for s in self.services:
             for c in s.characteristics:
                 if str(c.uuid) == char_uuid:
-                    hex_string = ' '.join(format(b, '02x') for b in data)
-                    logger.debug(f"Writing[{char_uuid}][{hex_string}]")
+                    logger.debug(f"Writing[{char_uuid}][{b2hex(data)}]")
                     c.write_value(data)
                     return
         ble_logger.error(f"Characteristic {char_uuid} not found")
@@ -256,8 +271,7 @@ class BleConnectionHandler(gatt.Device):
 
     def characteristic_value_updated(self, characteristic, value):
         """This is the callback for when a notification is received"""
-        hex_string = ' '.join(format(b, '02x') for b in value)
-        ble_logger.info(f"Notified[{characteristic.uuid}][{hex_string}]")
+        ble_logger.info(f"Notified[{characteristic.uuid}][{b2hex(value)}]")
         ble_notifications_q.put_nowait((characteristic, value))
         # ble_logger.debug(serial_msg)
 
