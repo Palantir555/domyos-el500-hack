@@ -76,18 +76,23 @@ class ReversingLogic:
             self.logic()
 
     def logic(self):
+        # TODO: If the target is disconnected, restart the logic(?)
+        def await_notification():
+            while not kill_all_threads:
+                try:
+                    notif_charact, notif_value = ble_notifications_q.get(timeout=1)
+                    break
+                except queue.Empty:
+                    pass
         ble_attributes_discovered.wait()
         logger.info(f"Sending startup message {El500Cmd.cmdid_atd_startup}")
         if ble_connected.is_set() and ble_attributes_discovered.is_set():
             el500_ble_device.write(
                 El500Attributes.CHARACT_STATES, El500Cmd.cmdid_atd_startup
             )
-        while not kill_all_threads:
-            try:
-                notif_charact, notif_value = ble_notifications_q.get(timeout=1)
-                break
-            except queue.Empty:
-                pass
+        await_notification()
+        # Device's response to startup message:
+        # Notified[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd9\x00\x086\x81g\xef']
         self.stop()
 
 
@@ -209,7 +214,8 @@ class BleConnectionHandler(gatt.Device):
         for s in self.services:
             for c in s.characteristics:
                 if str(c.uuid) == char_uuid:
-                    ble_logger.debug(f"Writing to {char_uuid}: {data}")
+                    hex_string = ' '.join(format(b, '02x') for b in data)
+                    logger.debug(f"Writing[{char_uuid}][{hex_string}]")
                     c.write_value(data)
                     return
         ble_logger.error(f"Characteristic {char_uuid} not found")
@@ -250,8 +256,8 @@ class BleConnectionHandler(gatt.Device):
 
     def characteristic_value_updated(self, characteristic, value):
         """This is the callback for when a notification is received"""
-        # serial_msg = bytes(f"Notify,{characteristic.uuid},{value.hex()}\r\n", "utf-8")
-        ble_logger.info(f"Notified[{characteristic.uuid}][{value}]")  # - {serial_msg}"
+        hex_string = ' '.join(format(b, '02x') for b in value)
+        ble_logger.info(f"Notified[{characteristic.uuid}][{hex_string}]")
         ble_notifications_q.put_nowait((characteristic, value))
         # ble_logger.debug(serial_msg)
 
@@ -293,5 +299,8 @@ if __name__ == "__main__":
     # manager.run()
 
     # New:
-    logic = ReversingLogic()
-    logic.start()
+    try:
+        logic = ReversingLogic()
+        logic.start()
+    finally:
+        logic.stop()
