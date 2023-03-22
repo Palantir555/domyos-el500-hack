@@ -63,7 +63,7 @@ coloredlogs.install(
 
 
 def b2hex(bytestring):
-    return " ".join(format(b, "02x") for b in data)
+    return " ".join(format(b, "02x") for b in bytestring)
 
 
 class MyDeviceManager(gatt.DeviceManager):
