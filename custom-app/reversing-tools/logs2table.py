@@ -16,7 +16,8 @@ import csv
 # 4. characteristic: the characteristic
 # 5. value: the value
 
-parsed_msgs = set()
+parsed_msgs = []
+parsed_msgs_uniq = set()
 with open(sys.argv[1], 'r') as f:
     for line in f:
         if line.startswith("ERROR"):
@@ -26,7 +27,8 @@ with open(sys.argv[1], 'r') as f:
             print("WARNING: line does not match regex: " + line)
             continue
         print(m.groups())
-        parsed_msgs.add(m.groups())
+        parsed_msgs.append(m.groups())
+        parsed_msgs_uniq.add(m.groups())
 
 # save parsed_msgs into a TSV file
 with open(sys.argv[2], 'w') as f:
