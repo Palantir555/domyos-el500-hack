@@ -9,6 +9,7 @@ import time
 import sys
 import re
 import enum
+import el500mitmlogs
 
 ble_vendor_id = "e8:5d:86"  # chang-yow.com.tw
 target_el500_mac = f"{ble_vendor_id}:bf:35:9d"  # Target BLE Device (The real EL500)
@@ -79,36 +80,58 @@ class ReversingLogic:
             logger.info("Starting EL500 logic")
             self.logic()
 
+    def interactive_logic(self):
+        with open("mitm_clean.log", "r") as f:
+            conversation = el500mitmlogs.parse_tsvconversation(f.read())
+        for cmd, response in conversation:
+            logger.info(f"Sending: {cmd.hex() if cmd is not None else None}")
+            logger.info(f"Expected: {response.hex() if response is not None else None}")
+            # logger.info(f"Received: {response.hex() if response is not None else None}")
+            el500_ble_device.write(El500Attributes.CHARACT_STATES, cmd)
+            try:
+                char, msg = ReversingLogic.await_notification(timeout=3)
+            except TimeoutError:
+                logger.warning("Timeout while waiting for response")
+            if msg != response:
+                logger.warning(f"Received: {msg.hex() if msg is not None else None}")
+            else:
+                logger.info(f"Received: {msg.hex() if msg is not None else None}")
+
     def logic(self):
         # TODO: If the target is disconnected, restart the logic(?)
-        def await_notification():
-            while not kill_all_threads:
-                try:
-                    notif_charact, notif_value = ble_notifications_q.get(timeout=0.25)
-                    return notif_charact, notif_value
-                except queue.Empty:
-                    pass
-
         ble_attributes_discovered.wait()
-        # Write "Startup" message:
-        logger.info(f"Sending startup message {El500Cmd.cmdid_atd_startup}")
-        el500_ble_device.write(
-            El500Attributes.CHARACT_STATES, El500Cmd.cmdid_atd_startup
-        )
-        char, msg = await_notification()
-        # Notified[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd9\x00\x086\x81g\xef']
-        if msg != b"\xf0\xd9\x00\x086\x81g\xef":
-            logger.error(f"Received unexpected message {msg}")
 
-        # Write "Ready" message:
-        el500_ble_device.write(El500Attributes.CHARACT_ST_1, El500Cmd.cmdid_atd_ready)
-        char, msg = await_notification()
-        # Notified[49535343-1e4d-4bd9-ba61-23c647249616][f0 d4 03 c7]
-        if msg != b"\xf0\xd4\x03\xc7":
-            logger.error(f"Received unexpected message {msg}")
+        self.interactive_logic()
+        # Write "Startup" message:
+        # logger.info(f"Sending startup message {El500Cmd.cmdid_atd_startup}")
+        # el500_ble_device.write(
+        #     El500Attributes.CHARACT_STATES, El500Cmd.cmdid_atd_startup
+        # )
+        # char, msg = ReversingLogic.await_notification()
+        # # Notified[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd9\x00\x086\x81g\xef']
+        # if msg != b"\xf0\xd9\x00\x08\x36\x81\x67\xef":
+        #     logger.error(f"Received unexpected message {msg}")
+
+        # # Write "Ready" message:
+        # el500_ble_device.write(El500Attributes.CHARACT_ST_1, El500Cmd.cmdid_atd_ready)
+        # char, msg = await_notification()
+        # # Notified[49535343-1e4d-4bd9-ba61-23c647249616][f0 d4 03 c7]
+        # if msg != b"\xf0\xd4\x03\xc7":
+        #     logger.error(f"Received unexpected message {msg}")
         while True:
-            char, msg = await_notification()
+            char, msg = ReversingLogic.await_notification()
         self.stop()
+
+    @staticmethod
+    def await_notification(timeout=0):
+        start = time.time()
+        while not kill_all_threads:
+            try:
+                notif_charact, notif_value = ble_notifications_q.get(timeout=0.25)
+                return notif_charact, notif_value
+            except queue.Empty:
+                if timeout > 0 and time.time() - start > timeout:
+                    raise TimeoutError("Timeout while waiting for notification")
 
 
 class El500Attributes:
@@ -153,6 +176,7 @@ class El500Attributes:
 class El500Cmd:
     cmdid_atd_startup = b"\xf0\xc9\xb9"  # App to Device
     cmdid_atd_ready = b"\xf0\xc4\x03\xb7"  # App to Device
+    cmdid_atd_wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"  # last 3 bytes might be over the MTU limit imposed by this lib (the default 23 bytes: 20 for payload, 3 for headers)
     cmdid_dta_status = b"\xf0\xbc"  # Device to App
 
 
