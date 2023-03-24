@@ -34,6 +34,7 @@ coloredlogs.install(
     level_styles={
         "debug": {"color": "green"},
         "info": {"color": "green"},
+        "warning": {"color": "yellow"},
         "error": {"color": "red"},
     },
 )
@@ -48,6 +49,9 @@ coloredlogs.install(
         "error": {"color": "red"},
     },
 )
+
+# Disable ble_logger for now
+ble_logger.disabled = True
 
 
 def b2hex(bytestring):
@@ -84,42 +88,35 @@ class ReversingLogic:
         with open("mitm_clean.log", "r") as f:
             conversation = el500mitmlogs.parse_tsvconversation(f.read())
         for cmd, response in conversation:
-            logger.info(f"Sending: {cmd.hex() if cmd is not None else None}")
-            logger.info(f"Expected: {response.hex() if response is not None else None}")
+            logger.info(f" Sending -> {cmd.hex() if cmd is not None else None}")
             # logger.info(f"Received: {response.hex() if response is not None else None}")
-            el500_ble_device.write(El500Attributes.CHARACT_STATES, cmd)
+            el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
             try:
                 char, msg = ReversingLogic.await_notification(timeout=3)
             except TimeoutError:
                 logger.warning("Timeout while waiting for response")
+                char, msg = None, None
             if msg != response:
-                logger.warning(f"Received: {msg.hex() if msg is not None else None}")
+                logger.warning(
+                    f"Expected <- {response.hex() if response is not None else None}"
+                )
+                logger.warning(f"Received <- {msg.hex() if msg is not None else None}")
             else:
-                logger.info(f"Received: {msg.hex() if msg is not None else None}")
+                logger.info(f"Received <- {msg.hex() if msg is not None else None}")
 
     def logic(self):
         # TODO: If the target is disconnected, restart the logic(?)
         ble_attributes_discovered.wait()
 
         self.interactive_logic()
-        # Write "Startup" message:
-        # logger.info(f"Sending startup message {El500Cmd.cmdid_atd_startup}")
-        # el500_ble_device.write(
-        #     El500Attributes.CHARACT_STATES, El500Cmd.cmdid_atd_startup
-        # )
-        # char, msg = ReversingLogic.await_notification()
-        # # Notified[49535343-1e4d-4bd9-ba61-23c647249616][b'\xf0\xd9\x00\x086\x81g\xef']
-        # if msg != b"\xf0\xd9\x00\x08\x36\x81\x67\xef":
-        #     logger.error(f"Received unexpected message {msg}")
-
-        # # Write "Ready" message:
-        # el500_ble_device.write(El500Attributes.CHARACT_ST_1, El500Cmd.cmdid_atd_ready)
-        # char, msg = await_notification()
-        # # Notified[49535343-1e4d-4bd9-ba61-23c647249616][f0 d4 03 c7]
-        # if msg != b"\xf0\xd4\x03\xc7":
-        #     logger.error(f"Received unexpected message {msg}")
         while True:
-            char, msg = ReversingLogic.await_notification()
+            logger.info(f" Sending -> {El500Cmd.getStatus}")
+            el500_ble_device.write(El500Characts.comms_AppToDev, El500Cmd.getStatus)
+            try:
+                char, msg = ReversingLogic.await_notification(2)
+            except TimeoutError:
+                char, msg = None, None
+            logger.info(f"Received <- {msg.hex() if msg is not None else None}")
         self.stop()
 
     @staticmethod
@@ -134,50 +131,34 @@ class ReversingLogic:
                     raise TimeoutError("Timeout while waiting for notification")
 
 
-class El500Attributes:
-    SERVICE_METADATA = "0000180a-0000-1000-8000-00805f9b34fb"
-    CHARACT_META_0 = "00002a29-0000-1000-8000-00805f9b34fb"  # R:R:value-str="ISSC"
-    # char ch0_val[] = "ISSC";
-    CHARACT_META_1 = "00002a24-0000-1000-8000-00805f9b34fb"  # R:R:value-str="BM70"
-    # char ch1_val[] = "BM70";
-    CHARACT_META_2 = "00002a25-0000-1000-8000-00805f9b34fb"  # R:R:value-str="0000"
-    # char ch2_val[] = "0000";
-    CHARACT_META_3 = (
-        "00002a27-0000-1000-8000-00805f9b34fb"  # R:R:value-str="5505 102_BLDK3"
-    )
-    # char ch3_val[] = "5505 102_BLDK3";
-    CHARACT_META_4 = "00002a26-0000-1000-8000-00805f9b34fb"  # R:R:value-str="009500"
-    # char ch4_val[] = "009500";
-    CHARACT_META_5 = "00002a28-0000-1000-8000-00805f9b34fb"  # R:R:value-str="0000"
-    # char ch5_val[] = "0000";
-    CHARACT_META_6 = (
-        "00002a23-0000-1000-8000-00805f9b34fb"  # R:R:value="0000000000000000"
-    )
-    # uint8_t ch6_val[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    CHARACT_META_7 = (
-        "00002a2a-0000-1000-8000-00805f9b34fb"  # R:R:value="0000000001000000"
-    )
-    # uint8_t ch7_val[] = {0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
+class El500ServiceUuids:
+    METADATA = "0000180a-0000-1000-8000-00805f9b34fb"
+    UNKNOWN_0 = "49535343-5d82-6099-9348-7aac4d5fbc51"
+    UNKNOWN_1 = "49535343-c9d0-cc83-a44a-6fe238d06d33"
+    COMMS = "49535343-fe7d-4ae5-8fa9-9fafd205e455"
 
-    SERVICE_UNKNOWN_0 = "49535343-5d82-6099-9348-7aac4d5fbc51"
-    CHARACT_UNK0_0 = "49535343-026e-3a9b-954c-97daef17e26e"  # W:W/N
-    # BLE2902 descrCharUnk0;
-    SERVICE_UNKNOWN_1 = "49535343-c9d0-cc83-a44a-6fe238d06d33"
-    CHARACT_UNK1_0 = "49535343-aca3-481c-91ec-d85e28a60318"  # W:W/N
-    # BLE2902 descrCharUnk1;
-    SERVICE_STATEREPORTS = "49535343-fe7d-4ae5-8fa9-9fafd205e455"
-    CHARACT_STATES = "49535343-1e4d-4bd9-ba61-23c647249616"  # W:W/WnR/N
-    # BLE2902 descrCharStateStates;
-    CHARACT_ST_1 = "49535343-8841-43f4-a8d4-ecbe34729bb3"  # W:W/WnR/N
-    CHARACT_ST_2 = "49535343-4c8a-39b3-2f49-511cff073b7e"  # W:W/N
-    # BLE2902 descrCharStateSt2;
+
+class El500Characts:
+    meta0 = "00002a29-0000-1000-8000-00805f9b34fb"  # R:R:value-str="ISSC"
+    meta1 = "00002a24-0000-1000-8000-00805f9b34fb"  # R:R:value-str="BM70"
+    meta2 = "00002a25-0000-1000-8000-00805f9b34fb"  # R:R:value-str="0000"
+    meta3 = "00002a27-0000-1000-8000-00805f9b34fb"  # R:R:value-str="5505 102_BLDK3"
+    meta4 = "00002a26-0000-1000-8000-00805f9b34fb"  # R:R:value-str="009500"
+    meta5 = "00002a28-0000-1000-8000-00805f9b34fb"  # R:R:value-str="0000"
+    meta6 = "00002a23-0000-1000-8000-00805f9b34fb"  # R:R:value="0000000000000000"
+    meta7 = "00002a2a-0000-1000-8000-00805f9b34fb"  # R:R:value="0000000001000000"
+    UNK0_0 = "49535343-026e-3a9b-954c-97daef17e26e"  # W:W/N + Descriptor BLE2902
+    UNK1_0 = "49535343-aca3-481c-91ec-d85e28a60318"  # W:W/N + Descriptor BLE2902
+    comms_DevToApp = "49535343-1e4d-4bd9-ba61-23c647249616"  # W:W/WnR/N + Descriptor BLE2902
+    comms_AppToDev = "49535343-8841-43f4-a8d4-ecbe34729bb3"  # W:W/WnR/N
+    comms_unknown = "49535343-4c8a-39b3-2f49-511cff073b7e"  # W:W/N + Descriptor BLE2902
 
 
 class El500Cmd:
-    cmdid_atd_startup = b"\xf0\xc9\xb9"  # App to Device
-    cmdid_atd_ready = b"\xf0\xc4\x03\xb7"  # App to Device
-    cmdid_atd_wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"  # last 3 bytes might be over the MTU limit imposed by this lib (the default 23 bytes: 20 for payload, 3 for headers)
-    cmdid_dta_status = b"\xf0\xbc"  # Device to App
+    startup = b"\xf0\xc9\xb9"
+    ready = b"\xf0\xc4\x03\xb7"
+    wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"
+    getStatus = b"\xf0\xac\x9c"
 
 
 class El500Status(object):
@@ -254,7 +235,7 @@ class BleConnectionHandler(gatt.Device):
         for s in self.services:
             for c in s.characteristics:
                 if str(c.uuid) == char_uuid:
-                    logger.debug(f"Writing[{char_uuid}][{b2hex(data)}]")
+                    ble_logger.debug(f"Writing[{char_uuid}][{b2hex(data)}]")
                     c.write_value(data)
                     return
         ble_logger.error(f"Characteristic {char_uuid} not found")
