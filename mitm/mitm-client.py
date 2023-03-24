@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import gatt
 import serial
 import signal

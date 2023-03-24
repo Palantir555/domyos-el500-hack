@@ -1,0 +1,59 @@
+
+Write	f0 a3 93
+Notify	f0 b3 01 01 ff ff a3
+Write	f0 c9 b9
+Notify	f0 d9 00 08 36 81 67 ef
+Write	f0 a4 94
+Notify	f0 b4 16 11 00 04 de ff ff ff ff ff a8
+Write	f0 c4 03 b7
+Notify	f0 d4 03 c7
+Write	f0 ad ff ff ff ff ff ff ff ff 01 ff ff ff ff ff ff ff 01 ff ff ff 8d
+Notify	f0 bd ff ff ff ff ff ff ff ff 01 ff ff ff ff ff ff ff 01 ff ff ff 9d
+Write	f0 ad ff ff ff ff ff ff ff ff 01 ff ff ff ff ff ff ff 01 ff ff ff 8d
+Write	f0 ad ff ff ff ff ff ff ff ff 01 ff ff ff ff ff ff ff 01 ff ff ff 8d
+Notify	f0 bd ff ff ff ff ff ff ff ff 01 ff ff ff ff ff ff ff 01 ff ff ff 9d
+Write	f0 ad ff ff ff ff ff ff ff ff 01 ff ff ff ff ff ff ff 01 ff ff ff 8d
+Notify	f0 bd ff ff ff ff ff ff ff ff 01 ff ff ff ff ff ff ff 01 ff ff ff 9d
+Write	f0 cb 02 00 08 ff 01 00 00 01 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 ca
+Notify	f0 db 02 00 08 ff 01 00 00 01 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 da
+Write	f0 cb 02 00 08 ff 01 00 00 01 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 ca
+Write	f0 a3 93
+Notify	f0 b3 01 01 ff ff a3
+Write	f0 ac 9c
+Notify	f0 bc ff ff 00 00 00 00 00 00 00 00 00 00 01 00 01 00 00 00 00 ff 00 00 00 ab
+Write	f0 a5 95
+Notify	f0 b5 00 03 ff ff a6
+Write	f0 a3 93
+Notify	f0 b3 01 01 ff ff a3
+Write	f0 a3 93
+Notify	f0 b3 01 01 ff ff a3
+Write	f0 a3 93
+Notify	f0 b3 01 01 ff ff a3
+Write	f0 a4 94
+Notify	f0 b4 16 11 00 04 de ff ff ff ff ff a8
+Write	f0 ac 9c
+Notify	f0 bc ff ff 00 00 00 00 00 00 00 00 00 00 01 00 01 00 00 00 00 ff 00 00 00 ab
+Write	f0 a3 93
+Notify	f0 b3 01 01 ff ff a3
+Write	f0 ca 00 ba
+Notify	f0 da 00 ca
+Write	f0 ca 00 ba
+Notify	f0 da 00 ca
+Write	f0 c8 01 b9
+Notify	f0 d8 01 c9
+Write	f0 ab 9b
+Notify	f0 bb 00 0d ff ff ff b5
+Write	f0 a4 94
+Notify	f0 b4 16 11 00 04 de ff ff ff ff ff a8
+Write	f0 a4 94
+Notify	f0 b4 16 11 00 04 de ff ff ff ff ff a8
+Write	f0 a4 94
+Notify	f0 b4 16 11 00 04 de ff ff ff ff ff a8
+Write	f0 a5 95
+Notify	f0 b5 00 03 ff ff a6
+Write	f0 ac 9c
+Notify	f0 bc ff ff 00 00 00 00 00 00 00 00 00 00 02 00 01 00 00 00 00 ff 00 00 01 ad
+Write	f0 a4 94
+Notify	f0 b4 16 11 00 04 de ff ff ff ff ff a8
+Write	f0 cb 01 00 00 02 01 00 00 01 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 c4
+Notify	f0 db 01 00 00 02 01 00 00 01 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 d4

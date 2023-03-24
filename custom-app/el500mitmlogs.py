@@ -1,14 +1,41 @@
+import re
+
 # logs from the MITM attack, in this format: <Write|Notify>\t<hex data>
 # Where hex data is an array of bytes separated by spaces
+# TODO FIX UP THIS MESS
 mitm_clean_logfile = "mitm_clean.log"
+mitm_dirty_logfile = "logsmitm-03-24_dirty.txt"
+mitm_new_logfile = "mitm_new.tsv"
 
 def cleanup_mitm_logfile():
     # This function removes all lines where "App to Target" uses "Notify", removes columns 0, 1 and 3. If a command (last column) does not start with "f0", it is appended to the previous line's command
-    with open(mitm_clean_logfile, "w") as f:
-        with open(mitm_logfile, "r") as g:
-            lines = g.readlines()
-            for line in lines:
-                pass # TODO
+    # Sample line ("App to Target" or "Target to App" are a single column):
+    # <INFO> <App to Target>:  <Write>[<49535343-8841-43f4-a8d4-ecbe34729bb3>][<f0 a3 93>]
+    def logs2table(loglines):
+        parsed_msgs = []
+        for line in loglines:
+            if line.startswith("ERROR"):
+                continue
+            m = re.match(r'([^ ]*) (.*):[ ]*(.*)\[([^\]]*)\]\[([^\]]*)\]', line)
+            if m is None:
+                print("WARNING: line does not match regex: " + line)
+                continue
+            if m.group(2) == "App to Target" and m.group(3) == "Notify":
+                continue # app only writes, it does not notify
+            yield m.groups()
+
+    with open(mitm_new_logfile, "w") as f:
+        with open(mitm_dirty_logfile, "r") as g:
+            for l in logs2table(g.readlines()):
+                # Write a line in the format <Write|Notify>\t<hex data>
+                # If l[4] does not start with ff, append it to the previous line's hex data
+                if l[4].startswith("f0"):
+                    f.write(f"\n{l[2]}\t{l[4]}")
+                else:
+                    f.write(f" {l[4]}") # append this message to the previous one
+                    
+                
+            
 
 def parse_tsvconversation(tsvdata):
     lines = tsvdata.split("\n")
@@ -38,8 +65,9 @@ def parse_tsvconversation(tsvdata):
 
 
 if __name__ == "__main__":
-    # read the tsv file and convert it to a list of (command, response) pairs
-    with open(mitm_clean_logfile, "r") as f:
+    cleanup_mitm_logfile()
+    # with open(mitm_clean_logfile, "r") as f:
+    with open(mitm_new_logfile, "r") as f:
         tsvdata = f.read()
     pairs = parse_tsvconversation(tsvdata)
     for pair in pairs:

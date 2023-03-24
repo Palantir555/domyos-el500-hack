@@ -85,7 +85,9 @@ class ReversingLogic:
             self.logic()
 
     def interactive_logic(self):
-        with open("mitm_clean.log", "r") as f:
+        # mitm_clean_logs = "mitm_clean.log"
+        mitm_clean_logs = "mitm_new.tsv"
+        with open(mitm_clean_logs, "r") as f:
             conversation = el500mitmlogs.parse_tsvconversation(f.read())
         for cmd, response in conversation:
             logger.info(f" Sending -> {cmd.hex() if cmd is not None else None}")
@@ -149,7 +151,9 @@ class El500Characts:
     meta7 = "00002a2a-0000-1000-8000-00805f9b34fb"  # R:R:value="0000000001000000"
     UNK0_0 = "49535343-026e-3a9b-954c-97daef17e26e"  # W:W/N + Descriptor BLE2902
     UNK1_0 = "49535343-aca3-481c-91ec-d85e28a60318"  # W:W/N + Descriptor BLE2902
-    comms_DevToApp = "49535343-1e4d-4bd9-ba61-23c647249616"  # W:W/WnR/N + Descriptor BLE2902
+    comms_DevToApp = (
+        "49535343-1e4d-4bd9-ba61-23c647249616"  # W:W/WnR/N + Descriptor BLE2902
+    )
     comms_AppToDev = "49535343-8841-43f4-a8d4-ecbe34729bb3"  # W:W/WnR/N
     comms_unknown = "49535343-4c8a-39b3-2f49-511cff073b7e"  # W:W/N + Descriptor BLE2902
 
