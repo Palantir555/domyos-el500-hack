@@ -54,6 +54,12 @@ class MyServerCallbacks : public BLEServerCallbacks
         Serial.println("connect cback");
     };
 
+    void onMTUChanged(BLEServer* pServer, uint16_t mtu)
+    {
+        Serial.print("MTU Changed to: ");
+        Serial.println(mtu);
+    }
+
     void onDisconnect(BLEServer* serv)
     {
         deviceConnected = false;
@@ -75,6 +81,20 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
         {
             // Print the byte as a hex value (always two digits)
             Serial.printf("%02x ", value.c_str()[i]);
+        }
+        Serial.println("]");
+    }
+
+    void onWriteRequest(BLECharacteristic* pCharacteristic, const uint8_t* data, size_t len, bool isNotify)
+    {
+        // serialize into a machine-readable format, send via Serial
+        Serial.print("WriteReq[");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.print("][");
+        for (int i = 0; i < len; i++)
+        {
+            // Print the byte as a hex value (always two digits)
+            Serial.printf("%02x ", data[i]);
         }
         Serial.println("]");
     }
@@ -104,9 +124,21 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
         // The BLE stack will automatically return the newly set value to the BLE client
     }
 
+    void onReadRequest(BLECharacteristic* pCharacteristic)
+    {
+        //std::string value = pCharacteristic->getValue();
+        Serial.print("ReadReq[");
+        Serial.print(pCharacteristic->getUUID().toString().c_str());
+        Serial.println("]");
+        // TODO JC high: Wait for python to send back the real device's char value, parse it, and:
+        // pCharacteristic->setValue(( uint8_t* )(receivedReadValue), sizeof(receivedReadValue));
+        // The BLE stack will automatically return the newly set value to the BLE client
+    }
+
     void onNotify(BLECharacteristic* pCharacteristic)
     {
         //std::string value = pCharacteristic->getValue();
+        #if 0 // This is getting the notifications sent by ourselves, cluttering the output
         Serial.print("Notify[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.print("][");
@@ -114,31 +146,26 @@ class MyCharactCallbacks : public BLECharacteristicCallbacks
         for (int i = 0; i < value.length(); i++)
         {
             // Print the byte as a hex value (always two digits)
+        Serial.print("Notify[");
             Serial.printf("%02x ", value.c_str()[i]);
         }
         Serial.println("]");
+        #endif
     }
 
+    #if 0
     void onStatus(BLECharacteristic* pCharacteristic, Status s, uint32_t code)
     {
+        // Says copilot (TODO verify):
+        // This callback is invoked when the status of the characteristic changes
+        // (e.g. when the characteristic is notified/indicated).
+        // Within BLE, the status represents the state of the client's CCCD (Client Characteristic Configuration Descriptor)
         Serial.print("Status[");
         Serial.print(pCharacteristic->getUUID().toString().c_str());
         Serial.print("][status:");
         Serial.print(s);
         Serial.print("][code:");
         Serial.print(code);
-        Serial.println("]");
-    }
-
-    #if 0
-    void onSubscribe(BLECharacteristic* pCharacteristic, ble::server::ServerCallbacks::SubscribeType t, bool isSubscribed)
-    {
-        Serial.print("Subscribe[");
-        Serial.print(pCharacteristic->getUUID().toString().c_str());
-        Serial.print("][type:");
-        Serial.print(t);
-        Serial.print("][isSubscribed:");
-        Serial.print(isSubscribed);
         Serial.println("]");
     }
     #endif
