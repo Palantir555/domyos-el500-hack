@@ -3,7 +3,7 @@ import re
 # logs from the MITM attack, in this format: <Write|Notify>\t<hex data>
 # Where hex data is an array of bytes separated by spaces
 # TODO FIX UP THIS MESS
-mitm_clean_logfile = "mitm_clean.log"
+# mitm_clean_logfile = "mitm_clean.log"
 mitm_dirty_logfile = "logsmitm-03-24_dirty.txt"
 mitm_new_logfile = "mitm_new.tsv"
 

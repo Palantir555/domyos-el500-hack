@@ -10,6 +10,9 @@ import sys
 import re
 import enum
 import el500mitmlogs
+from kaitaistruct import KaitaiStream, BytesIO
+# kaitai-struct-compiler -t python message_structs.ksy
+from response_status import ResponseStatus
 
 ble_vendor_id = "e8:5d:86"  # chang-yow.com.tw
 target_el500_mac = f"{ble_vendor_id}:bf:35:9d"  # Target BLE Device (The real EL500)
@@ -85,12 +88,19 @@ class ReversingLogic:
             self.logic()
 
     def interactive_logic(self):
+        def parse_status_msg(binmsg):
+            return ResponseStatus.from_bytes(binmsg)
         # mitm_clean_logs = "mitm_clean.log"
         mitm_clean_logs = "mitm_new.tsv"
         with open(mitm_clean_logs, "r") as f:
             conversation = el500mitmlogs.parse_tsvconversation(f.read())
         for cmd, response in conversation:
-            logger.info(f" Sending -> {cmd.hex() if cmd is not None else None}")
+            if cmd is None:
+                continue
+            inp = input(f"Send cmd ?? {cmd.hex()}? [Y/n]")
+            if inp.lower() in ["n", "no"]:
+                continue
+            logger.info(f" Sending -> {cmd.hex()}")
             # logger.info(f"Received: {response.hex() if response is not None else None}")
             el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
             try:
@@ -105,20 +115,21 @@ class ReversingLogic:
                 logger.warning(f"Received <- {msg.hex() if msg is not None else None}")
             else:
                 logger.info(f"Received <- {msg.hex() if msg is not None else None}")
+        while not kill_all_threads:
+            logger.info(f" Sending -> {El500Cmd.getStatus}")
+            el500_ble_device.write(El500Characts.comms_AppToDev, El500Cmd.getStatus)
+            try:
+                char, msg = ReversingLogic.await_notification(2)
+                # logger.info(f"Received <- {msg.hex()}")
+                logger.info(f"Status: {parse_status_msg(msg)}")
+            except TimeoutError:
+                char, msg = None, None
 
     def logic(self):
         # TODO: If the target is disconnected, restart the logic(?)
         ble_attributes_discovered.wait()
 
         self.interactive_logic()
-        while True:
-            logger.info(f" Sending -> {El500Cmd.getStatus}")
-            el500_ble_device.write(El500Characts.comms_AppToDev, El500Cmd.getStatus)
-            try:
-                char, msg = ReversingLogic.await_notification(2)
-            except TimeoutError:
-                char, msg = None, None
-            logger.info(f"Received <- {msg.hex() if msg is not None else None}")
         self.stop()
 
     @staticmethod
@@ -159,9 +170,9 @@ class El500Characts:
 
 
 class El500Cmd:
-    startup = b"\xf0\xc9\xb9"
-    ready = b"\xf0\xc4\x03\xb7"
-    wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"
+    # startup = b"\xf0\xc9\xb9"
+    # ready = b"\xf0\xc4\x03\xb7"
+    # wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"
     getStatus = b"\xf0\xac\x9c"
 
 
@@ -290,6 +301,7 @@ class BleConnectionHandler(gatt.Device):
 
     def characteristic_write_value_failed(self, characteristic, error):
         ble_logger.error("characteristic_write_value_failed")
+        # TODO: I think the app would retry here, but I don't have the value to retry with ATM
 
     def characteristic_read_value_succeeded(self, characteristic, value):
         ble_logger.debug("characteristic_read_value_succeeded")
