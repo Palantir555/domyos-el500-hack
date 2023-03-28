@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import gatt
-import serial
+import gatt # pip3 install gatt
+import serial # pip3 install serial
 import signal
 import threading
 import queue
@@ -10,13 +10,13 @@ import sys
 import re
 
 # import module for colorful logging
-import coloredlogs
+import coloredlogs # pip3 install coloredlogs
 
 # Target BLE Device (The real EL500)
 target_el500_mac = "e8:5d:86:bf:35:9d"  # My EL500's MAC address
 TARGET_MAC = target_el500_mac
 
-EL500_SPOOFER_SERIALPORT = "/dev/ttyUSB0"
+EL500_SPOOFER_SERIALPORT = "/dev/tty.usbserial-0001"  # Linux: "/dev/ttyUSB0"
 EL500_SPOOFER_BAUDRATE = 230400  # 115200
 
 el500_ble_device = None
@@ -290,6 +290,6 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, sigint_handler)
 
     # Start the BLE manager:
-    manager = MyDeviceManager(adapter_name="hci0")
+    manager = MyDeviceManager()#adapter_name="hci0")
     manager.start_discovery()
     manager.run()

@@ -4,9 +4,6 @@
 #include <esp_system.h>
 #include <BLE2902.h>
 
-// See the following for generating UUIDs:
-// https://www.uuidgenerator.net/
-
 // permission : properties : value
 #define SERVICE_UUID_METADATA     "0000180a-0000-1000-8000-00805f9b34fb"
     #define CHARACT_UUID_META_0   "00002a29-0000-1000-8000-00805f9b34fb" // R : R : value-str="ISSC"
