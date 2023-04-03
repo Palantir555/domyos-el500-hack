@@ -11,6 +11,7 @@ import re
 import enum
 import el500mitmlogs
 from kaitaistruct import KaitaiStream, BytesIO
+
 # kaitai-struct-compiler -t python message_structs.ksy
 from response_status import ResponseStatus
 
@@ -57,8 +58,8 @@ coloredlogs.install(
 ble_logger.disabled = True
 
 
-def b2hex(bytestring):
-    return " ".join(format(b, "02x") for b in bytestring)
+def bin2hex(binmsg):
+    return " ".join(f"{byte:02x}" for byte in binmsg)
 
 
 class ReversingLogic:
@@ -87,9 +88,32 @@ class ReversingLogic:
             logger.info("Starting EL500 logic")
             self.logic()
 
+    def write_chunked(self, data, chunk_size=20, set_chunknum_octet=True):
+        def set_chunk_count_octet():
+            n_chunks = len(range(0, len(data), chunk_size))
+            cmd_byte = data[1]
+            # last_byte = data[-1]
+            first_octet = (cmd_byte & 0xF0) >> 4
+            second_octet = cmd_byte & 0x0F
+            first_octet = (first_octet - n_chunks) & 0x0F
+            modified_last_byte = (first_octet << 4) | second_octet
+            return data[:-1] + bytes([modified_last_byte])
+
+        if set_chunknum_octet is True:
+            data = set_chunk_count_octet()
+
+        for i in range(0, len(data), chunk_size):
+            msg = data[i : i + chunk_size]
+            logger.info(f" Sending -> {bin2hex(msg)}")
+            el500_ble_device.write(El500Characts.comms_AppToDev, msg)
+            time.sleep(0.3)
+
     def interactive_logic(self):
         def parse_status_msg(binmsg):
             return ResponseStatus.from_bytes(binmsg)
+
+        ASK_BEFORE_WRITE = False
+
         # mitm_clean_logs = "mitm_clean.log"
         mitm_clean_logs = "mitm_new.tsv"
         with open(mitm_clean_logs, "r") as f:
@@ -97,12 +121,11 @@ class ReversingLogic:
         for cmd, response in conversation:
             if cmd is None:
                 continue
-            inp = input(f"Send cmd ?? {cmd.hex()}? [Y/n]")
-            if inp.lower() in ["n", "no"]:
-                continue
-            logger.info(f" Sending -> {cmd.hex()}")
-            # logger.info(f"Received: {response.hex() if response is not None else None}")
-            el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
+            if ASK_BEFORE_WRITE is True:
+                inp = input(f"Send cmd ?? {bin2hex(cmd)}? [Y/n]")
+                if inp.lower() in ["n", "no"]:
+                    continue
+            self.write_chunked(cmd, set_chunknum_octet=False)
             try:
                 char, msg = ReversingLogic.await_notification(timeout=3)
             except TimeoutError:
@@ -110,18 +133,27 @@ class ReversingLogic:
                 char, msg = None, None
             if msg != response:
                 logger.warning(
-                    f"Expected <- {response.hex() if response is not None else None}"
+                    f"Expected <- {bin2hex(response) if response is not None else None}"
                 )
-                logger.warning(f"Received <- {msg.hex() if msg is not None else None}")
+                logger.warning(
+                    f"Received <- {bin2hex(msg) if msg is not None else None}"
+                )
             else:
-                logger.info(f"Received <- {msg.hex() if msg is not None else None}")
+                logger.info(f"Received <- {bin2hex(msg) if msg is not None else None}")
+
+        devstate = None
+        start_t = time.time()
         while not kill_all_threads:
-            logger.info(f" Sending -> {El500Cmd.getStatus}")
-            el500_ble_device.write(El500Characts.comms_AppToDev, El500Cmd.getStatus)
+            time.sleep(0.25)
+            self.write_chunked(El500Cmd.getStatus)
             try:
                 char, msg = ReversingLogic.await_notification(2)
-                # logger.info(f"Received <- {msg.hex()}")
-                logger.info(f"Status: {parse_status_msg(msg)}")
+                logger.info(f"Received <- {bin2hex(msg)}")
+                # The device is expecting us to set the time moving and send it to the device
+                devstate = parse_status_msg(msg)
+                devstate.response_identifier = 0xCB
+                devstate.seconds_moving_over_10 = int((time.time() - start_t) // 10)
+                self.write_chunked(devstate.serialize())
             except TimeoutError:
                 char, msg = None, None
 
@@ -161,61 +193,48 @@ class El500Characts:
     meta6 = "00002a23-0000-1000-8000-00805f9b34fb"  # R:R:value="0000000000000000"
     meta7 = "00002a2a-0000-1000-8000-00805f9b34fb"  # R:R:value="0000000001000000"
     UNK0_0 = "49535343-026e-3a9b-954c-97daef17e26e"  # W:W/N + Descriptor BLE2902
-    UNK1_0 = "49535343-aca3-481c-91ec-d85e28a60318"  # W:W/N + Descriptor BLE2902
-    comms_DevToApp = (
-        "49535343-1e4d-4bd9-ba61-23c647249616"  # W:W/WnR/N + Descriptor BLE2902
-    )
+    UNK1_0 = "49535343-aca3-481c-91ec-d85e28a60318"  # W:W/N + BLE2902
+    comms_DevToApp = "49535343-1e4d-4bd9-ba61-23c647249616"  # W:W/WnR/N + BLE2902
     comms_AppToDev = "49535343-8841-43f4-a8d4-ecbe34729bb3"  # W:W/WnR/N
-    comms_unknown = "49535343-4c8a-39b3-2f49-511cff073b7e"  # W:W/N + Descriptor BLE2902
+    comms_unknown = "49535343-4c8a-39b3-2f49-511cff073b7e"  # W:W/N + BLE2902
 
 
 class El500Cmd:
     # startup = b"\xf0\xc9\xb9"
     # ready = b"\xf0\xc4\x03\xb7"
     # wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"
-    getStatus = b"\xf0\xac\x9c"
+    getStatus = b"\xf0\xac\xac" # getStatus = b"\xf0\xac\x9c" # Dirty dirty hack on the last byte. TODO highest: It should be generated dynamically on write_chunk
 
 
-class El500Status(object):
-    def __init__(
-        self,
-        rpm_left,
-        rpm_right,
-        resistance,
-        active_seconds,
-        active_minutes,
-        heart_rate,
-    ):
-        self.rpm_left = rpm_left
-        self.rpm_right = rpm_right
-        self.resistance = resistance
-        self.active_seconds = active_seconds
-        self.active_minutes = active_minutes
-        self.heart_rate = heart_rate
+class SerialOverBle:
+    rx_char_uuid = El500Characts.comms_DevToApp
+    tx_char_uuid = El500Characts.comms_AppToDev
 
-    def set_from_ble_msg(self, msg):
-        """Load BLE status msg byte array into the object properties. msg format:
-        b'<cmd_id:2><unk0:2><unk1:2><rpm_left:2><rpm_right:2><active_sec:2><active_min:2><resistance:1><unk2:1><unk3:2><heart_rate:1><unk4:1>'
-        """
-        cmd_id = int.from_bytes(msg[0:2], byteorder="little", signed=False)
-        unk0 = int.from_bytes(msg[2:4], byteorder="little", signed=False)
-        unk1 = int.from_bytes(msg[4:6], byteorder="little", signed=False)
-        self.rpm_left = int.from_bytes(msg[6:8], byteorder="little", signed=False)
-        self.rpm_right = int.from_bytes(msg[8:10], byteorder="little", signed=False)
-        self.active_seconds = int.from_bytes(
-            msg[10:12], byteorder="little", signed=False
-        )
-        self.active_minutes = int.from_bytes(
-            msg[12:14], byteorder="little", signed=False
-        )
-        self.resistance = int.from_bytes(msg[14:15], byteorder="little", signed=False)
-        unk2 = int.from_bytes(msg[15:16], byteorder="little", signed=False)
-        unk3 = int.from_bytes(msg[16:18], byteorder="little", signed=False)
-        self.heartrate = int.from_bytes(msg[18:19], byteorder="little", signed=False)
-        self.heartrate = int.from_bytes(msg[19:20], byteorder="little", signed=False)
+    def __init__(self, rx_msg_q):
+        self.rx_buffer = bytearray()
+        self.rx_msg_q = rx_msg_q
 
-    def __str__(self):
-        return f"RPM: {self.rpm_left} / {self.rpm_right} | Resistance: {self.resistance} | Active: {self.active_minutes}m {self.active_seconds}s | Heart Rate: {self.heart_rate}"
+    # def notification_handler(self, data):
+    #     # if a notification is received, and it's 20-bytes long, add it to the rx buffer.
+    #     # If it is under 20 bytes, it is the last packet of a message, so add it to the
+    #     # buffer and put the buffer into the rx queue.
+    #     if len(data) == 20:
+    #         self.rx_buffer += data
+    #     elif len(data) > 20:
+    #         raise ValueError(
+    #             "Received a notification longer than 20 bytes. "
+    #             + "Although this was expected? I think this can be removed safely"
+    #         )
+    #     else:
+    #         self.rx_buffer += data
+    #         self.rx_msg_q.put(self.rx_buffer)
+    #         self.rx_buffer = bytearray()
+
+    def write(self, data):
+        # el500_ble_device.write(self.tx_char_uuid, data)
+        # split the message into 20 byte chunks, and write them:
+        for i in range(0, len(data), 20):
+            el500_ble_device.write(self.tx_char_uuid, data[i : i + 20])
 
 
 class BleDeviceManager(gatt.DeviceManager):
@@ -250,7 +269,7 @@ class BleConnectionHandler(gatt.Device):
         for s in self.services:
             for c in s.characteristics:
                 if str(c.uuid) == char_uuid:
-                    ble_logger.debug(f"Writing[{char_uuid}][{b2hex(data)}]")
+                    ble_logger.debug(f"Writing[{char_uuid}][{bin2hex(data)}]")
                     c.write_value(data)
                     return
         ble_logger.error(f"Characteristic {char_uuid} not found")
@@ -291,7 +310,7 @@ class BleConnectionHandler(gatt.Device):
 
     def characteristic_value_updated(self, characteristic, value):
         """This is the callback for when a notification is received"""
-        ble_logger.info(f"Notified[{characteristic.uuid}][{b2hex(value)}]")
+        ble_logger.info(f"Notified[{characteristic.uuid}][{bin2hex(value)}]")
         ble_notifications_q.put_nowait((characteristic, value))
         # ble_logger.debug(serial_msg)
 
@@ -323,8 +342,6 @@ def sigint_handler(sig, frame):
 
 
 if __name__ == "__main__":
-    print("Hello World")
-
     # configure sigint handler:
     signal.signal(signal.SIGINT, sigint_handler)
 

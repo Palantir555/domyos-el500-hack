@@ -35,6 +35,15 @@ seq:
   - id: heart_rate
     type: u2
     doc: Heart rate (0x00 0x43)
-  - id: end_of_message_byte
+  - id: unknown4
+    type: u2
+    doc: Unknown (0x00 0x00)
+  - id: unknown5
+    type: u2
+    doc: Unknown (0xFF 0x00)
+  - id: unknown6
+    type: u2
+    doc: Unknown (0x00 0x01)
+  - id: endofmessage
     type: u1
-    doc: End of message byte
+    doc: Message terminator is the original command, 0xAC
