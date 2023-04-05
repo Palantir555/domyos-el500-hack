@@ -1,0 +1,5 @@
+# This file was created by Wireshark. Edit with care.
+@New coloring rule@bluetooth.addr==e8:5d:86:bf:35:9d && btatt.value contains f0bcff@[63736,17733,17733][0,0,0]
+@f0 cb@bluetooth.addr==e8:5d:86:bf:35:9d && btatt.value contains f0cb@[21331,65535,64507][0,0,0]
+@Write response@bluetooth.addr==e8:5d:86:bf:35:9d && btatt.opcode==0x13@[47802,47802,47802][0,0,0]
+@Write request@bluetooth.addr==e8:5d:86:bf:35:9d && btatt.opcode==0x12@[24929,54741,50372][0,0,0]
