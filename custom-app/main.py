@@ -88,19 +88,17 @@ class ReversingLogic:
             logger.info("Starting EL500 logic")
             self.logic()
 
-    def write_chunked(self, data, chunk_size=20, set_chunknum_octet=True):
-        def set_chunk_count_octet():
+    def write_chunked(self, data, chunk_size=20):
+        def set_chunk_count_octet(): # TODO dirty dirty hack. The original 'data' shouldn't include the terminator byte; it should be dynamically generated instead. I just don't yet fully understand how
             n_chunks = len(range(0, len(data), chunk_size))
             cmd_byte = data[1]
-            # last_byte = data[-1]
             first_octet = (cmd_byte & 0xF0) >> 4
             second_octet = cmd_byte & 0x0F
             first_octet = (first_octet - n_chunks) & 0x0F
             modified_last_byte = (first_octet << 4) | second_octet
             return data[:-1] + bytes([modified_last_byte])
 
-        if set_chunknum_octet is True:
-            data = set_chunk_count_octet()
+        data = set_chunk_count_octet()
 
         for i in range(0, len(data), chunk_size):
             msg = data[i : i + chunk_size]
@@ -109,9 +107,6 @@ class ReversingLogic:
             time.sleep(0.3)
 
     def interactive_logic(self):
-        def parse_status_msg(binmsg):
-            return ResponseStatus.from_bytes(binmsg)
-
         ASK_BEFORE_WRITE = False
 
         # mitm_clean_logs = "mitm_clean.log"
@@ -125,7 +120,9 @@ class ReversingLogic:
                 inp = input(f"Send cmd ?? {bin2hex(cmd)}? [Y/n]")
                 if inp.lower() in ["n", "no"]:
                     continue
-            self.write_chunked(cmd, set_chunknum_octet=False)
+            # self.write_chunked(cmd) # This overwrites the last byte, which we need to replay. Even if that's worked around, the chunking itself causes problems (not receiving some expected notifications). TODO: figure out why, as it is probably messing with the dynamically generated chunked messages
+            logger.info(f" Sending -> {bin2hex(cmd)}")
+            el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
             try:
                 char, msg = ReversingLogic.await_notification(timeout=3)
             except TimeoutError:
@@ -141,27 +138,44 @@ class ReversingLogic:
             else:
                 logger.info(f"Received <- {bin2hex(msg) if msg is not None else None}")
 
+    def logic(self):
+        def parse_status_msg(binmsg):
+            return ResponseStatus.from_bytes(binmsg)
+
+        # TODO: If the target is disconnected, restart the logic(?)
+        ble_attributes_discovered.wait()
+
+        self.interactive_logic()
+
+        # Assuming the conversation replay is successful in getting a session started,
+        # We can now loop querying for status and providing the target with
+        # whatever it needs (unknown as of yet)
         devstate = None
         start_t = time.time()
         while not kill_all_threads:
-            time.sleep(0.25)
+            time.sleep(0.03)
             self.write_chunked(El500Cmd.getStatus)
             try:
                 char, msg = ReversingLogic.await_notification(2)
                 logger.info(f"Received <- {bin2hex(msg)}")
                 # The device is expecting us to set the time moving and send it to the device
                 devstate = parse_status_msg(msg)
-                devstate.response_identifier = 0xCB
-                devstate.seconds_moving_over_10 = int((time.time() - start_t) // 10)
-                self.write_chunked(devstate.serialize())
+                # devstate.seconds_moving_over_10 = int((time.time() - start_t) // 10)
             except TimeoutError:
+                logger.info(f"Received <- TIMEOUT")
                 char, msg = None, None
 
-    def logic(self):
-        # TODO: If the target is disconnected, restart the logic(?)
-        ble_attributes_discovered.wait()
+            # CURRENTLY TIMES OUT:
+            # time.sleep(0.03)
+            # self.write_chunked(El500Cmd.setSomething)
+            # try:
+            #     char, msg = ReversingLogic.await_notification(2)
+            #     logger.info(f"Received <- {bin2hex(msg)}")
+            #     # devstate.seconds_moving_over_10 = int((time.time() - start_t) // 10)
+            # except TimeoutError:
+            #     logger.info(f"Received <- TIMEOUT")
+            #     char, msg = None, None
 
-        self.interactive_logic()
         self.stop()
 
     @staticmethod
@@ -203,7 +217,8 @@ class El500Cmd:
     # startup = b"\xf0\xc9\xb9"
     # ready = b"\xf0\xc4\x03\xb7"
     # wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"
-    getStatus = b"\xf0\xac\xac" # getStatus = b"\xf0\xac\x9c" # Dirty dirty hack on the last byte. TODO highest: It should be generated dynamically on write_chunk
+    getStatus = b"\xf0\xac\xac"  # getStatus = b"\xf0\xac\x9c" # Dirty dirty hack on the last byte. TODO highest: It should be generated dynamically on write_chunk
+    setSomething = b"\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xdb" # Captured terminator byte: "\xca"
 
 
 class SerialOverBle:
