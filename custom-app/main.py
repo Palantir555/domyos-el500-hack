@@ -89,7 +89,7 @@ class ReversingLogic:
             logger.info("Starting EL500 logic")
             self.logic()
 
-    def write_chunked(self, data, chunk_size=20):
+    def write_chunked(self, data, chunk_size=20, overwrite_last_byte=True):
         def set_chunk_count_octet():  # TODO dirty dirty hack. The original 'data' shouldn't include the terminator byte; it should be dynamically generated instead. I just don't yet fully understand how
             n_chunks = len(range(0, len(data), chunk_size))
             cmd_byte = data[1]
@@ -141,7 +141,7 @@ class ReversingLogic:
 
     def session_logic(self):
         async def send_data(data):
-            self.write_chunked(data)
+            self.write_chunked(data, overwrite_last_byte=False)
 
         async def receive_data():
             try:
@@ -152,6 +152,10 @@ class ReversingLogic:
                 char, msg = None, None
 
         async def event_300ms(cmd_lock):
+            def build_setSomething_msg():
+                # setSomething = b"\xf0\xcb\x01\x02\x30\x02\x01\x00\x38\x01\x01\x00\x59\x00\x01\x00\x41\x00\x01\x00\x02\x00\x01\x00\x07\x00\xd1"
+                pass
+
             while not kill_all_threads:
                 async with cmd_lock:
                     await send_data(El500Cmd.getStatus)
@@ -261,8 +265,10 @@ class El500Cmd:
     # startup = b"\xf0\xc9\xb9"
     # ready = b"\xf0\xc4\x03\xb7"
     # wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"
-    getStatus = b"\xf0\xac\xac"  # getStatus = b"\xf0\xac\x9c" # Dirty dirty hack on the last byte. TODO highest: It should be generated dynamically on write_chunk
-    setSomething = b"\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xdb"  # Captured terminator byte: "\xca"
+    # getStatus = b"\xf0\xac\xac"  # Dirty dirty hack on the last byte. TODO highest: It should be generated dynamically on write_chunk
+    getStatus = b"\xf0\xac\x9c"
+    # setSomething = b"\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xdb"  # Captured terminator byte: "\xca"
+    setSomething = b"\xf0\xcb\x01\x02\x30\x02\x01\x00\x38\x01\x01\x00\x59\x00\x01\x00\x41\x00\x01\x00\x02\x00\x01\x00\x07\x00\xd1"  # Captured terminator byte: "\xca"
 
 
 class SerialOverBle:
@@ -300,6 +306,7 @@ class BleDeviceManager(gatt.DeviceManager):
     known_devices = (
         set()
     )  # TODO high: Shouldn't be here, but this is a faux-singleton, so whatever...
+
     # This function is called when a BLE device is discovered
     def device_discovered(self, device):
         global el500_ble_device  # TODO: remove this shitty global
