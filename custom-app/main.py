@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import gatt
 import signal
+import asyncio
 import threading
 import coloredlogs
 import logging
@@ -89,7 +90,7 @@ class ReversingLogic:
             self.logic()
 
     def write_chunked(self, data, chunk_size=20):
-        def set_chunk_count_octet(): # TODO dirty dirty hack. The original 'data' shouldn't include the terminator byte; it should be dynamically generated instead. I just don't yet fully understand how
+        def set_chunk_count_octet():  # TODO dirty dirty hack. The original 'data' shouldn't include the terminator byte; it should be dynamically generated instead. I just don't yet fully understand how
             n_chunks = len(range(0, len(data), chunk_size))
             cmd_byte = data[1]
             first_octet = (cmd_byte & 0xF0) >> 4
@@ -138,6 +139,48 @@ class ReversingLogic:
             else:
                 logger.info(f"Received <- {bin2hex(msg) if msg is not None else None}")
 
+    def session_logic(self):
+        async def send_data(data):
+            self.write_chunked(data)
+
+        async def receive_data():
+            try:
+                char, msg = ReversingLogic.await_notification(1)
+                logger.info(f"Received <- {bin2hex(msg)}")
+            except TimeoutError:
+                logger.warning(f"Received <- TIMEOUT")
+                char, msg = None, None
+
+        async def event_300ms(cmd_lock):
+            while not kill_all_threads:
+                async with cmd_lock:
+                    await send_data(El500Cmd.getStatus)
+                    await receive_data()
+                await asyncio.sleep(0.3)  # 300 ms
+
+        async def event_1000ms(cmd_lock):
+            while not kill_all_threads:
+                async with cmd_lock:
+                    await send_data(El500Cmd.setSomething)
+                    await receive_data()
+                await asyncio.sleep(1)  # 1000 ms
+
+        async def logic():
+            try:
+                cmd_lock = asyncio.Lock()
+                # Run both events concurrently using asyncio.gather
+                tasks = asyncio.gather(
+                    event_300ms(cmd_lock),
+                    event_1000ms(cmd_lock),
+                    return_exceptions=True,
+                )
+                await tasks
+            except KeyboardInterrupt:
+                tasks.cancel()
+
+        # Run the main function using the asyncio event loop
+        asyncio.run(logic())
+
     def logic(self):
         def parse_status_msg(binmsg):
             return ResponseStatus.from_bytes(binmsg)
@@ -147,34 +190,35 @@ class ReversingLogic:
 
         self.interactive_logic()
 
-        # Assuming the conversation replay is successful in getting a session started,
-        # We can now loop querying for status and providing the target with
-        # whatever it needs (unknown as of yet)
-        devstate = None
-        start_t = time.time()
-        while not kill_all_threads:
-            time.sleep(0.03)
-            self.write_chunked(El500Cmd.getStatus)
-            try:
-                char, msg = ReversingLogic.await_notification(2)
-                logger.info(f"Received <- {bin2hex(msg)}")
-                # The device is expecting us to set the time moving and send it to the device
-                devstate = parse_status_msg(msg)
-                # devstate.seconds_moving_over_10 = int((time.time() - start_t) // 10)
-            except TimeoutError:
-                logger.info(f"Received <- TIMEOUT")
-                char, msg = None, None
+        self.session_logic()
 
-            # CURRENTLY TIMES OUT:
-            # time.sleep(0.03)
-            # self.write_chunked(El500Cmd.setSomething)
-            # try:
-            #     char, msg = ReversingLogic.await_notification(2)
-            #     logger.info(f"Received <- {bin2hex(msg)}")
-            #     # devstate.seconds_moving_over_10 = int((time.time() - start_t) // 10)
-            # except TimeoutError:
-            #     logger.info(f"Received <- TIMEOUT")
-            #     char, msg = None, None
+        # # Assuming the conversation replay is successful in getting a session started,
+        # # We can now loop querying for status and providing the target with
+        # # whatever it needs (unknown as of yet)
+        # devstate = None
+        # start_t = time.time()
+        # while not kill_all_threads:
+        #     time.sleep(0.03)
+        #     self.write_chunked(El500Cmd.getStatus)
+        #     try:
+        #         char, msg = ReversingLogic.await_notification(2)
+        #         logger.info(f"Received <- {bin2hex(msg)}")
+        #         # The device is expecting us to set the time moving and send it to the device
+        #         devstate = parse_status_msg(msg)
+        #         # devstate.seconds_moving_over_10 = int((time.time() - start_t) // 10)
+        #     except TimeoutError:
+        #         logger.info(f"Received <- TIMEOUT")
+        #         char, msg = None, None
+
+        #     # CURRENTLY TIMES OUT:
+        #     # time.sleep(0.03)
+        #     # self.write_chunked(El500Cmd.setSomething)
+        #     # try:
+        #     #     char, msg = ReversingLogic.await_notification(2)
+        #     #     logger.info(f"Received <- {bin2hex(msg)}")
+        #     # except TimeoutError:
+        #     #     logger.info(f"Received <- TIMEOUT")
+        #     #     char, msg = None, None
 
         self.stop()
 
@@ -218,7 +262,7 @@ class El500Cmd:
     # ready = b"\xf0\xc4\x03\xb7"
     # wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"
     getStatus = b"\xf0\xac\xac"  # getStatus = b"\xf0\xac\x9c" # Dirty dirty hack on the last byte. TODO highest: It should be generated dynamically on write_chunk
-    setSomething = b"\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xdb" # Captured terminator byte: "\xca"
+    setSomething = b"\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xdb"  # Captured terminator byte: "\xca"
 
 
 class SerialOverBle:
