@@ -152,10 +152,6 @@ class ReversingLogic:
                 char, msg = None, None
 
         async def event_300ms(cmd_lock):
-            def build_setSomething_msg():
-                # setSomething = b"\xf0\xcb\x01\x02\x30\x02\x01\x00\x38\x01\x01\x00\x59\x00\x01\x00\x41\x00\x01\x00\x02\x00\x01\x00\x07\x00\xd1"
-                pass
-
             while not kill_all_threads:
                 async with cmd_lock:
                     await send_data(El500Cmd.getStatus)
@@ -163,9 +159,12 @@ class ReversingLogic:
                 await asyncio.sleep(0.3)  # 300 ms
 
         async def event_1000ms(cmd_lock):
+            def build_setSessionState_msg():
+                return El500Cmd.setSessionState
+
             while not kill_all_threads:
                 async with cmd_lock:
-                    await send_data(El500Cmd.setSomething)
+                    await send_data(build_setSessionState_msg())
                     await receive_data()
                 await asyncio.sleep(1)  # 1000 ms
 
@@ -192,37 +191,11 @@ class ReversingLogic:
         # TODO: If the target is disconnected, restart the logic(?)
         ble_attributes_discovered.wait()
 
+        # Replays the start of the conversation hoping to start a session (TODO: Reverse this)
         self.interactive_logic()
 
+        # Replay the getStatus setSession commands
         self.session_logic()
-
-        # # Assuming the conversation replay is successful in getting a session started,
-        # # We can now loop querying for status and providing the target with
-        # # whatever it needs (unknown as of yet)
-        # devstate = None
-        # start_t = time.time()
-        # while not kill_all_threads:
-        #     time.sleep(0.03)
-        #     self.write_chunked(El500Cmd.getStatus)
-        #     try:
-        #         char, msg = ReversingLogic.await_notification(2)
-        #         logger.info(f"Received <- {bin2hex(msg)}")
-        #         # The device is expecting us to set the time moving and send it to the device
-        #         devstate = parse_status_msg(msg)
-        #         # devstate.seconds_moving_over_10 = int((time.time() - start_t) // 10)
-        #     except TimeoutError:
-        #         logger.info(f"Received <- TIMEOUT")
-        #         char, msg = None, None
-
-        #     # CURRENTLY TIMES OUT:
-        #     # time.sleep(0.03)
-        #     # self.write_chunked(El500Cmd.setSomething)
-        #     # try:
-        #     #     char, msg = ReversingLogic.await_notification(2)
-        #     #     logger.info(f"Received <- {bin2hex(msg)}")
-        #     # except TimeoutError:
-        #     #     logger.info(f"Received <- TIMEOUT")
-        #     #     char, msg = None, None
 
         self.stop()
 
@@ -265,10 +238,8 @@ class El500Cmd:
     # startup = b"\xf0\xc9\xb9"
     # ready = b"\xf0\xc4\x03\xb7"
     # wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"
-    # getStatus = b"\xf0\xac\xac"  # Dirty dirty hack on the last byte. TODO highest: It should be generated dynamically on write_chunk
     getStatus = b"\xf0\xac\x9c"
-    # setSomething = b"\xf0\xcb\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\xdb"  # Captured terminator byte: "\xca"
-    setSomething = b"\xf0\xcb\x01\x02\x30\x02\x01\x00\x38\x01\x01\x00\x59\x00\x01\x00\x41\x00\x01\x00\x02\x00\x01\x00\x07\x00\xd1"  # Captured terminator byte: "\xca"
+    setSessionState = b"\xf0\xcb\x01\x02\x30\x02\x01\x00\x38\x01\x01\x00\x59\x00\x01\x00\x41\x00\x01\x00\x02\x00\x01\x00\x07\x00\xd1"  # Captured terminator byte: "\xca"
 
 
 class SerialOverBle:
