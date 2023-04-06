@@ -90,16 +90,17 @@ class ReversingLogic:
             self.logic()
 
     def write_chunked(self, data, chunk_size=20, overwrite_last_byte=True):
-        def set_chunk_count_octet():  # TODO dirty dirty hack. The original 'data' shouldn't include the terminator byte; it should be dynamically generated instead. I just don't yet fully understand how
-            n_chunks = len(range(0, len(data), chunk_size))
-            cmd_byte = data[1]
+        def set_chunk_count_octet(dat):  # TODO dirty dirty hack. The original 'dat' shouldn't include the terminator byte; it should be dynamically generated instead. I just don't yet fully understand how
+            n_chunks = len(range(0, len(dat), chunk_size))
+            cmd_byte = dat[1]
             first_octet = (cmd_byte & 0xF0) >> 4
             second_octet = cmd_byte & 0x0F
             first_octet = (first_octet - n_chunks) & 0x0F
             modified_last_byte = (first_octet << 4) | second_octet
-            return data[:-1] + bytes([modified_last_byte])
+            return dat[:-1] + bytes([modified_last_byte])
 
-        data = set_chunk_count_octet()
+        if overwrite_last_byte:
+            data = set_chunk_count_octet(data)
 
         for i in range(0, len(data), chunk_size):
             msg = data[i : i + chunk_size]
@@ -109,7 +110,6 @@ class ReversingLogic:
 
     def interactive_logic(self):
         ASK_BEFORE_WRITE = False
-
         # mitm_clean_logs = "mitm_clean.log"
         mitm_clean_logs = "mitm_new.tsv"
         with open(mitm_clean_logs, "r") as f:
@@ -141,7 +141,7 @@ class ReversingLogic:
 
     def session_logic(self):
         async def send_data(data):
-            self.write_chunked(data, overwrite_last_byte=False)
+            self.write_chunked(data, overwrite_last_byte=False, chunk_size=666) # TODO fix this mess
 
         async def receive_data():
             try:
