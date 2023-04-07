@@ -44,6 +44,6 @@ seq:
   - id: unknown6
     type: u2
     doc: Unknown (0x00 0x01)
-  - id: endofmessage
+  - id: checksum
     type: u1
-    doc: Message terminator is the original command, 0xAC
+    doc: Checksum (Sum of all bytes & 0xff). Indicates end of message

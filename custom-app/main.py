@@ -81,14 +81,14 @@ class ReversingLogic:
             el500_ble_device.disconnect()
             time.sleep(0.19)  # give it some time
 
-    def start_ble_manager(self):
-        logger.info("Scanning for BLE devices...")
-        self.manager.start_discovery()
-        self.manager_thread = threading.Thread(target=self.manager.run)
-        self.manager_thread.start()
-
     def start(self):
-        self.start_ble_manager()
+        def start_ble_manager():
+            logger.info("Scanning for BLE devices...")
+            self.manager.start_discovery()
+            self.manager_thread = threading.Thread(target=self.manager.run)
+            self.manager_thread.start()
+
+        start_ble_manager()
         # while not kill_all_threads:
         ble_connected.wait()
         if el500_ble_device is not None:
@@ -96,31 +96,34 @@ class ReversingLogic:
             logger.info("Starting EL500 logic")
             self.logic()
 
-    def await_notification(self, timeout=0):
-        start = time.time()
-        while not kill_all_threads:
-            try:
-                notif_charact, notif_value = ble_notifications_q.get(timeout=0.25)
-                logger.info(f"Received <- {bin2hex(notif_value)}")
-                return notif_charact, notif_value
-            except queue.Empty:
-                if timeout > 0 and time.time() - start > timeout:
-                    raise TimeoutError("Timeout while waiting for notification")
-
     def send_cmd(self, cmd, await_response=True, timeout=1, attempts=1):
+        def await_notification(timeout=0):
+            start = time.time()
+            while not kill_all_threads:
+                try:
+                    notif_charact, notif_value = ble_notifications_q.get(timeout=0.25)
+                    logger.info(f"Received <- {bin2hex(notif_value)}")
+                    return notif_charact, notif_value
+                except queue.Empty:
+                    if timeout > 0 and time.time() - start > timeout:
+                        raise TimeoutError("Timeout while waiting for notification")
+
+        # Generate and append checksum
+        cmd = bytearray(cmd)
+        cmd.append(generateChecksum(cmd))
         logger.info(f" Sending -> {bin2hex(cmd)}")
         el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
         if await_response is True:
             while attempts > 0 and not kill_all_threads:
                 attempts -= 1
                 try:
-                    char, resp = self.await_notification(timeout=timeout)
+                    char, resp = await_notification(timeout=timeout)
                     return resp
                 except TimeoutError as e:
                     logger.warning(e)
         return None
 
-    def interactive_logic(self):
+    def replay_logic(self):
         ASK_BEFORE_WRITE = False
         mitm_clean_logs = "mitm_new.tsv"
         with open(mitm_clean_logs, "r") as f:
@@ -153,19 +156,15 @@ class ReversingLogic:
             def build_setSessionState_msg():
                 nonlocal resistance
                 barr = bytearray(El500Cmd.setSessionState)
+                payload = b"\x01\x02\x30\x02\x01\x00\x38\x01\x01\x00\x59\x00\x01\x00\x41\x00\x01\x00\x02\x00\x01\x00\x07\x00"
+                barr += payload  # append payload
                 resistance += 1
                 if resistance > 0x0F:
-                    resistance = 0x00
+                    resistance = 0x01
                 barr[24] = resistance
-                # Calculate and append checksum
-                barr = barr[
-                    :-1
-                ]  # TODO: Assumes the cmd includes a checksum already, so remove it
-                chksum = generateChecksum(barr[:-1])
-                barr.append(chksum)
                 return bytes(barr)
 
-            resistance = 0  # should live in a 'DeviceStatus' struct/object
+            resistance = 1  # should live in a 'DeviceStatus' struct/object
             try:
                 while not kill_all_threads:
                     async with cmd_lock:
@@ -201,7 +200,7 @@ class ReversingLogic:
         ble_attributes_discovered.wait()
 
         # Replays the start of the conversation hoping to start a session (TODO: Reverse this)
-        self.interactive_logic()
+        self.replay_logic()
 
         # Replay the getStatus setSession commands
         self.session_logic()
@@ -231,45 +230,36 @@ class El500Characts:
     comms_DevToApp = "49535343-1e4d-4bd9-ba61-23c647249616"  # W:W/WnR/N + BLE2902
     comms_AppToDev = "49535343-8841-43f4-a8d4-ecbe34729bb3"  # W:W/WnR/N
     comms_unknown = "49535343-4c8a-39b3-2f49-511cff073b7e"  # W:W/N + BLE2902
+    # Names extracted from the decompiled android app:
+    # FTMS_CLIENT_CONFIGURATION_UUID = ("00002902-0000-1000-8000-00805F9B34FB");
+    # FTMS_MACHINE_STATUS_UUID       = ("00002ADA-0000-1000-8000-00805F9B34FB");
+    # FTMS_MACHINE_FEATURE_UUID      = ("00002ACC-0000-1000-8000-00805F9B34FB");
+    # FTMS_ROWER_DATA_UUID           = ("00002AD1-0000-1000-8000-00805F9B34FB");
+    # FTMS_TREADMILL_DATA_UUID       = ("00002ACD-0000-1000-8000-00805F9B34FB");
+    # FTMS_ELLIPTICAL_DATA_UUID      = ("00002ACE-0000-1000-8000-00805F9B34FB");
+    # FTMS_BIKE_DATA_UUID            = ("00002AD2-0000-1000-8000-00805F9B34FB");
+    # FTMS_UUID                      = ("00001826-0000-1000-8000-00805F9B34FB");
+    # DEVICE_INFORMATION_UUID        = ("0000180A-0000-1000-8000-00805F9B34FB");
+    # SERVICE_UUID                   = ("49535343-FE7D-4AE5-8FA9-9FAFD205E455");
+    # WRITE_UUID                     = ("49535343-8841-43F4-A8D4-ECBE34729BB3");
+    # NOTIFY_UUID                    = ("49535343-1E4D-4BD9-BA61-23C647249616");
 
 
 class El500Cmd:
-    # startup = b"\xf0\xc9\xb9"
-    # ready = b"\xf0\xc4\x03\xb7"
-    # wat = b"\xf0\xad\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\x8d"
-    getStatus = b"\xf0\xac\x9c"
-    setSessionState = b"\xf0\xcb\x01\x02\x30\x02\x01\x00\x38\x01\x01\x00\x59\x00\x01\x00\x41\x00\x01\x00\x02\x00\x01\x00\x07\x00\xd1"  # Captured terminator byte: "\xca"
+    getStatus = b"\xf0\xac"
+    setSessionState = b"\xf0\xcb"
+    # startup = b"\xf0\xc9"
+    # ready = b"\xf0\xc4" + b"\x03"
+    # wat = b"\xf0\xad" + b"\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff"
 
+    @staticmethod
+    def send():
+        pass  # TODO: combine cmd, payload, and generate+append checksum
 
-class SerialOverBle:
-    rx_char_uuid = El500Characts.comms_DevToApp
-    tx_char_uuid = El500Characts.comms_AppToDev
-
-    def __init__(self, rx_msg_q):
-        self.rx_buffer = bytearray()
-        self.rx_msg_q = rx_msg_q
-
-    # def notification_handler(self, data):
-    #     # if a notification is received, and it's 20-bytes long, add it to the rx buffer.
-    #     # If it is under 20 bytes, it is the last packet of a message, so add it to the
-    #     # buffer and put the buffer into the rx queue.
-    #     if len(data) == 20:
-    #         self.rx_buffer += data
-    #     elif len(data) > 20:
-    #         raise ValueError(
-    #             "Received a notification longer than 20 bytes. "
-    #             + "Although this was expected? I think this can be removed safely"
-    #         )
-    #     else:
-    #         self.rx_buffer += data
-    #         self.rx_msg_q.put(self.rx_buffer)
-    #         self.rx_buffer = bytearray()
-
-    def write(self, data):
-        # el500_ble_device.write(self.tx_char_uuid, data)
-        # split the message into 20 byte chunks, and write them:
-        for i in range(0, len(data), 20):
-            el500_ble_device.write(self.tx_char_uuid, data[i : i + 20])
+    @staticmethod
+    def recv():
+        # TODO: Move class to a separate file, use global Tx/Rx buffers, and abstract away the BLE messages
+        pass
 
 
 class BleDeviceManager(gatt.DeviceManager):
@@ -380,11 +370,6 @@ def sigint_handler(sig, frame):
 if __name__ == "__main__":
     # configure sigint handler:
     signal.signal(signal.SIGINT, sigint_handler)
-
-    # Start the BLE manager:
-    # manager = BleDeviceManager(adapter_name="hci0")
-    # manager.start_discovery()
-    # manager.run()
 
     # New:
     try:
