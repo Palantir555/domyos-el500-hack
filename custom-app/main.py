@@ -63,6 +63,13 @@ def bin2hex(binmsg):
     return " ".join(f"{byte:02x}" for byte in binmsg)
 
 
+def generateChecksum(data):
+    checksum = 0
+    for byte in data:
+        checksum += byte
+    return checksum & 0xFF
+
+
 class ReversingLogic:
     def __init__(self):
         self.manager = BleDeviceManager(adapter_name="hci0")
@@ -89,84 +96,86 @@ class ReversingLogic:
             logger.info("Starting EL500 logic")
             self.logic()
 
-    def write_chunked(self, data, chunk_size=20, overwrite_last_byte=True):
-        def set_chunk_count_octet(dat):  # TODO dirty dirty hack. The original 'dat' shouldn't include the terminator byte; it should be dynamically generated instead. I just don't yet fully understand how
-            n_chunks = len(range(0, len(dat), chunk_size))
-            cmd_byte = dat[1]
-            first_octet = (cmd_byte & 0xF0) >> 4
-            second_octet = cmd_byte & 0x0F
-            first_octet = (first_octet - n_chunks) & 0x0F
-            modified_last_byte = (first_octet << 4) | second_octet
-            return dat[:-1] + bytes([modified_last_byte])
+    def await_notification(self, timeout=0):
+        start = time.time()
+        while not kill_all_threads:
+            try:
+                notif_charact, notif_value = ble_notifications_q.get(timeout=0.25)
+                logger.info(f"Received <- {bin2hex(notif_value)}")
+                return notif_charact, notif_value
+            except queue.Empty:
+                if timeout > 0 and time.time() - start > timeout:
+                    raise TimeoutError("Timeout while waiting for notification")
 
-        if overwrite_last_byte:
-            data = set_chunk_count_octet(data)
-
-        for i in range(0, len(data), chunk_size):
-            msg = data[i : i + chunk_size]
-            logger.info(f" Sending -> {bin2hex(msg)}")
-            el500_ble_device.write(El500Characts.comms_AppToDev, msg)
-            time.sleep(0.3)
+    def send_cmd(self, cmd, await_response=True, timeout=1, attempts=1):
+        logger.info(f" Sending -> {bin2hex(cmd)}")
+        el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
+        if await_response is True:
+            while attempts > 0 and not kill_all_threads:
+                attempts -= 1
+                try:
+                    char, resp = self.await_notification(timeout=timeout)
+                    return resp
+                except TimeoutError as e:
+                    logger.warning(e)
+        return None
 
     def interactive_logic(self):
         ASK_BEFORE_WRITE = False
-        # mitm_clean_logs = "mitm_clean.log"
         mitm_clean_logs = "mitm_new.tsv"
         with open(mitm_clean_logs, "r") as f:
             conversation = el500mitmlogs.parse_tsvconversation(f.read())
-        for cmd, response in conversation:
-            if cmd is None:
+        for cmd, xresponse in conversation:
+            if None in [cmd, xresponse]:
                 continue
             if ASK_BEFORE_WRITE is True:
                 inp = input(f"Send cmd ?? {bin2hex(cmd)}? [Y/n]")
                 if inp.lower() in ["n", "no"]:
                     continue
-            # self.write_chunked(cmd) # This overwrites the last byte, which we need to replay. Even if that's worked around, the chunking itself causes problems (not receiving some expected notifications). TODO: figure out why, as it is probably messing with the dynamically generated chunked messages
-            logger.info(f" Sending -> {bin2hex(cmd)}")
-            el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
             try:
-                char, msg = ReversingLogic.await_notification(timeout=3)
+                resp = self.send_cmd(cmd, attempts=2)
+                if resp != xresponse and resp is not None:
+                    logger.warning(f"Expected {bin2hex(xresponse)}")
             except TimeoutError:
-                logger.warning("Timeout while waiting for response")
-                char, msg = None, None
-            if msg != response:
-                logger.warning(
-                    f"Expected <- {bin2hex(response) if response is not None else None}"
-                )
-                logger.warning(
-                    f"Received <- {bin2hex(msg) if msg is not None else None}"
-                )
-            else:
-                logger.info(f"Received <- {bin2hex(msg) if msg is not None else None}")
+                logger.warning("Timeout waiting for: {bin2hex(xresponse)}")
 
     def session_logic(self):
-        async def send_data(data):
-            self.write_chunked(data, overwrite_last_byte=False, chunk_size=666) # TODO fix this mess
-
-        async def receive_data():
-            try:
-                char, msg = ReversingLogic.await_notification(1)
-                logger.info(f"Received <- {bin2hex(msg)}")
-            except TimeoutError:
-                logger.warning(f"Received <- TIMEOUT")
-                char, msg = None, None
+        async def cmd(cmd):
+            resp = self.send_cmd(cmd, timeout=0.5)
 
         async def event_300ms(cmd_lock):
             while not kill_all_threads:
                 async with cmd_lock:
-                    await send_data(El500Cmd.getStatus)
-                    await receive_data()
+                    await cmd(El500Cmd.getStatus)
                 await asyncio.sleep(0.3)  # 300 ms
 
         async def event_1000ms(cmd_lock):
             def build_setSessionState_msg():
-                return El500Cmd.setSessionState
+                nonlocal resistance
+                barr = bytearray(El500Cmd.setSessionState)
+                resistance += 1
+                if resistance > 0x0F:
+                    resistance = 0x00
+                barr[24] = resistance
+                # Calculate and append checksum
+                barr = barr[
+                    :-1
+                ]  # TODO: Assumes the cmd includes a checksum already, so remove it
+                chksum = generateChecksum(barr[:-1])
+                barr.append(chksum)
+                return bytes(barr)
 
-            while not kill_all_threads:
-                async with cmd_lock:
-                    await send_data(build_setSessionState_msg())
-                    await receive_data()
-                await asyncio.sleep(1)  # 1000 ms
+            resistance = 0  # should live in a 'DeviceStatus' struct/object
+            try:
+                while not kill_all_threads:
+                    async with cmd_lock:
+                        await cmd(build_setSessionState_msg())
+                    await asyncio.sleep(1)  # 1000 ms
+            except Exception as e:
+                logger.error(
+                    "Exception in logic", exc_info=(type(e), e, e.__traceback__)
+                )
+                logger.error(e)
 
         async def logic():
             try:
@@ -188,7 +197,7 @@ class ReversingLogic:
         def parse_status_msg(binmsg):
             return ResponseStatus.from_bytes(binmsg)
 
-        # TODO: If the target is disconnected, restart the logic(?)
+        # Wait for the discovery process to finish
         ble_attributes_discovered.wait()
 
         # Replays the start of the conversation hoping to start a session (TODO: Reverse this)
@@ -197,18 +206,8 @@ class ReversingLogic:
         # Replay the getStatus setSession commands
         self.session_logic()
 
+        # Disconnect BLE
         self.stop()
-
-    @staticmethod
-    def await_notification(timeout=0):
-        start = time.time()
-        while not kill_all_threads:
-            try:
-                notif_charact, notif_value = ble_notifications_q.get(timeout=0.25)
-                return notif_charact, notif_value
-            except queue.Empty:
-                if timeout > 0 and time.time() - start > timeout:
-                    raise TimeoutError("Timeout while waiting for notification")
 
 
 class El500ServiceUuids:
