@@ -4,6 +4,7 @@ import signal
 import asyncio
 import threading
 import coloredlogs
+import numpy as np
 import logging
 import queue
 import time
@@ -116,17 +117,18 @@ class ReversingLogic:
                 await asyncio.sleep(0.3)  # 300 ms
 
         async def event_1000ms(cmd_lock):
-            resistance = 1  # should live in a 'DeviceStatus' struct/object
+            V = 1  # should live in a 'DeviceStatus' struct/object
 
             def update_setSessionState_msg():
-                nonlocal resistance
+                nonlocal V
                 barr = bytearray(El500Cmd.setSessionState)
-                payload = b"\x01\x02\x30\x02\x01\x00\x38\x01\x01\x00\x59\x00\x01\x00\x41\x00\x01\x00\x02\x00\x01\x00\x07\x00"
+                payload = El500Cmd.build_set_state_payload(
+                    rpmA=V, rpmB=V, resistance=V, heartrate=V, secmoving=V, minmoving=V
+                )
                 barr += payload  # append payload
-                resistance += 1
-                if resistance > 0x0F:
-                    resistance = 0x01
-                barr[24] = resistance
+                V += 1
+                if V > 0x0F:
+                    V = 0x01
                 return bytes(barr)
 
             try:
@@ -159,13 +161,10 @@ class ReversingLogic:
     def logic(self):
         # Wait for the discovery process to finish
         ble_attributes_discovered.wait()
-
         # Replays the start of the conversation hoping to start a session (TODO: Reverse this)
         self.replay_logic()
-
         # Replay the getStatus setSession commands
         self.session_logic()
-
         # Disconnect BLE
         self.stop()
 
@@ -192,18 +191,18 @@ class El500Characts:
     comms_AppToDev = "49535343-8841-43f4-a8d4-ecbe34729bb3"  # W:W/WnR/N
     comms_unknown = "49535343-4c8a-39b3-2f49-511cff073b7e"  # W:W/N + BLE2902
     # Names extracted from the decompiled android app:
-    # FTMS_CLIENT_CONFIGURATION_UUID = ("00002902-0000-1000-8000-00805F9B34FB");
-    # FTMS_MACHINE_STATUS_UUID       = ("00002ADA-0000-1000-8000-00805F9B34FB");
-    # FTMS_MACHINE_FEATURE_UUID      = ("00002ACC-0000-1000-8000-00805F9B34FB");
-    # FTMS_ROWER_DATA_UUID           = ("00002AD1-0000-1000-8000-00805F9B34FB");
-    # FTMS_TREADMILL_DATA_UUID       = ("00002ACD-0000-1000-8000-00805F9B34FB");
-    # FTMS_ELLIPTICAL_DATA_UUID      = ("00002ACE-0000-1000-8000-00805F9B34FB");
-    # FTMS_BIKE_DATA_UUID            = ("00002AD2-0000-1000-8000-00805F9B34FB");
-    # FTMS_UUID                      = ("00001826-0000-1000-8000-00805F9B34FB");
-    # DEVICE_INFORMATION_UUID        = ("0000180A-0000-1000-8000-00805F9B34FB");
-    # SERVICE_UUID                   = ("49535343-FE7D-4AE5-8FA9-9FAFD205E455");
-    # WRITE_UUID                     = ("49535343-8841-43F4-A8D4-ECBE34729BB3");
-    # NOTIFY_UUID                    = ("49535343-1E4D-4BD9-BA61-23C647249616");
+    # FTMS_CLIENT_CONFIGURATION_UUID = "00002902-0000-1000-8000-00805F9B34FB"
+    # FTMS_MACHINE_STATUS_UUID       = "00002ADA-0000-1000-8000-00805F9B34FB"
+    # FTMS_MACHINE_FEATURE_UUID      = "00002ACC-0000-1000-8000-00805F9B34FB"
+    # FTMS_ROWER_DATA_UUID           = "00002AD1-0000-1000-8000-00805F9B34FB"
+    # FTMS_TREADMILL_DATA_UUID       = "00002ACD-0000-1000-8000-00805F9B34FB"
+    # FTMS_ELLIPTICAL_DATA_UUID      = "00002ACE-0000-1000-8000-00805F9B34FB"
+    # FTMS_BIKE_DATA_UUID            = "00002AD2-0000-1000-8000-00805F9B34FB"
+    # FTMS_UUID                      = "00001826-0000-1000-8000-00805F9B34FB"
+    # DEVICE_INFORMATION_UUID        = "0000180A-0000-1000-8000-00805F9B34FB"
+    # SERVICE_UUID                   = "49535343-FE7D-4AE5-8FA9-9FAFD205E455"
+    # WRITE_UUID                     = "49535343-8841-43F4-A8D4-ECBE34729BB3"
+    # NOTIFY_UUID                    = "49535343-1E4D-4BD9-BA61-23C647249616"
 
 
 class El500Cmd:
@@ -221,7 +220,7 @@ class El500Cmd:
         cmd.extend(El500Cmd.headerByte)
         cmd.extend(bytearray(cmd_id))
         cmd.extend(bytearray(payload)) if payload is not None else None
-        cmd.append(El500Cmd.generateChecksum(cmd))
+        cmd.append(El500Cmd.checksum(cmd))
         logger.info(f" Sending -> {bin2hex(cmd)}")
         el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
         while attempts > 0 and not kill_all_threads:
@@ -234,7 +233,6 @@ class El500Cmd:
 
     @staticmethod
     def await_resp(timeout=0.25):
-        # TODO: Move class to a separate file, use global Tx/Rx buffers, and abstract away the BLE messages
         start = time.time()
         while not kill_all_threads:
             try:
@@ -246,11 +244,29 @@ class El500Cmd:
                     raise TimeoutError("Timeout while waiting for notification")
 
     @staticmethod
-    def generateChecksum(data):
-        checksum = 0
+    def checksum(data):
+        chksum = 0
         for byte in data:
-            checksum += byte
-        return checksum & 0xFF
+            chksum += byte
+        return chksum & 0xFF
+
+    @staticmethod
+    def build_set_state_payload(
+        rpmA, rpmB, resistance, heartrate, secmoving, minmoving=0
+    ):
+        p = bytearray()
+        p.extend(b"\x01\x02\x30\x02\x01")
+        p.extend(np.int16(rpmA).newbyteorder('>').tobytes())
+        p.extend(b"\x01\x01")
+        p.extend(np.int16(heartrate).newbyteorder('>').tobytes())
+        p.extend(b"\x00\x01")
+        p.extend(np.int16(rpmB).newbyteorder('>').tobytes())
+        p.extend(b"\x00\x01")
+        p.extend(np.int16(secmoving).newbyteorder('>').tobytes())
+        p.extend(b"\x00\x01")
+        p.extend(np.int16(resistance).newbyteorder('>').tobytes())  # Only 8bits in the getStatus resp??
+        p.extend(b"\x00")
+        return p
 
 
 class BleDeviceManager(gatt.DeviceManager):
