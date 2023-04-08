@@ -107,8 +107,8 @@ class ReversingLogic:
                 logger.warning("Timeout waiting for: {bin2hex(xresponse)}")
 
     def session_logic(self):
-        async def cmd(cmd):
-            resp = El500Cmd.send(cmd, timeout=0.5)
+        async def cmd(cmd, payload=None):
+            resp = El500Cmd.send(cmd, payload, timeout=0.5)
 
         async def event_300ms(cmd_lock):
             while not kill_all_threads:
@@ -117,31 +117,50 @@ class ReversingLogic:
                 await asyncio.sleep(0.3)  # 300 ms
 
         async def event_1000ms(cmd_lock):
-            tog = 0x00
-
-            def update_setSessionState_msg():
-                nonlocal tog
-                tog = 0x01 if tog == 0x00 else 0x00
-                barr = bytearray(El500Cmd.setSessionState)
-                payload = El500Cmd.build_setstate_payload(
+            def setsession_payload():
+                return El500Cmd.build_setstate_payload(
                     displaymode=El500Cmd.numdisplaymodes[
                         "reversingnow"
                     ],  # El500Cmd.numdisplaymodes["distance"],
                     distance=(tog * 1),
                     rpmA=(tog * 2),
                     rpmB=(tog * 3),
-                    resistance=(tog * 4),
+                    resistance=((tog + 1) * 2),
                     heartrate=(tog * 5),
                     kcal=(tog * 6),  # Displayed as calories?? 1kcal/10sec moving!!
                 )
-                barr += payload  # append payload
-                return bytes(barr)
 
+            tog = 0x00
             try:
                 while not kill_all_threads:
                     async with cmd_lock:
-                        await cmd(update_setSessionState_msg())
+                        await cmd(El500Cmd.setSessionState, setsession_payload())
                     await asyncio.sleep(1)  # 1000 ms
+                    tog = 0x01 if tog == 0x00 else 0x00
+            except Exception as e:
+                logger.error(
+                    "Exception in logic", exc_info=(type(e), e, e.__traceback__)
+                )
+                logger.error(e)
+
+        async def event_4000ms(cmd_lock):
+            def setinfo_payload():
+                return El500Cmd.build_setinfo_payload(
+                    kmph=(tog + 2) * 3,
+                    resistance=(tog + 1),
+                    inclinepercent=(tog * 7),
+                    mwatt=((tog + 1) * 5),
+                    heartrateledcolor=(tog),
+                    btledswitch=(tog),
+                )
+
+            tog = 0x00
+            try:
+                while not kill_all_threads:
+                    async with cmd_lock:
+                        await cmd(El500Cmd.setInfo, setinfo_payload())
+                    await asyncio.sleep(4)  # 4000 ms
+                    tog = 0x01 if tog == 0x00 else 0x00
             except Exception as e:
                 logger.error(
                     "Exception in logic", exc_info=(type(e), e, e.__traceback__)
@@ -155,6 +174,7 @@ class ReversingLogic:
                 tasks = asyncio.gather(
                     event_300ms(cmd_lock),
                     event_1000ms(cmd_lock),
+                    event_4000ms(cmd_lock),
                     return_exceptions=True,
                 )
                 await tasks
@@ -305,19 +325,19 @@ class El500Cmd:
         kmph, resistance, inclinepercent, mwatt, heartrateledcolor, btledswitch
     ):
         p = bytearray()
-        p.extend(b"\ff" * 2)
+        p.extend(b"\xff" * 2)
         p.extend(np.int8(kmph // 256).newbyteorder(">").tobytes())
         p.extend(np.int8(kmph % 256).newbyteorder(">").tobytes())
-        p.extend(b"\ff" * 4)
+        p.extend(b"\xff" * 4)
         p.extend(np.int8(resistance).newbyteorder(">").tobytes())
-        p.extend(b"\ff" * 2)
+        p.extend(b"\xff" * 2)
         p.extend(np.int8(inclinepercent // 256).newbyteorder(">").tobytes())
         p.extend(np.int8(inclinepercent % 256).newbyteorder(">").tobytes())
         p.extend(np.int8(mwatt // 256).newbyteorder(">").tobytes())
         p.extend(np.int8(mwatt % 256).newbyteorder(">").tobytes())
         p.extend(np.int8(heartrateledcolor).newbyteorder(">").tobytes())
         p.extend(np.int8(btledswitch).newbyteorder(">").tobytes())
-        p.extend(b"\ff" * 3)
+        p.extend(b"\xff" * 3)
         return p
 
 
