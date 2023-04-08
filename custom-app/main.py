@@ -317,6 +317,7 @@ class El500Cmd:
         p.extend(np.int8(mwatt % 256).newbyteorder(">").tobytes())
         p.extend(np.int8(heartrateledcolor).newbyteorder(">").tobytes())
         p.extend(np.int8(btledswitch).newbyteorder(">").tobytes())
+        p.extend(b"\ff" * 3)
         return p
 
 
