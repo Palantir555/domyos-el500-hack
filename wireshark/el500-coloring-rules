@@ -1,4 +1,8 @@
 # This file was created by Wireshark. Edit with care.
+@CMD setInfo@bluetooth.dst==e8:5d:86:bf:35:9d && (btatt.value contains f0ad)@[5397,65535,0][0,0,0]
+@CMD setInfo pt2@bluetooth.dst==e8:5d:86:bf:35:9d && (btatt.opcode==0x12 && frame.len==15 && btatt.value contains ffff)@[5397,65535,0][0,0,0]
+@RSP setInfo@bluetooth.src==e8:5d:86:bf:35:9d && (btatt.value contains f0bd)@[21074,48830,14392][0,0,0]
+@RSP setInfo pt2@bluetooth.src==e8:5d:86:bf:35:9d && (frame.len==15 && btatt.value contains ffff)@[21074,48830,14392][0,0,0]
 @Handshake+@bluetooth.addr==e8:5d:86:bf:35:9d && (btatt.opcode in {0x01, 0x04, 0x05, 0x08, 0x09, 0x10, 0x11})@[65535,22102,58339][0,0,0]
 @CCCD config@bluetooth.addr==e8:5d:86:bf:35:9d && btatt.uuid16==0x2902@[49087,12593,40092][0,0,0]
 @CMD getStatus@bluetooth.dst==e8:5d:86:bf:35:9d && (btatt.value contains f0ac9c)@[63479,65535,3855][0,0,0]
@@ -10,3 +14,4 @@
 @RSP f0cb pt2@bluetooth.src==e8:5d:86:bf:35:9d && (btatt.opcode==0x1b && frame.len==19 && btatt.value contains 000100)@[0,13878,65535][0,0,0]
 @Write response@bluetooth.src==e8:5d:86:bf:35:9d && btatt.opcode==0x13@[47802,47802,47802][0,0,0]
 !@Write request@bluetooth.src==e8:5d:86:bf:35:9d && btatt.opcode==0x12@[24929,54741,50372][0,0,0]
+!@all but writeresp@bluetooth.addr==e8:5d:86:bf:35:9d && btatt.opcode!=0x13@[65535,65535,65535][0,0,0]
