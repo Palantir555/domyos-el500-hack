@@ -63,13 +63,6 @@ def bin2hex(binmsg):
     return " ".join(f"{byte:02x}" for byte in binmsg)
 
 
-def generateChecksum(data):
-    checksum = 0
-    for byte in data:
-        checksum += byte
-    return checksum & 0xFF
-
-
 class ReversingLogic:
     def __init__(self):
         self.manager = BleDeviceManager(adapter_name="hci0")
@@ -82,46 +75,16 @@ class ReversingLogic:
             time.sleep(0.19)  # give it some time
 
     def start(self):
-        def start_ble_manager():
-            logger.info("Scanning for BLE devices...")
-            self.manager.start_discovery()
-            self.manager_thread = threading.Thread(target=self.manager.run)
-            self.manager_thread.start()
-
-        start_ble_manager()
-        # while not kill_all_threads:
+        logger.info("Starting BLE management thread")
+        self.manager.start_discovery()
+        self.manager_thread = threading.Thread(target=self.manager.run)
+        self.manager_thread.start()
+        logger.info("Awaiting connection to the El500")
         ble_connected.wait()
         if el500_ble_device is not None:
             logger.info("Connected to EL500")
             logger.info("Starting EL500 logic")
             self.logic()
-
-    def send_cmd(self, cmd, await_response=True, timeout=1, attempts=1):
-        def await_notification(timeout=0):
-            start = time.time()
-            while not kill_all_threads:
-                try:
-                    notif_charact, notif_value = ble_notifications_q.get(timeout=0.25)
-                    logger.info(f"Received <- {bin2hex(notif_value)}")
-                    return notif_charact, notif_value
-                except queue.Empty:
-                    if timeout > 0 and time.time() - start > timeout:
-                        raise TimeoutError("Timeout while waiting for notification")
-
-        # Generate and append checksum
-        cmd = bytearray(cmd)
-        cmd.append(generateChecksum(cmd))
-        logger.info(f" Sending -> {bin2hex(cmd)}")
-        el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
-        if await_response is True:
-            while attempts > 0 and not kill_all_threads:
-                attempts -= 1
-                try:
-                    char, resp = await_notification(timeout=timeout)
-                    return resp
-                except TimeoutError as e:
-                    logger.warning(e)
-        return None
 
     def replay_logic(self):
         ASK_BEFORE_WRITE = False
@@ -136,7 +99,7 @@ class ReversingLogic:
                 if inp.lower() in ["n", "no"]:
                     continue
             try:
-                resp = self.send_cmd(cmd, attempts=2)
+                resp = El500Cmd.send(cmd[1:-1], attempts=2)
                 if resp != xresponse and resp is not None:
                     logger.warning(f"Expected {bin2hex(xresponse)}")
             except TimeoutError:
@@ -144,7 +107,7 @@ class ReversingLogic:
 
     def session_logic(self):
         async def cmd(cmd):
-            resp = self.send_cmd(cmd, timeout=0.5)
+            resp = El500Cmd.send(cmd, timeout=0.5)
 
         async def event_300ms(cmd_lock):
             while not kill_all_threads:
@@ -153,7 +116,9 @@ class ReversingLogic:
                 await asyncio.sleep(0.3)  # 300 ms
 
         async def event_1000ms(cmd_lock):
-            def build_setSessionState_msg():
+            resistance = 1  # should live in a 'DeviceStatus' struct/object
+
+            def update_setSessionState_msg():
                 nonlocal resistance
                 barr = bytearray(El500Cmd.setSessionState)
                 payload = b"\x01\x02\x30\x02\x01\x00\x38\x01\x01\x00\x59\x00\x01\x00\x41\x00\x01\x00\x02\x00\x01\x00\x07\x00"
@@ -164,11 +129,10 @@ class ReversingLogic:
                 barr[24] = resistance
                 return bytes(barr)
 
-            resistance = 1  # should live in a 'DeviceStatus' struct/object
             try:
                 while not kill_all_threads:
                     async with cmd_lock:
-                        await cmd(build_setSessionState_msg())
+                        await cmd(update_setSessionState_msg())
                     await asyncio.sleep(1)  # 1000 ms
             except Exception as e:
                 logger.error(
@@ -193,9 +157,6 @@ class ReversingLogic:
         asyncio.run(logic())
 
     def logic(self):
-        def parse_status_msg(binmsg):
-            return ResponseStatus.from_bytes(binmsg)
-
         # Wait for the discovery process to finish
         ble_attributes_discovered.wait()
 
@@ -246,26 +207,56 @@ class El500Characts:
 
 
 class El500Cmd:
-    getStatus = b"\xf0\xac"
-    setSessionState = b"\xf0\xcb"
-    # startup = b"\xf0\xc9"
+    headerByte = b"\xF0"  # Start of cmd. End of cmd is a checksum byte
+    getStatus = b"\xAC"
+    setSessionState = b"\xCB"
+    # startup = b"\xc9"
     # ready = b"\xf0\xc4" + b"\x03"
     # wat = b"\xf0\xad" + b"\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff"
 
     @staticmethod
-    def send():
-        pass  # TODO: combine cmd, payload, and generate+append checksum
+    def send(cmd_id, payload=None, timeout=1, attempts=1):
+        # Create full command
+        cmd = bytearray()
+        cmd.extend(El500Cmd.headerByte)
+        cmd.extend(bytearray(cmd_id))
+        cmd.extend(bytearray(payload)) if payload is not None else None
+        cmd.append(El500Cmd.generateChecksum(cmd))
+        logger.info(f" Sending -> {bin2hex(cmd)}")
+        el500_ble_device.write(El500Characts.comms_AppToDev, cmd)
+        while attempts > 0 and not kill_all_threads:
+            attempts -= 1
+            try:
+                char, resp = El500Cmd.await_resp(timeout)
+                return resp
+            except TimeoutError as e:
+                logger.warning(e)
 
     @staticmethod
-    def recv():
+    def await_resp(timeout=0.25):
         # TODO: Move class to a separate file, use global Tx/Rx buffers, and abstract away the BLE messages
-        pass
+        start = time.time()
+        while not kill_all_threads:
+            try:
+                notif_charact, notif_value = ble_notifications_q.get(timeout=timeout)
+                logger.info(f"Received <- {bin2hex(notif_value)}")
+                return notif_charact, notif_value
+            except queue.Empty:
+                if timeout > 0 and time.time() - start > timeout:
+                    raise TimeoutError("Timeout while waiting for notification")
+
+    @staticmethod
+    def generateChecksum(data):
+        checksum = 0
+        for byte in data:
+            checksum += byte
+        return checksum & 0xFF
 
 
 class BleDeviceManager(gatt.DeviceManager):
     known_devices = (
         set()
-    )  # TODO high: Shouldn't be here, but this is a faux-singleton, so whatever...
+    )  # TODO high: Shouldn't be here, but this is a faux-singleton, so whatever
 
     # This function is called when a BLE device is discovered
     def device_discovered(self, device):
