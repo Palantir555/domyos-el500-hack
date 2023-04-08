@@ -117,26 +117,22 @@ class ReversingLogic:
                 await asyncio.sleep(0.3)  # 300 ms
 
         async def event_1000ms(cmd_lock):
-            tog = 0x02
-            V = 1
+            tog = 0x01
 
             def update_setSessionState_msg():
                 nonlocal V, tog
                 barr = bytearray(El500Cmd.setSessionState)
                 payload = El500Cmd.build_setstate_payload(
-                    displaymode=El500Cmd.displaymodes["distance"], # V
-                    distance=V,
-                    rpmA=V,
-                    rpmB=V,
-                    resistance=tog,
-                    heartrate=tog,
-                    secmoving=tog,
+                    displaymode=El500Cmd.numdisplaymodes["distance"],
+                    distance=(tog*1),
+                    rpmA=(tog*2),
+                    rpmB=(tog*3),
+                    resistance=(tog*4),
+                    heartrate=(tog*5),
+                    kcal=(tog*6),  # Displayed as calories?? 1kcal/10sec moving!!
                 )
                 barr += payload  # append payload
-                tog = 0x04  if tog == 0x02 else 0x02
-                V += 1
-                if V > 0x0F:
-                    V = 0x01
+                tog = 0x01  if tog == 0x00 else 0x00
                 return bytes(barr)
 
             try:
@@ -221,7 +217,7 @@ class El500Cmd:
     # ready = b"\xc4" + b"\x03"
     # wat = b"\xad" + b"\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff"
 
-    displaymodes = {
+    numdisplaymodes = {
         "off": 0,
         "distance": 1,
         "scroll_good": 2,
@@ -266,7 +262,7 @@ class El500Cmd:
 
     @staticmethod
     def build_setstate_payload(
-        displaymode, distance, rpmA, rpmB, resistance, heartrate, secmoving
+        displaymode, distance, rpmA, rpmB, resistance, heartrate, kcal
     ):
         p = bytearray()
         # reversing the first 3 bytes of the message:
@@ -285,7 +281,7 @@ class El500Cmd:
         p.extend(b"\x00\x01")
         p.extend(np.int16(rpmB).newbyteorder(">").tobytes())
         p.extend(b"\x00\x01")
-        p.extend(np.int16(secmoving).newbyteorder(">").tobytes())
+        p.extend(np.int16(kcal).newbyteorder(">").tobytes())
         p.extend(b"\x00\x01")
         p.extend(
             np.int16(resistance).newbyteorder(">").tobytes()
