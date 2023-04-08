@@ -117,15 +117,23 @@ class ReversingLogic:
                 await asyncio.sleep(0.3)  # 300 ms
 
         async def event_1000ms(cmd_lock):
-            V = 1  # should live in a 'DeviceStatus' struct/object
+            tog = 0x02
+            V = 1
 
             def update_setSessionState_msg():
-                nonlocal V
+                nonlocal V, tog
                 barr = bytearray(El500Cmd.setSessionState)
-                payload = El500Cmd.build_set_state_payload(
-                    rpmA=V, rpmB=V, resistance=V, heartrate=V, secmoving=V, minmoving=V
+                payload = El500Cmd.build_setstate_payload(
+                    displaymode=El500Cmd.displaymodes["distance"], # V
+                    distance=V,
+                    rpmA=V,
+                    rpmB=V,
+                    resistance=tog,
+                    heartrate=tog,
+                    secmoving=tog,
                 )
                 barr += payload  # append payload
+                tog = 0x04  if tog == 0x02 else 0x02
                 V += 1
                 if V > 0x0F:
                     V = 0x01
@@ -210,8 +218,14 @@ class El500Cmd:
     getStatus = b"\xAC"
     setSessionState = b"\xCB"
     # startup = b"\xc9"
-    # ready = b"\xf0\xc4" + b"\x03"
-    # wat = b"\xf0\xad" + b"\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff"
+    # ready = b"\xc4" + b"\x03"
+    # wat = b"\xad" + b"\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff"
+
+    displaymodes = {
+        "off": 0,
+        "distance": 1,
+        "scroll_good": 2,
+    }  # TODO: complete: speed, heartrate, time
 
     @staticmethod
     def send(cmd_id, payload=None, timeout=1, attempts=1):
@@ -251,20 +265,31 @@ class El500Cmd:
         return chksum & 0xFF
 
     @staticmethod
-    def build_set_state_payload(
-        rpmA, rpmB, resistance, heartrate, secmoving, minmoving=0
+    def build_setstate_payload(
+        displaymode, distance, rpmA, rpmB, resistance, heartrate, secmoving
     ):
         p = bytearray()
-        p.extend(b"\x01\x02\x30\x02\x01")
-        p.extend(np.int16(rpmA).newbyteorder('>').tobytes())
+        # reversing the first 3 bytes of the message:
+        # p.extend(b"\x01\x02\x30") # distance must be in here??
+        # p.extend(b"\x01\x02\x20") # lowering byte2 lowers distance in device slightly
+        # p.extend(b"\x01\x01\x30") # lowering byte1 lowers distance in device more
+        # p.extend(b"\x00\x02\x30") # setting byte0=0 disables distance/time/heartrate display
+        # p.extend(b"\x02\x02\x30") # setting byte0=2 scrolls 'GOOd' on the display
+        # p.extend(b"\x01\x00\x00") # setting bytes1and2=0 , distance == 0!!
+        p.extend(np.int8(displaymode).tobytes())
+        p.extend(np.int16(distance).newbyteorder(">").tobytes())  # TODO: meters? revolutions?
+        p.extend(b"\x02\x01")
+        p.extend(np.int16(rpmA).newbyteorder(">").tobytes())
         p.extend(b"\x01\x01")
-        p.extend(np.int16(heartrate).newbyteorder('>').tobytes())
+        p.extend(np.int16(heartrate).newbyteorder(">").tobytes())
         p.extend(b"\x00\x01")
-        p.extend(np.int16(rpmB).newbyteorder('>').tobytes())
+        p.extend(np.int16(rpmB).newbyteorder(">").tobytes())
         p.extend(b"\x00\x01")
-        p.extend(np.int16(secmoving).newbyteorder('>').tobytes())
+        p.extend(np.int16(secmoving).newbyteorder(">").tobytes())
         p.extend(b"\x00\x01")
-        p.extend(np.int16(resistance).newbyteorder('>').tobytes())  # Only 8bits in the getStatus resp??
+        p.extend(
+            np.int16(resistance).newbyteorder(">").tobytes()
+        )  # int8 in getStatus resp??
         p.extend(b"\x00")
         return p
 
