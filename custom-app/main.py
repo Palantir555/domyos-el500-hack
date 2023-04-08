@@ -117,22 +117,24 @@ class ReversingLogic:
                 await asyncio.sleep(0.3)  # 300 ms
 
         async def event_1000ms(cmd_lock):
-            tog = 0x01
+            tog = 0x00
 
             def update_setSessionState_msg():
-                nonlocal V, tog
+                nonlocal tog
+                tog = 0x01 if tog == 0x00 else 0x00
                 barr = bytearray(El500Cmd.setSessionState)
                 payload = El500Cmd.build_setstate_payload(
-                    displaymode=El500Cmd.numdisplaymodes["distance"],
-                    distance=(tog*1),
-                    rpmA=(tog*2),
-                    rpmB=(tog*3),
-                    resistance=(tog*4),
-                    heartrate=(tog*5),
-                    kcal=(tog*6),  # Displayed as calories?? 1kcal/10sec moving!!
+                    displaymode=El500Cmd.numdisplaymodes[
+                        "reversingnow"
+                    ],  # El500Cmd.numdisplaymodes["distance"],
+                    distance=(tog * 1),
+                    rpmA=(tog * 2),
+                    rpmB=(tog * 3),
+                    resistance=(tog * 4),
+                    heartrate=(tog * 5),
+                    kcal=(tog * 6),  # Displayed as calories?? 1kcal/10sec moving!!
                 )
                 barr += payload  # append payload
-                tog = 0x01  if tog == 0x00 else 0x00
                 return bytes(barr)
 
             try:
@@ -213,14 +215,21 @@ class El500Cmd:
     headerByte = b"\xF0"  # Start of cmd. End of cmd is a checksum byte
     getStatus = b"\xAC"
     setSessionState = b"\xCB"
+    setInfo = b"\xAD"
     # startup = b"\xc9"
     # ready = b"\xc4" + b"\x03"
     # wat = b"\xad" + b"\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff"
 
     numdisplaymodes = {
         "off": 0,
-        "distance": 1,
+        "distance": 1,  # TODO: miles or km?
         "scroll_good": 2,
+        "distance": 3,  # TODO: miles or km?
+        "off?": 4,
+        "off??": 5,
+        "off???": 6,
+        "off????": 7,
+        "reversingnow": 1,
     }  # TODO: complete: speed, heartrate, time
 
     @staticmethod
@@ -273,7 +282,9 @@ class El500Cmd:
         # p.extend(b"\x02\x02\x30") # setting byte0=2 scrolls 'GOOd' on the display
         # p.extend(b"\x01\x00\x00") # setting bytes1and2=0 , distance == 0!!
         p.extend(np.int8(displaymode).tobytes())
-        p.extend(np.int16(distance).newbyteorder(">").tobytes())  # TODO: meters? revolutions?
+        p.extend(
+            np.int16(distance).newbyteorder(">").tobytes()
+        )  # TODO: meters? revolutions?
         p.extend(b"\x02\x01")
         p.extend(np.int16(rpmA).newbyteorder(">").tobytes())
         p.extend(b"\x01\x01")
@@ -287,6 +298,25 @@ class El500Cmd:
             np.int16(resistance).newbyteorder(">").tobytes()
         )  # int8 in getStatus resp??
         p.extend(b"\x00")
+        return p
+
+    @staticmethod
+    def build_setinfo_payload(
+        kmph, resistance, inclinepercent, mwatt, heartrateledcolor, btledswitch
+    ):
+        p = bytearray()
+        p.extend(b"\ff" * 2)
+        p.extend(np.int8(kmph // 256).newbyteorder(">").tobytes())
+        p.extend(np.int8(kmph % 256).newbyteorder(">").tobytes())
+        p.extend(b"\ff" * 4)
+        p.extend(np.int8(resistance).newbyteorder(">").tobytes())
+        p.extend(b"\ff" * 2)
+        p.extend(np.int8(inclinepercent // 256).newbyteorder(">").tobytes())
+        p.extend(np.int8(inclinepercent % 256).newbyteorder(">").tobytes())
+        p.extend(np.int8(mwatt // 256).newbyteorder(">").tobytes())
+        p.extend(np.int8(mwatt % 256).newbyteorder(">").tobytes())
+        p.extend(np.int8(heartrateledcolor).newbyteorder(">").tobytes())
+        p.extend(np.int8(btledswitch).newbyteorder(">").tobytes())
         return p
 
 
