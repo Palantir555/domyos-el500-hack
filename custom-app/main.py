@@ -94,12 +94,12 @@ class ReversingLogic:
                 await asyncio.sleep(0.3)  # 300 ms
 
         async def event_1000ms(cmd_lock):
-            def setsession_payload():
-                return El500Cmd.build_setSessionState_payload(
+            def setdisplay_payload():
+                return El500Cmd.build_setdisplay_payload(
                     displaymode=counter,  # El500Cmd.numdisplaymodes["distance"],
                     distance=counter,  # (tog * 1),
-                    rpmA=counter,  # (tog * 2),
-                    rpmB=counter,  # (tog * 3),
+                    Kmph=counter,  # (tog * 2),
+                    rpm=counter,  # (tog * 3),
                     resistance=counter & 0x0F,  # ((tog + 1) * 2),
                     heartrate=counter,  # (tog * 5),
                     kcal=counter,  # (tog * 6),  # Displayed as calories?? 1kcal/10sec moving!!
@@ -110,7 +110,7 @@ class ReversingLogic:
             try:
                 while not kill_all_threads:
                     async with cmd_lock:
-                        await cmd(El500Cmd.setSessionState, setsession_payload())
+                        await cmd(El500Cmd.setDisplay, setdisplay_payload())
                     await asyncio.sleep(1)  # 1000 ms
                     tog = 0x01 if tog == 0x00 else 0x00
                     counter += 1
@@ -136,7 +136,7 @@ class ReversingLogic:
             try:
                 while not kill_all_threads:
                     async with cmd_lock:
-                        await cmd(El500Cmd.setInfo, setinfo_payload())
+                        await cmd(El500Cmd.setInfoValue, setinfo_payload())
                     await asyncio.sleep(4)  # 4000 ms
                     tog = 0x01 if tog == 0x00 else 0x00
                     counter += 1
@@ -173,7 +173,7 @@ class ReversingLogic:
                 resp = El500Cmd.send(cmd, payload, attempts=4)
             except TimeoutError:
                 logger.error(f"Timeout while sending command {cmd}: {payload}")
-        # Replay the getStatus setSession commands
+        # Replay the getStatus setDisplay commands, sprinkle some setInfoValue
         self.session_logic()
         # Disconnect BLE
         self.stop()
@@ -218,8 +218,8 @@ class El500Characts:
 class El500Cmd:
     headerByte = b"\xF0"  # Start of cmd. End of cmd is a checksum byte
     getStatus = b"\xAC"  # called non-stop
-    setSessionState = b"\xCB"  # called every second
-    setInfo = b"\xAD"  # called to command hardware changes (resistance, UI)
+    setDisplay = b"\xCB"  # called every second
+    setInfoValue = b"\xAD"  # called to set the device's state
 
     getEquipmentId = b"\xC9"
     getSerialNumber = b"\xA4"
@@ -242,6 +242,15 @@ class El500Cmd:
         "reversingnow": 1,
     }  # TODO: complete: speed, heartrate, time
 
+    uiheartcolor = {
+        "off": 0,
+        "blue": 1,
+        "green": 2,
+        "yellow": 3,
+        "orange": 4,
+        "red": 5,
+    }
+
     @staticmethod
     def startup_cmds():
         # TODO: This function is a temporary hack to get sessions started. Move it elsewhere
@@ -256,17 +265,17 @@ class El500Cmd:
             (El500Cmd.getSerialNumber, None),
             (El500Cmd.getVersion, None),
             (El500Cmd.setSessionData, b"\x03"),
-            (El500Cmd.setInfo, setInfoInitPayload),
-            (El500Cmd.setInfo, setInfoInitPayload),
-            (El500Cmd.setInfo, setInfoInitPayload),
-            (El500Cmd.setSessionState, sessInitState),
+            (El500Cmd.setInfoValue, setInfoInitPayload),
+            (El500Cmd.setInfoValue, setInfoInitPayload),
+            (El500Cmd.setInfoValue, setInfoInitPayload),
+            (El500Cmd.setDisplay, sessInitState),
             (El500Cmd.getUsageHours, None),
             (El500Cmd.getStatus, None),
             (El500Cmd.setFanSpeed, b"\x00"),
             (El500Cmd.setHotKey, b"\x01"),
             (El500Cmd.getCumulativeKm, None),
             (El500Cmd.getStatus, None),
-            (El500Cmd.setSessionState, sessInitStat2),
+            (El500Cmd.setDisplay, sessInitStat2),
         ]
 
     @staticmethod
@@ -307,8 +316,8 @@ class El500Cmd:
         return chksum & 0xFF
 
     @staticmethod
-    def build_setSessionState_payload(
-        displaymode, distance, rpmA, rpmB, resistance, heartrate, kcal
+    def build_setdisplay_payload(
+        displaymode, distance, Kmph, rpm, resistance, heartrate, kcal
     ):
         p = bytearray()
         # reversing the first 3 bytes of the message:
@@ -323,11 +332,11 @@ class El500Cmd:
             np.int16(distance).newbyteorder(">").tobytes()
         )  # TODO: meters? revolutions?
         p.extend(b"\x02\x01")
-        p.extend(np.int16(rpmA).newbyteorder(">").tobytes())
+        p.extend(np.int16(Kmph).newbyteorder(">").tobytes())
         p.extend(b"\x01\x01")
         p.extend(np.int16(heartrate).newbyteorder(">").tobytes())
         p.extend(b"\x00\x01")
-        p.extend(np.int16(rpmB).newbyteorder(">").tobytes())
+        p.extend(np.int16(rpm).newbyteorder(">").tobytes())
         p.extend(b"\x00\x01")
         p.extend(np.int16(kcal).newbyteorder(">").tobytes())
         p.extend(b"\x00\x01")
@@ -341,6 +350,7 @@ class El500Cmd:
     def build_setinfo_payload(
         kmph, resistance, inclinepercent, mwatt, heartrateledcolor, btledswitch
     ):
+        # All bytes reversed from app
         p = bytearray()
         p.extend(b"\xff" * 2)
         p.extend(np.int8(kmph // 256).newbyteorder(">").tobytes())
