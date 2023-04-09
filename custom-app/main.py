@@ -11,11 +11,6 @@ import time
 import sys
 import re
 import enum
-import el500mitmlogs
-from kaitaistruct import KaitaiStream, BytesIO
-
-# kaitai-struct-compiler -t python message_structs.ksy
-from response_status import ResponseStatus
 
 ble_vendor_id = "e8:5d:86"  # chang-yow.com.tw
 target_el500_mac = f"{ble_vendor_id}:bf:35:9d"  # Target BLE Device (The real EL500)
@@ -24,7 +19,8 @@ kill_all_threads = False
 
 el500_ble_device = None
 
-# a thread-safe variable that helps the BLE connection handling thread to signal the EL500 logic thread that a connection is currently established:
+# A thread-safe variable that helps the BLE connection handling thread to signal
+# the EL500 logic thread that a connection is currently established:
 ble_connected = threading.Event()
 ble_attributes_discovered = threading.Event()
 ble_notifications_q = queue.Queue(maxsize=100)
@@ -87,25 +83,6 @@ class ReversingLogic:
             logger.info("Starting EL500 logic")
             self.logic()
 
-    def replay_logic(self):
-        ASK_BEFORE_WRITE = False
-        mitm_clean_logs = "mitm_new.tsv"
-        with open(mitm_clean_logs, "r") as f:
-            conversation = el500mitmlogs.parse_tsvconversation(f.read())
-        for cmd, xresponse in conversation:
-            if None in [cmd, xresponse]:
-                continue
-            if ASK_BEFORE_WRITE is True:
-                inp = input(f"Send cmd ?? {bin2hex(cmd)}? [Y/n]")
-                if inp.lower() in ["n", "no"]:
-                    continue
-            try:
-                resp = El500Cmd.send(cmd[1:-1], attempts=2)
-                if resp != xresponse and resp is not None:
-                    logger.warning(f"Expected {bin2hex(xresponse)}")
-            except TimeoutError:
-                logger.warning("Timeout waiting for: {bin2hex(xresponse)}")
-
     def session_logic(self):
         async def cmd(cmd, payload=None):
             resp = El500Cmd.send(cmd, payload, timeout=0.5)
@@ -118,18 +95,17 @@ class ReversingLogic:
 
         async def event_1000ms(cmd_lock):
             def setsession_payload():
-                return El500Cmd.build_setstate_payload(
-                    displaymode=El500Cmd.numdisplaymodes[
-                        "reversingnow"
-                    ],  # El500Cmd.numdisplaymodes["distance"],
-                    distance=(tog * 1),
-                    rpmA=(tog * 2),
-                    rpmB=(tog * 3),
-                    resistance=((tog + 1) * 2),
-                    heartrate=(tog * 5),
-                    kcal=(tog * 6),  # Displayed as calories?? 1kcal/10sec moving!!
+                return El500Cmd.build_setSessionState_payload(
+                    displaymode=counter,  # El500Cmd.numdisplaymodes["distance"],
+                    distance=counter,  # (tog * 1),
+                    rpmA=counter,  # (tog * 2),
+                    rpmB=counter,  # (tog * 3),
+                    resistance=counter & 0x0F,  # ((tog + 1) * 2),
+                    heartrate=counter,  # (tog * 5),
+                    kcal=counter,  # (tog * 6),  # Displayed as calories?? 1kcal/10sec moving!!
                 )
 
+            counter = np.uint8(0)
             tog = 0x00
             try:
                 while not kill_all_threads:
@@ -137,6 +113,7 @@ class ReversingLogic:
                         await cmd(El500Cmd.setSessionState, setsession_payload())
                     await asyncio.sleep(1)  # 1000 ms
                     tog = 0x01 if tog == 0x00 else 0x00
+                    counter += 1
             except Exception as e:
                 logger.error(
                     "Exception in logic", exc_info=(type(e), e, e.__traceback__)
@@ -146,14 +123,15 @@ class ReversingLogic:
         async def event_4000ms(cmd_lock):
             def setinfo_payload():
                 return El500Cmd.build_setinfo_payload(
-                    kmph=(tog + 2) * 3,
-                    resistance=(tog + 1),
-                    inclinepercent=(tog * 7),
-                    mwatt=((tog + 1) * 5),
-                    heartrateledcolor=(tog),
-                    btledswitch=(tog),
+                    kmph=counter,  # (tog + 2) * 3,
+                    resistance=counter & 0x0F,  # (tog + 1),
+                    inclinepercent=counter,  # (tog * 7),
+                    mwatt=counter,  # ((tog + 1) * 5),
+                    heartrateledcolor=counter,  # (tog),
+                    btledswitch=counter,  # (tog),
                 )
 
+            counter = np.uint8(0)
             tog = 0x00
             try:
                 while not kill_all_threads:
@@ -161,6 +139,7 @@ class ReversingLogic:
                         await cmd(El500Cmd.setInfo, setinfo_payload())
                     await asyncio.sleep(4)  # 4000 ms
                     tog = 0x01 if tog == 0x00 else 0x00
+                    counter += 1
             except Exception as e:
                 logger.error(
                     "Exception in logic", exc_info=(type(e), e, e.__traceback__)
@@ -187,8 +166,13 @@ class ReversingLogic:
     def logic(self):
         # Wait for the discovery process to finish
         ble_attributes_discovered.wait()
-        # Replays the start of the conversation hoping to start a session (TODO: Reverse this)
-        self.replay_logic()
+        # Send a startup sequence as extracted from the replay attack. less redundant
+        time.sleep(0.5)  # Avoid timeout in the first command
+        for cmd, payload in El500Cmd.startup_cmds():
+            try:
+                resp = El500Cmd.send(cmd, payload, attempts=4)
+            except TimeoutError:
+                logger.error(f"Timeout while sending command {cmd}: {payload}")
         # Replay the getStatus setSession commands
         self.session_logic()
         # Disconnect BLE
@@ -233,12 +217,18 @@ class El500Characts:
 
 class El500Cmd:
     headerByte = b"\xF0"  # Start of cmd. End of cmd is a checksum byte
-    getStatus = b"\xAC"
-    setSessionState = b"\xCB"
-    setInfo = b"\xAD"
-    # startup = b"\xc9"
-    # ready = b"\xc4" + b"\x03"
-    # wat = b"\xad" + b"\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff"
+    getStatus = b"\xAC"  # called non-stop
+    setSessionState = b"\xCB"  # called every second
+    setInfo = b"\xAD"  # called to command hardware changes (resistance, UI)
+
+    getEquipmentId = b"\xC9"
+    getSerialNumber = b"\xA4"
+    getVersion = b"\xA3"
+    setSessionData = b"\xC4"  # 1 byte payload, app accepts only 3 or 255
+    getUsageHours = b"\xA5"
+    setFanSpeed = b"\xCA"
+    setHotKey = b"\xC8"
+    getCumulativeKm = b"\xAB"
 
     numdisplaymodes = {
         "off": 0,
@@ -251,6 +241,33 @@ class El500Cmd:
         "off????": 7,
         "reversingnow": 1,
     }  # TODO: complete: speed, heartrate, time
+
+    @staticmethod
+    def startup_cmds():
+        # TODO: This function is a temporary hack to get sessions started. Move it elsewhere
+        setInfoInitPayload = b"\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff"
+        setInfoInitPayload += b"\xff\xff\xff\xff\x01\xff\xff\xff"
+        sessInitState = b"\x02\x00\x08\xff\x01\x00\x00\x01\x01\x00\x00\x00\x01"
+        sessInitState += b"\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00"
+        sessInitStat2 = b"\x01\x00\x00\x02\x01\x00\x00\x01\x01\x00\x00\x00\x01"
+        sessInitStat2 += b"\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00"
+        return [
+            (El500Cmd.getEquipmentId, None),
+            (El500Cmd.getSerialNumber, None),
+            (El500Cmd.getVersion, None),
+            (El500Cmd.setSessionData, b"\x03"),
+            (El500Cmd.setInfo, setInfoInitPayload),
+            (El500Cmd.setInfo, setInfoInitPayload),
+            (El500Cmd.setInfo, setInfoInitPayload),
+            (El500Cmd.setSessionState, sessInitState),
+            (El500Cmd.getUsageHours, None),
+            (El500Cmd.getStatus, None),
+            (El500Cmd.setFanSpeed, b"\x00"),
+            (El500Cmd.setHotKey, b"\x01"),
+            (El500Cmd.getCumulativeKm, None),
+            (El500Cmd.getStatus, None),
+            (El500Cmd.setSessionState, sessInitStat2),
+        ]
 
     @staticmethod
     def send(cmd_id, payload=None, timeout=1, attempts=1):
@@ -290,7 +307,7 @@ class El500Cmd:
         return chksum & 0xFF
 
     @staticmethod
-    def build_setstate_payload(
+    def build_setSessionState_payload(
         displaymode, distance, rpmA, rpmB, resistance, heartrate, kcal
     ):
         p = bytearray()
@@ -404,13 +421,11 @@ class BleConnectionHandler(gatt.Device):
             ble_logger.debug(f"[{self.mac_address}] \tService [{service.uuid}]")
             for charac in service.characteristics:
                 ble_logger.debug(
-                    f"Enabling notifications for [{self.mac_address}] \t\tCharacteristic [{charac.uuid}]"
+                    f"Enabling notifications for [{self.mac_address}] "
+                    + f"\t\tCharacteristic [{charac.uuid}]"
                 )
-                charac.enable_notifications()  # Subscribe to all notifications
-                # charac.write_value(b'\x42\x41\x43') # just testing
-                # JC: This version of the gatt lib doesn't seem to support descriptors??
-                # for descr in charac.descriptors:
-                #     ble_logger.debug(f"[{self.mac_address}]\t\t\tDescriptor [{descr.uuid}] ({descr.read_value()})")
+                charac.enable_notifications()  # "Subscribe" to all notifications
+                # TODO: I only need to subscribe to the DevToApp characteristic
         ble_attributes_discovered.set()
 
     def characteristic_value_updated(self, characteristic, value):
@@ -425,7 +440,6 @@ class BleConnectionHandler(gatt.Device):
 
     def characteristic_write_value_failed(self, characteristic, error):
         ble_logger.error("characteristic_write_value_failed")
-        # TODO: I think the app would retry here, but I don't have the value to retry with ATM
 
     def characteristic_read_value_succeeded(self, characteristic, value):
         ble_logger.debug("characteristic_read_value_succeeded")
