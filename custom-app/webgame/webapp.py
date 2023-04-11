@@ -10,9 +10,9 @@ def index():
 
 @app.route("/get_data")
 def data():
-    speed = random.uniform(0, 20)  # Random speed between 0.5 and 3
-    resistance = random.uniform(1, 16)  # Random resistance between 0 and 1
-    return jsonify({"speed": speed, "resistance": resistance})
+    speed = random.uniform(10, 25)  # Random speed between 0.5 and 3
+    slope = random.uniform(0, 40)  # Random resistance between 0 and 1
+    return jsonify({"speed": speed, "slope": slope})
 
 def run_app():
     app.run(host="0.0.0.0", debug=True)

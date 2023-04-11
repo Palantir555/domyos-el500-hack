@@ -1,16 +1,19 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-const doneButton = document.getElementById("doneButton");
+const dotSize = 4;
+const gravity = 9.8;
+const timeInterval = 100;
 
 let dotX = 0;
-let dotY = canvas.height / 2;
-const dotSize = 5;
-let speed = 1;
-let resistance = 0;
-
-let timeInterval = 100; // Time interval between data updates in milliseconds
+let dotY = canvas.height - (3*dotSize); //canvas.height / 2;
+let speed = 0;
+let slope = 0;
 
 function drawDot() {
+  // Leave a trail behind the dot
+    ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath();
   ctx.arc(dotX, dotY, dotSize, 0, 2 * Math.PI);
   ctx.fillStyle = "#dddcd8";
@@ -18,47 +21,53 @@ function drawDot() {
   ctx.closePath();
 }
 
-function updateDotPosition() {
-  const angle = Math.atan(resistance * 3);
-  dotX += speed * Math.cos(angle);
-  dotY -= speed * Math.sin(angle);
+function calculateDisplacement(speed, slope) {
 
-  // Update canvas position to follow the dot
-  canvas.style.transform = `translateX(-${dotX - canvas.width / 2}px)`;
-}
-
-function gameLoop() {
-  updateDotPosition();
-  drawDot();
-
-  if (dotX < canvas.width * 2) {
-    requestAnimationFrame(gameLoop);
-  } else {
-    doneButton.style.display = "block"; // Show the "Done" button when the dot reaches the end
-  }
+  return {
+    horizontal: horizontalDisplacement,
+    vertical: verticalDisplacement,
+  };
 }
 
 async function getData() {
   const response = await fetch("/get_data");
   const data = await response.json();
   speed = data.speed;
-  resistance = data.resistance;
+  slope = data.slope;
 
-  console.log("Speed:", speed, "Resistance:", resistance);
+  console.log("Speed:", speed, "slope:", slope);
 
   setTimeout(getData, timeInterval);
 }
 
-// Zoom out and show the entire trail when the "Done" button is pressed
-doneButton.addEventListener("click", () => {
-  canvas.style.transform = "translateX(0)";
-  canvas.width *= 0.5;
-  canvas.height *= 0.5;
-  ctx.scale(0.5, 0.5);
-  dotX = 0;
-  dotY = canvas.height / 2;
-  gameLoop();
-});
+
+function updateDot() {
+  // Convert the slope from degrees to radians
+  const slopeInRadians = (slope * Math.PI) / 180;
+  // Calculate the horizontal and vertical displacements using trigonometry
+  const horizontalDisplacement = speed * Math.cos(slopeInRadians);
+  const verticalDisplacement = speed * Math.sin(slopeInRadians);
+  // Move the dot
+  dotX += horizontalDisplacement;
+  dotY -= verticalDisplacement;
+
+  if (dotX >= (canvas.width - 3*dotSize)) {
+    // Move the canvas to the left by -horizontalDisplacement
+    canvas.style.left = -horizontalDisplacement + "px";
+    // Keep the dot next to the right edge of the canvas
+    dotX = canvas.width - (3*dotSize);
+  }
+  if (dotY <= (canvas.height / 4)) {
+    // Move the canvas by verticalDisplacement
+    canvas.style.top = -verticalDisplacement + "px";
+    // Keep the dot next to the top edge of the canvas
+    dotY = (canvas.height / 4);
+  }
+
+  drawDot();
+  setTimeout(updateDot, timeInterval);
+}
 
 getData();
-gameLoop();
+updateDot();
+
