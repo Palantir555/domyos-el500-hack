@@ -7,11 +7,21 @@ const timeInterval = 100;
 const balls = [];
 
 function updatePastDotPositions(ballIndex, horizontalDisplacement, verticalDisplacement) {
-  const pastPositions = balls[ballIndex].pastPositions;
-  for (let i = 0; i < pastPositions.length; i++) {
-    pastPositions[i].x -= horizontalDisplacement;
-    pastPositions[i].y += verticalDisplacement;
-  }
+  //const pastPositions = balls[ballIndex].pastPositions;
+  //for (let i = 0; i < pastPositions.length; i++) {
+  //  pastPositions[i].x -= horizontalDisplacement;
+  //  pastPositions[i].y += verticalDisplacement;
+  //}
+  // Update the positions of all the balls
+    balls.forEach((ball, index) => {
+        //if (index === ballIndex) return;
+        const pastPositions = ball.pastPositions;
+        for (let i = 0; i < pastPositions.length; i++) {
+            pastPositions[i].x -= horizontalDisplacement;
+            pastPositions[i].y += verticalDisplacement;
+        }
+        
+    });
 }
 
 function drawDot() {
@@ -32,7 +42,7 @@ function drawDot() {
     // Draw the main dot
     ctx.beginPath();
     ctx.arc(ball.position.x, ball.position.y, dotSize, 0, 2 * Math.PI);
-    ctx.fillStyle = ball.id === 0 ? "#dddcd8" : `rgba(${ball.id * 20}, ${ball.id * 20}, ${ball.id * 20}, 1)`;
+    ctx.fillStyle = ball.id === 0 ? "#dddcd8" : `rgba(${ball.id * 40}, ${ball.id * 40}, ${ball.id * 50}, 1)`;
     ctx.fill();
     ctx.closePath();
   });
