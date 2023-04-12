@@ -10,9 +10,19 @@ def index():
 
 @app.route("/get_data")
 def data():
-    speed = random.uniform(10, 25)  # Random speed between 0.5 and 3
-    slope = random.uniform(0, 40)  # Random resistance between 0 and 1
-    return jsonify({"speed": speed, "slope": slope})
+    # Ball 0 (user-controlled)
+    speed = random.uniform(10, 25)  # Random speed between 10 and 25
+    slope = random.uniform(0, 40)   # Random slope between 0 and 40
+
+    # Generate data for additional balls
+    additional_balls = []
+    for i in range(1, 4):
+        additional_speed = random.uniform(10, 25)
+        additional_slope = random.uniform(0, 40)
+        additional_balls.append({"id": i, "speed": additional_speed, "slope": additional_slope})
+
+    all_ball_data = [{"id": 0, "speed": speed, "slope": slope}] + additional_balls
+    return jsonify(all_ball_data)
 
 def run_app():
     app.run(host="0.0.0.0", debug=True)

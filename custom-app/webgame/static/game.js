@@ -5,7 +5,7 @@ const gravity = 9.8;
 const timeInterval = 100;
 
 let dotX = 0;
-let dotY = canvas.height - (3*dotSize); //canvas.height / 2;
+let dotY = canvas.height - (3*dotSize);
 let speed = 0;
 let slope = 0;
 pastPositionsUpdated = false;
@@ -13,7 +13,6 @@ pastPositionsUpdated = false;
 const pastDotPositions = []; // Add this line to store past dot positions
 
 function updatePastDotPositions(horizontalDisplacement, verticalDisplacement) {
-  // TODO: massively wasteful? or what?
   for (let i = 0; i < pastDotPositions.length; i++) {
     pastDotPositions[i].x -= horizontalDisplacement;
     pastDotPositions[i].y += verticalDisplacement;
@@ -78,22 +77,27 @@ function updateDot() {
   // Move the dot
   dotX += horizontalDisplacement;
   dotY -= verticalDisplacement;
+  canvasupdated = false;
 
-  if (dotX >= (canvas.width - 3*dotSize)) {
+  if (dotX >= 3 * (canvas.width / 4)) {
     // Move the canvas to the left by -horizontalDisplacement
     canvas.style.left = horizontalDisplacement + "px";
-    // Move the dot trail
-    updatePastDotPositions(horizontalDisplacement, 0);
     // Keep the dot next to the right edge of the canvas
-    dotX = canvas.width - (3*dotSize);
+    dotX = 3 * (canvas.width / 4);
+    canvasupdated = true;
   }
   if (dotY <= (canvas.height / 4)) {
     // Move the canvas by verticalDisplacement
     canvas.style.top = verticalDisplacement + "px";
-    // Move the dot trail
-    updatePastDotPositions(0, verticalDisplacement);
     // Keep the dot next to the top edge of the canvas
     dotY = (canvas.height / 4);
+    canvasupdated = true;
+  }
+  if (canvasupdated) {
+    // Move the dot trail
+    // TODO: This will move both axes even if only 1 is updated. It's just less
+    //       wasteful this way, but maybe unnecessarily so(?)
+    updatePastDotPositions(horizontalDisplacement, verticalDisplacement);
   }
 
   drawDot();
